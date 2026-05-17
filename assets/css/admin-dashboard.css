@@ -1,0 +1,3698 @@
+/* ================================================================
+   JDEVS. — Admin Dashboard Stylesheet (admin-dashboard.css)
+   NEW classes only — prefixed adm-* to avoid any collision
+   with style.css. Zero modifications to existing rules.
+================================================================ */
+
+
+/* ── Admin sidebar avatar (red-tinted for admin distinction) ── */
+.adm-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF4D4D, #C23B3B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: #fff;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.adm-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 77, 77, 0.12);
+  color: #FF4D4D;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 77, 77, 0.25);
+}
+
+.adm-role-pill i {
+  font-size: 0.7rem;
+}
+
+/* ── Admin top bar admin badge ────────────────────────────── */
+.adm-topbar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.2);
+  color: #FF4D4D;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+.adm-topbar-badge i {
+  font-size: 0.8rem;
+}
+
+/* ── Admin stat card colour modifiers (red) ───────────────── */
+.db-stat-card.red-top::before {
+  background: #FF4D4D;
+}
+
+.db-stat-icon.red {
+  background: rgba(255, 77, 77, 0.12);
+  color: #FF4D4D;
+}
+
+/* ── Clickable stat cards hover effect ───────────────────── */
+.db-stat-card[onclick] {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.db-stat-card[onclick]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.db-stat-card[onclick]:active {
+  transform: translateY(-1px);
+}
+
+/* ── Section filter bar ───────────────────────────────────── */
+.adm-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.adm-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-body);
+}
+
+.adm-filter-btn:hover {
+  border-color: rgba(181, 255, 46, 0.35);
+  color: var(--clr-white);
+}
+
+.adm-filter-btn.active {
+  background: rgba(181, 255, 46, 0.1);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.adm-filter-btn .adm-count {
+  background: var(--clr-accent);
+  color: #0D0D0D;
+  font-size: 0.6rem;
+  font-weight: 800;
+  border-radius: var(--radius-pill);
+  padding: 0.05rem 0.4rem;
+  min-width: 16px;
+  text-align: center;
+}
+
+.adm-filter-btn.active-red {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: #FF4D4D;
+  color: #FF4D4D;
+}
+
+.adm-filter-btn.active-red .adm-count {
+  background: #FF4D4D;
+  color: #fff;
+}
+
+.adm-filter-btn.active-blue {
+  background: rgba(77, 158, 255, 0.1);
+  border-color: #4D9EFF;
+  color: #4D9EFF;
+}
+
+.adm-filter-btn.active-blue .adm-count {
+  background: #4D9EFF;
+  color: #fff;
+}
+
+.adm-search-inline {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  min-width: 200px;
+}
+
+.adm-search-inline input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  width: 100%;
+}
+
+.adm-search-inline input::placeholder {
+  color: var(--clr-muted);
+}
+
+/* ── Quote card (for free & user quotes as expandable cards) ─ */
+.adm-quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.adm-quote-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.adm-quote-card:hover {
+  border-color: rgba(181, 255, 46, 0.25);
+}
+
+.adm-quote-card.free-quote {
+  border-left: 3px solid #FF8C4D;
+}
+
+.adm-quote-card.user-quote {
+  border-left: 3px solid #4D9EFF;
+}
+
+.adm-quote-card.new-quote {
+  border-left: 3px solid var(--clr-accent);
+}
+
+.adm-quote-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.adm-quote-head:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.adm-quote-sender {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.adm-sender-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--clr-muted);
+  flex-shrink: 0;
+}
+
+.adm-sender-avatar.orange {
+  background: rgba(255, 140, 77, 0.12);
+  color: #FF8C4D;
+  border-color: rgba(255, 140, 77, 0.2);
+}
+
+.adm-sender-avatar.blue {
+  background: rgba(77, 158, 255, 0.12);
+  color: #4D9EFF;
+  border-color: rgba(77, 158, 255, 0.2);
+}
+
+.adm-sender-avatar.green {
+  background: rgba(181, 255, 46, 0.1);
+  color: var(--clr-accent);
+  border-color: rgba(181, 255, 46, 0.2);
+}
+
+.adm-sender-info {
+  min-width: 0;
+}
+
+.adm-sender-name {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--clr-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-sender-email {
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-quote-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.adm-quote-service {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  display: none;
+}
+
+.adm-quote-date {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+}
+
+.adm-quote-chevron {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-muted);
+  font-size: 0.85rem;
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+
+.adm-quote-card.open .adm-quote-chevron {
+  transform: rotate(180deg);
+}
+
+/* Expanded body */
+.adm-quote-body {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--clr-border);
+}
+
+.adm-quote-card.open .adm-quote-body {
+  display: block;
+}
+
+.adm-quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.adm-quote-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.adm-quote-field label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-muted);
+}
+
+.adm-quote-field span {
+  font-size: 0.85rem;
+  color: var(--clr-text);
+  font-weight: 500;
+}
+
+.adm-quote-field span.highlight {
+  color: var(--clr-white);
+  font-weight: 600;
+}
+
+.adm-quote-message {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  background: var(--clr-surface-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+}
+
+.adm-quote-message label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.adm-quote-message p {
+  font-size: 0.85rem;
+  color: var(--clr-text);
+  line-height: 1.6;
+}
+
+.adm-quote-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+  flex-wrap: wrap;
+}
+
+/* ── Admin action buttons ─────────────────────────────────── */
+.adm-btn-accept {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  background: var(--clr-accent);
+  color: #0D0D0D;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-btn-accept:hover {
+  background: var(--clr-accent-dim);
+  transform: translateY(-1px);
+}
+
+.adm-btn-decline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  background: rgba(255, 77, 77, 0.1);
+  color: #FF4D4D;
+  border: 1px solid rgba(255, 77, 77, 0.25);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-btn-decline:hover {
+  background: rgba(255, 77, 77, 0.2);
+  transform: translateY(-1px);
+}
+
+.adm-btn-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-btn-reply:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.adm-btn-mark {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  background: transparent;
+  color: var(--clr-muted);
+  border: 1px solid var(--clr-border);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-btn-mark:hover {
+  color: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+/* ── Works view — Kanban-style cards ─────────────────────── */
+.adm-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.adm-work-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: border-color var(--transition), transform var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.adm-work-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.adm-work-card.wk-pending::before {
+  background: #FFB300;
+}
+
+.adm-work-card.wk-progress::before {
+  background: #4D9EFF;
+}
+
+.adm-work-card.wk-review::before {
+  background: #FF8C4D;
+}
+
+.adm-work-card.wk-done::before {
+  background: var(--clr-accent);
+}
+
+.adm-work-card:hover {
+  border-color: rgba(181, 255, 46, 0.2);
+  transform: translateY(-2px);
+}
+
+.adm-work-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.adm-work-id {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--clr-muted);
+  letter-spacing: 0.06em;
+}
+
+.adm-work-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--clr-white);
+  line-height: 1.3;
+}
+
+.adm-work-client {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+}
+
+.adm-work-client i {
+  font-size: 0.85rem;
+}
+
+.adm-work-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.adm-work-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+  font-weight: 600;
+}
+
+.adm-work-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(42, 42, 42, 0.5);
+  gap: 0.5rem;
+}
+
+.adm-work-due {
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.adm-work-due.soon {
+  color: #FFB300;
+}
+
+.adm-work-due.late {
+  color: #FF4D4D;
+}
+
+.adm-work-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.adm-work-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-muted);
+  transition: all var(--transition);
+}
+
+.adm-work-btn:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.adm-work-btn.danger:hover {
+  border-color: #FF4D4D;
+  color: #FF4D4D;
+}
+
+/* ── Works view header controls ──────────────────────────── */
+.adm-view-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.adm-view-toggle {
+  display: flex;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.adm-view-toggle button {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--clr-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.adm-view-toggle button.active {
+  background: rgba(181, 255, 46, 0.1);
+  color: var(--clr-accent);
+}
+
+/* ── Portfolio Manager ────────────────────────────────────── */
+.adm-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.adm-portfolio-item {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition);
+  position: relative;
+  aspect-ratio: 4/3;
+  /* group: true; */
+}
+
+.adm-portfolio-item:hover {
+  border-color: var(--clr-accent);
+  transform: translateY(-2px);
+}
+
+.adm-portfolio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.adm-portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.adm-portfolio-item:hover .adm-portfolio-overlay {
+  opacity: 1;
+}
+
+.adm-portfolio-overlay-title {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--clr-white);
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.adm-portfolio-overlay-btns {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.adm-port-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--clr-white);
+  transition: all var(--transition);
+}
+
+.adm-port-btn:hover {
+  background: var(--clr-accent);
+  color: #0D0D0D;
+  border-color: var(--clr-accent);
+}
+
+.adm-port-btn.danger:hover {
+  background: #FF4D4D;
+  border-color: #FF4D4D;
+}
+
+/* Upload drop zone */
+.adm-upload-zone {
+  border: 2px dashed var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: transparent;
+  text-align: center;
+}
+
+.adm-upload-zone:hover,
+.adm-upload-zone.drag-over {
+  border-color: var(--clr-accent);
+  background: rgba(181, 255, 46, 0.04);
+}
+
+.adm-upload-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: rgba(181, 255, 46, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--clr-accent);
+}
+
+.adm-upload-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--clr-white);
+}
+
+.adm-upload-sub {
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+}
+
+.adm-upload-input {
+  display: none;
+}
+
+/* Upload form fields */
+.adm-upload-form {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.adm-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.adm-form-group.full {
+  grid-column: 1 / -1;
+}
+
+.adm-form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--clr-muted);
+}
+
+/* Small helper text that sits inline after a label */
+.adm-form-hint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--clr-muted);
+  opacity: 0.7;
+  margin-left: 0.4rem;
+}
+
+/* Category + year sub-line on admin portfolio grid tiles */
+.adm-portfolio-overlay-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.adm-form-input,
+.adm-form-select,
+.adm-form-textarea {
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--clr-white);
+  outline: none;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+.adm-form-input:focus,
+.adm-form-select:focus,
+.adm-form-textarea:focus {
+  border-color: var(--clr-accent);
+}
+
+.adm-form-input::placeholder,
+.adm-form-textarea::placeholder {
+  color: var(--clr-muted);
+}
+
+.adm-form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2rem;
+}
+
+.adm-form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Image preview grid (before upload) */
+.adm-preview-strip {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.adm-preview-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--clr-border);
+  flex-shrink: 0;
+}
+
+.adm-preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.adm-preview-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 77, 77, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  transition: transform var(--transition);
+}
+
+.adm-preview-remove:hover {
+  transform: scale(1.2);
+}
+
+/* Portfolio category tabs */
+.adm-cat-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.adm-cat-tab {
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: var(--font-body);
+}
+
+.adm-cat-tab:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-white);
+}
+
+.adm-cat-tab.active {
+  background: rgba(181, 255, 46, 0.1);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+/* Portfolio placeholder card */
+.adm-portfolio-add-card {
+  background: transparent;
+  border: 2px dashed var(--clr-border);
+  border-radius: var(--radius-md);
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--clr-muted);
+}
+
+.adm-portfolio-add-card:hover {
+  border-color: var(--clr-accent);
+  background: rgba(181, 255, 46, 0.04);
+  color: var(--clr-accent);
+}
+
+.adm-portfolio-add-card i {
+  font-size: 1.6rem;
+}
+
+.adm-portfolio-add-card span {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ── Stats summary row for overview ───────────────────────── */
+.adm-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Welcome banner admin variant ────────────────────────── */
+.adm-welcome-banner {
+  background: linear-gradient(135deg, #110508 0%, #1c1020 45%, #240810 100%);
+  border: 1px solid rgba(255, 77, 77, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(180, 20, 20, 0.14), 0 1px 0 rgba(255,255,255,0.04) inset;
+}
+
+/* Top-right red glow */
+.adm-welcome-banner::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255, 77, 77, 0.18) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+/* Bottom-left warm glow */
+.adm-welcome-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(200, 40, 40, 0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Pin heading to white regardless of theme */
+.adm-welcome-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+  color: #FFFFFF;
+}
+
+/* Pin subtitle to soft white — readable against dark banner */
+.adm-welcome-text p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Bold spans inside subtitle always bright white */
+.adm-welcome-text p strong {
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+
+.adm-welcome-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Recent activity timeline ─────────────────────────────── */
+.adm-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.adm-tl-item {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+  align-items: flex-start;
+}
+
+.adm-tl-item:last-child {
+  border-bottom: none;
+}
+
+.adm-tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.adm-tl-dot.green {
+  background: var(--clr-accent);
+  box-shadow: 0 0 6px rgba(181, 255, 46, 0.5);
+}
+
+.adm-tl-dot.blue {
+  background: #4D9EFF;
+}
+
+.adm-tl-dot.orange {
+  background: #FF8C4D;
+}
+
+.adm-tl-dot.red {
+  background: #FF4D4D;
+}
+
+.adm-tl-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.adm-tl-text p {
+  font-size: 0.83rem;
+  color: var(--clr-text);
+  line-height: 1.5;
+}
+
+.adm-tl-text p strong {
+  color: var(--clr-white);
+}
+
+.adm-tl-time {
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+  margin-top: 0.2rem;
+}
+
+/* ── Notification panel admin variant ────────────────────── */
+.adm-quote-source-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.adm-quote-source-tag.free {
+  background: rgba(255, 140, 77, 0.12);
+  color: #FF8C4D;
+  border: 1px solid rgba(255, 140, 77, 0.2);
+}
+
+.adm-quote-source-tag.user {
+  background: rgba(77, 158, 255, 0.12);
+  color: #4D9EFF;
+  border: 1px solid rgba(77, 158, 255, 0.2);
+}
+
+.adm-quote-source-tag.new {
+  background: rgba(181, 255, 46, 0.1);
+  color: var(--clr-accent);
+  border: 1px solid rgba(181, 255, 46, 0.2);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .adm-works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adm-quote-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .adm-works-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-upload-form {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-upload-form .adm-form-group.full {
+    grid-column: 1;
+  }
+
+  .adm-quote-service {
+    display: none;
+  }
+
+  .adm-search-inline {
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .adm-portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adm-quote-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-welcome-banner {
+    padding: 1.5rem;
+  }
+}
+
+
+/* ================================================================
+   JDEVS. — Admin Sections Enhancement (add to end of admin-dashboard.css)
+   Developed to match user dashboard design language — adm-sec-* prefix
+================================================================ */
+
+
+/* ── Section mini-stats row ─────────────────────────────────── */
+.adm-section-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.adm-mini-stat {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  transition: border-color var(--transition);
+  cursor: default;
+}
+
+.adm-mini-stat:hover {
+  border-color: rgba(181, 255, 46, 0.2);
+}
+
+.adm-mini-stat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.adm-mini-stat.red .adm-mini-stat-icon {
+  background: rgba(255, 77, 77, 0.1);
+  color: #FF4D4D;
+}
+
+.adm-mini-stat.orange .adm-mini-stat-icon {
+  background: rgba(255, 140, 77, 0.1);
+  color: #FF8C4D;
+}
+
+.adm-mini-stat.green .adm-mini-stat-icon {
+  background: rgba(181, 255, 46, 0.1);
+  color: var(--clr-accent);
+}
+
+.adm-mini-stat.blue .adm-mini-stat-icon {
+  background: rgba(77, 158, 255, 0.1);
+  color: #4D9EFF;
+}
+
+.adm-mini-stat.amber .adm-mini-stat-icon {
+  background: rgba(255, 179, 0, 0.1);
+  color: #FFB300;
+}
+
+.adm-mini-stat.muted .adm-mini-stat-icon {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--clr-muted);
+}
+
+.adm-mini-stat-body {
+  min-width: 0;
+}
+
+.adm-mini-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--clr-white);
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.adm-mini-stat-label {
+  font-size: 0.7rem;
+  color: var(--clr-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+/* ── Admin note textarea inside quote cards ─────────────────── */
+.adm-quote-note {
+  margin-top: 0.85rem;
+}
+
+.adm-quote-note-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.adm-quote-note textarea {
+  width: 100%;
+  background: var(--clr-surface-2);
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--clr-text);
+  resize: none;
+  outline: none;
+  transition: border-color var(--transition);
+  min-height: 62px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.adm-quote-note textarea::placeholder {
+  color: var(--clr-muted);
+  opacity: 0.6;
+}
+
+.adm-quote-note textarea:focus {
+  border-color: var(--clr-accent);
+  border-style: solid;
+}
+
+
+/* ── User profile chip row (user-quotes expanded) ───────────── */
+.adm-user-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--clr-surface-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.adm-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+}
+
+.adm-user-chip i {
+  font-size: 0.8rem;
+}
+
+.adm-user-chip strong {
+  color: var(--clr-white);
+  font-weight: 600;
+}
+
+
+/* ── Add New Work panel ──────────────────────────────────────── */
+.adm-add-work-panel {
+  display: none;
+  background: var(--clr-surface);
+  border: 1px solid rgba(181, 255, 46, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.5rem 1.5rem;
+  margin-bottom: 1.4rem;
+  animation: admFadeIn 0.2s ease;
+}
+
+.adm-add-work-panel.open {
+  display: block;
+}
+
+@keyframes admFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.adm-add-work-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.adm-add-work-panel-title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--clr-white);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.adm-add-work-panel-title i {
+  color: var(--clr-accent);
+}
+
+.adm-add-work-close {
+  background: transparent;
+  border: none;
+  color: var(--clr-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color var(--transition);
+}
+
+.adm-add-work-close:hover {
+  color: #FF4D4D;
+}
+
+.adm-add-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-top: 1.1rem;
+}
+
+.adm-add-work-grid .full {
+  grid-column: 1 / -1;
+}
+
+
+/* ── Works page controls bar ────────────────────────────────── */
+.adm-works-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.adm-works-topbar .adm-filter-bar {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+
+/* ── Work card enhancements ──────────────────────────────────── */
+.adm-work-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.55rem 0 0.7rem;
+  flex-wrap: wrap;
+}
+
+.adm-work-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.adm-work-tag.service {
+  background: rgba(181, 255, 46, 0.08);
+  color: var(--clr-accent);
+  border: 1px solid rgba(181, 255, 46, 0.15);
+}
+
+.adm-work-tag.source-free {
+  background: rgba(255, 140, 77, 0.1);
+  color: #FF8C4D;
+  border: 1px solid rgba(255, 140, 77, 0.2);
+}
+
+.adm-work-tag.source-user {
+  background: rgba(77, 158, 255, 0.1);
+  color: #4D9EFF;
+  border: 1px solid rgba(77, 158, 255, 0.2);
+}
+
+.adm-work-source-ref {
+  font-size: 0.72rem;
+  color: #4D9EFF;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.adm-work-source-ref:hover {
+  text-decoration: underline;
+}
+
+
+/* ── Progress controls (+/- adjustment) ─────────────────────── */
+.adm-prog-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.adm-prog-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+.adm-prog-btn:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.adm-prog-btn:active {
+  transform: scale(0.88);
+}
+
+
+/* ── Revenue badge on work card ─────────────────────────────── */
+.adm-work-revenue {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .adm-section-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adm-add-work-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .adm-section-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .adm-add-work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-add-work-grid .full {
+    grid-column: 1;
+  }
+
+  .adm-works-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ================================================================
+   JDEVS. — Admin Dashboard Light Mode Theme
+   Scoped entirely to .db-shell.light-mode — nav & footer stay dark.
+   All admin-specific overrides use adm-* prefix selectors.
+================================================================ */
+
+/* ── Core shell surfaces ─────────────────────────────────────── */
+.db-shell.light-mode {
+  background: #F4F6FB;
+}
+
+.db-shell.light-mode .db-sidebar {
+  background: #FFFFFF;
+  border-right-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-sidebar-profile {
+  border-bottom-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-sidebar-footer {
+  border-top-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-main {
+  background: #F4F6FB;
+}
+
+/* ── Sidebar text & nav items ────────────────────────────────── */
+.db-shell.light-mode .db-avatar-info h6 {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .db-avatar-info span {
+  color: #6B7494;
+}
+
+.db-shell.light-mode .db-nav-label {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .db-nav-item {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .db-nav-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .db-nav-item.active {
+  background: rgba(181, 255, 46, 0.12);
+  color: #1A1D2E;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────── */
+.db-shell.light-mode .db-topbar {
+  border-bottom-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-topbar-left h1 {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .db-topbar-left p {
+  color: #6B7494;
+}
+
+.db-shell.light-mode .db-sidebar-toggle {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+  color: #4A5070;
+}
+
+.db-shell.light-mode .db-sidebar-toggle:hover {
+  background: #F0F2FA;
+  border-color: #B5C0DA;
+}
+
+/* ── Cards ───────────────────────────────────────────────────── */
+.db-shell.light-mode .db-card {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-card-head {
+  border-bottom-color: #E4E8F4;
+}
+
+.db-shell.light-mode .db-card-title {
+  color: #1A1D2E;
+}
+
+/* ── Stat cards ──────────────────────────────────────────────── */
+.db-shell.light-mode .db-stat-card {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-stat-label {
+  color: #6B7494;
+}
+
+.db-shell.light-mode .db-stat-num {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .db-stat-sub {
+  color: #9AA0B5;
+}
+
+/* ── Tables ──────────────────────────────────────────────────── */
+.db-shell.light-mode .db-table thead th {
+  background: #F0F2FA;
+  color: #9AA0B5;
+  border-bottom-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-table tbody tr {
+  border-bottom-color: #EEF0F8;
+}
+
+.db-shell.light-mode .db-table tbody tr:hover {
+  background: #F7F8FD;
+}
+
+.db-shell.light-mode .db-table td {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .req-id {
+  color: #9AA0B5;
+}
+
+/* ── Text colours ────────────────────────────────────────────── */
+.db-shell.light-mode {
+  --clr-white: #1A1D2E;
+  --clr-text: #4A5070;
+  --clr-muted: #9AA0B5;
+  --clr-bg: #F4F6FB;
+  --clr-surface: #FFFFFF;
+  --clr-surface-2: #F0F2FA;
+  --clr-border: #D4D9EC;
+}
+
+/* ── Notification panel ──────────────────────────────────────── */
+.db-shell.light-mode .db-notif-panel {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .db-notif-head {
+  border-bottom-color: #E4E8F4;
+}
+
+.db-shell.light-mode .db-notif-head h6 {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .db-notif-item {
+  border-bottom-color: #EEF0F8;
+}
+
+.db-shell.light-mode .db-notif-item p {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .db-notif-item time {
+  color: #9AA0B5;
+}
+
+/* ── Admin quote cards ───────────────────────────────────────── */
+.db-shell.light-mode .adm-quote-card {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-quote-card:hover {
+  border-color: rgba(139, 204, 26, 0.45);
+}
+
+.db-shell.light-mode .adm-quote-head:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.db-shell.light-mode .adm-sender-name {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .adm-sender-email {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-quote-service {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-quote-date {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-quote-chevron {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-quote-body {
+  border-top-color: #E4E8F4;
+}
+
+.db-shell.light-mode .adm-quote-field label {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-quote-field span {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-quote-field span.highlight {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .adm-quote-message {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-quote-message label {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-quote-message p {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-sender-avatar {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+  color: #9AA0B5;
+}
+
+/* ── Mini stats ──────────────────────────────────────────────── */
+.db-shell.light-mode .adm-mini-stat {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-mini-stat-num {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .adm-mini-stat-label {
+  color: #9AA0B5;
+}
+
+/* ── Work cards ──────────────────────────────────────────────── */
+.db-shell.light-mode .adm-work-card {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-work-id {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-work-title {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .adm-work-client {
+  color: #6B7494;
+}
+
+.db-shell.light-mode .adm-work-footer {
+  border-top-color: #E4E8F4;
+}
+
+.db-shell.light-mode .adm-work-due {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-work-btn {
+  border-color: #D4D9EC;
+  color: #6B7494;
+  background: #F0F2FA;
+}
+
+.db-shell.light-mode .adm-work-btn:hover {
+  border-color: #B5C0DA;
+  background: #E4E8F4;
+}
+
+.db-shell.light-mode .adm-work-btn.danger:hover {
+  background: rgba(255, 77, 77, 0.08);
+  border-color: rgba(255, 77, 77, 0.3);
+  color: #FF4D4D;
+}
+
+.db-shell.light-mode .db-progress-bar {
+  background: #E4E8F4;
+}
+
+.db-shell.light-mode .adm-work-progress-label span {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-work-progress-label span:last-child {
+  color: #4A5070;
+}
+
+/* ── Add work panel ──────────────────────────────────────────── */
+.db-shell.light-mode .adm-add-work-panel {
+  background: #FFFFFF;
+  border-color: rgba(139, 204, 26, 0.35);
+}
+
+.db-shell.light-mode .adm-add-work-panel-title {
+  color: #1A1D2E;
+}
+
+.db-shell.light-mode .adm-prog-btn {
+  border-color: #D4D9EC;
+  color: #9AA0B5;
+  background: #F0F2FA;
+}
+
+.db-shell.light-mode .adm-prog-btn:hover {
+  border-color: var(--clr-accent-dim);
+  color: var(--clr-accent-dim);
+}
+
+/* ── Filter bar ──────────────────────────────────────────────── */
+.db-shell.light-mode .adm-filter-btn {
+  border-color: #D4D9EC;
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-filter-btn:hover {
+  border-color: #B5C0DA;
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-search-inline {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-search-inline input {
+  color: #4A5070;
+}
+
+/* ── Portfolio manager ───────────────────────────────────────── */
+.db-shell.light-mode .adm-upload-zone {
+  background: #F7F8FD;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-upload-zone:hover {
+  border-color: var(--clr-accent-dim);
+  background: rgba(181, 255, 46, 0.04);
+}
+
+.db-shell.light-mode .adm-portfolio-item {
+  background: #FFFFFF;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-portfolio-caption input {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+  color: #4A5070;
+}
+
+/* ── Quote note textarea ─────────────────────────────────────── */
+.db-shell.light-mode .adm-quote-note textarea {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-quote-note-label {
+  color: #9AA0B5;
+}
+
+/* ── User chip row ───────────────────────────────────────────── */
+.db-shell.light-mode .adm-user-chip-row {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-user-chip {
+  color: #9AA0B5;
+}
+
+.db-shell.light-mode .adm-user-chip strong {
+  color: #1A1D2E;
+}
+
+/* ── Forms & inputs ──────────────────────────────────────────── */
+.db-shell.light-mode .db-form-input,
+.db-shell.light-mode .db-form-select,
+.db-shell.light-mode .db-form-textarea {
+  background: #F0F2FA;
+  border-color: #D4D9EC;
+  color: #4A5070;
+}
+
+.db-shell.light-mode .db-form-label {
+  color: #6B7494;
+}
+
+/* ── Welcome banner light-mode — clean white, whisper of red ───── */
+.db-shell.light-mode .adm-welcome-banner {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 60%, #fff8f8 100%);
+  border: 1px solid #f0d4d4;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Subtle red glow — barely visible, top-right corner */
+.db-shell.light-mode .adm-welcome-banner::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 77, 77, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.db-shell.light-mode .adm-welcome-banner::after {
+  display: none;
+}
+
+/* Dark heading */
+.db-shell.light-mode .adm-welcome-text h2 {
+  color: #1A1D2E;
+}
+
+/* Muted subtitle */
+.db-shell.light-mode .adm-welcome-text p {
+  color: #6B7494;
+}
+
+/* Bold callouts — dark */
+.db-shell.light-mode .adm-welcome-text p strong {
+  color: #1A1D2E !important;
+}
+
+/* Outline button — plain, dark text */
+.db-shell.light-mode .adm-welcome-banner .btn-outline {
+  border-color: #D4D9EC;
+  color: #1A1D2E;
+  background: transparent;
+}
+
+.db-shell.light-mode .adm-welcome-banner .btn-outline:hover {
+  background: #F0F2FA;
+  border-color: #B5C0DA;
+}
+
+/* ── Toggle in Settings — light-mode icon tints ─────────────── */
+.db-shell.light-mode #admThemeIconSun {
+  color: var(--clr-accent-dim);
+}
+
+.db-shell.light-mode #admThemeIconMoon {
+  color: #9AA0B5;
+}
+
+/* ── Sidebar theme toggle row styles ─────────────────────────── */
+.adm-sidebar-theme-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--clr-border);
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+  transition: background var(--transition);
+  user-select: none;
+}
+
+.adm-sidebar-theme-row:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.adm-sidebar-theme-label {
+  font-size: 0.8rem;
+  color: var(--clr-text);
+  flex: 1;
+  white-space: nowrap;
+}
+
+.adm-sidebar-theme-icon {
+  font-size: 0.95rem;
+  color: var(--clr-muted);
+  flex-shrink: 0;
+  transition: color var(--transition);
+}
+
+.adm-sidebar-theme-toggle {
+  width: 38px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.adm-sidebar-theme-toggle::after {
+  width: 16px !important;
+  height: 16px !important;
+  top: 3px !important;
+  left: 3px !important;
+}
+
+.adm-sidebar-theme-toggle.active::after {
+  left: 19px !important;
+}
+
+/* Light-mode look for the sidebar theme row itself */
+.db-shell.light-mode .adm-sidebar-theme-row {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #D4D9EC;
+}
+
+.db-shell.light-mode .adm-sidebar-theme-row:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.db-shell.light-mode .adm-sidebar-theme-label {
+  color: #4A5070;
+}
+
+.db-shell.light-mode .adm-sidebar-theme-icon {
+  color: #9AA0B5;
+}
+
+/* Mobile: sidebar overlay in light mode */
+@media (max-width: 860px) {
+  .db-shell.light-mode .db-sidebar {
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+  }
+}
+/* ================================================================
+   JDEVS. — Admin Dashboard CSS Additions
+   Append this entire block to the END of admin-dashboard.css
+
+   Covers:
+     Sidebar dual-label nav items  (adm-nav-dual-label)
+     Invoice & Billing Manager     (adm-create-inv-*, adm-inv-*)
+     Client Management             (adm-client-*)
+================================================================ */
+
+
+/* ── Sidebar dual-label (mirrors user dashboard pattern) ──── */
+.adm-nav-dual-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+  font-size: 0.88rem;
+  font-weight: 0;
+  color: var(--clr-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-nav-dual-sub {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--clr-muted);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.db-nav-item.active .adm-nav-dual-label,
+.db-nav-item:hover  .adm-nav-dual-label {
+  color: var(--clr-white);
+}
+
+.db-nav-item.active .adm-nav-dual-sub,
+.db-nav-item:hover  .adm-nav-dual-sub {
+  color: var(--clr-accent, #B5FF2E);
+  opacity: 0.85;
+}
+
+
+/* ── Client Name — hybrid typeahead + dropdown ───────────── */
+.adm-inv-client-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.adm-inv-client-wrap .db-form-input {
+  padding-right: 2.4rem;
+  width: 100%;
+}
+
+.adm-inv-client-arrow {
+  position: absolute;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  color: var(--clr-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.1rem 0.2rem;
+  line-height: 1;
+  transition: color var(--transition), transform 0.2s ease;
+}
+
+.adm-inv-client-arrow:hover { color: var(--clr-white); }
+
+/* dropdown list */
+.adm-inv-client-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: #0D0D0D;
+  border: 1px solid rgba(181, 255, 46, 0.3);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+
+.adm-inv-client-list.open {
+  max-height: 260px;
+  opacity: 1;
+  pointer-events: auto;
+  overflow-y: auto;
+}
+
+.adm-inv-client-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.adm-inv-client-opt:hover,
+.adm-inv-client-opt.hover {
+  background: rgba(181, 255, 46, 0.07);
+}
+
+.adm-inv-client-opt-av {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(181, 255, 46, 0.12);
+  color: var(--clr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.adm-inv-client-opt-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-white);
+  line-height: 1.2;
+}
+
+.adm-inv-client-opt-email {
+  font-size: 0.7rem;
+  color: var(--clr-muted);
+}
+
+/* Light-mode */
+.db-shell.light-mode .adm-inv-client-list {
+  background: #fff;
+  border-color: rgba(181, 255, 46, 0.4);
+}
+
+.db-shell.light-mode .adm-inv-client-opt:hover,
+.db-shell.light-mode .adm-inv-client-opt.hover {
+  background: rgba(181, 255, 46, 0.1);
+}
+
+
+
+.adm-mini-stat.blue .adm-mini-stat-icon {
+  background: rgba(77, 158, 255, 0.12);
+  color: #4D9EFF;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   INVOICE & BILLING MANAGER
+══════════════════════════════════════════════════════════════ */
+
+/* Create invoice slide-down panel */
+.adm-create-inv-panel {
+  background: #0D0D0D;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.38s ease, opacity 0.25s ease, margin-bottom 0.3s ease;
+  margin-bottom: 0;
+}
+
+.adm-create-inv-panel.open {
+  max-height: 600px;
+  opacity: 1;
+  margin-bottom: 1.25rem;
+}
+
+.adm-create-inv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.35rem 0.9rem;
+  border-bottom: 1px solid var(--clr-border);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--clr-white);
+  font-family: var(--font-display);
+}
+
+.adm-create-inv-head i {
+  margin-right: 0.45rem;
+  color: var(--clr-accent);
+}
+
+.adm-create-inv-close {
+  background: none;
+  border: none;
+  color: var(--clr-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition);
+  line-height: 1;
+}
+
+.adm-create-inv-close:hover { color: var(--clr-white); }
+
+.adm-create-inv-body {
+  padding: 1.25rem 1.35rem 1.35rem;
+}
+
+.adm-create-inv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.9rem;
+}
+
+
+/* Invoice table — client cell */
+.adm-inv-client {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.adm-inv-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(181, 255, 46, 0.12);
+  color: var(--clr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.adm-inv-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-white);
+  line-height: 1.2;
+}
+
+.adm-inv-email {
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+}
+
+
+/* Invoice row action buttons */
+.adm-inv-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.adm-inv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.adm-inv-btn:hover {
+  border-color: rgba(181, 255, 46, 0.4);
+  color: var(--clr-white);
+}
+
+.adm-inv-btn.mark-paid {
+  background: rgba(181, 255, 46, 0.08);
+  border-color: rgba(181, 255, 46, 0.3);
+  color: var(--clr-accent);
+}
+
+.adm-inv-btn.mark-paid:hover {
+  background: rgba(181, 255, 46, 0.18);
+  border-color: var(--clr-accent);
+}
+
+.adm-inv-btn.icon-only {
+  padding: 0.28rem 0.55rem;
+}
+
+.adm-inv-btn.icon-only.danger {
+  color: rgba(255, 77, 77, 0.55);
+  border-color: transparent;
+}
+
+.adm-inv-btn.icon-only.danger:hover {
+  color: #FF4D4D;
+  border-color: rgba(255, 77, 77, 0.3);
+  background: rgba(255, 77, 77, 0.06);
+}
+
+/* Light-mode overrides for invoice section */
+.db-shell.light-mode .adm-create-inv-panel {
+  background: #fff;
+}
+
+.db-shell.light-mode .adm-inv-avatar {
+  background: rgba(181, 255, 46, 0.18);
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   CLIENT MANAGEMENT
+══════════════════════════════════════════════════════════════ */
+
+.adm-client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Client card */
+.adm-client-card {
+  background: #0D0D0D;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.adm-client-card:hover {
+  border-color: rgba(181, 255, 46, 0.2);
+}
+
+.adm-client-card.open {
+  border-color: rgba(181, 255, 46, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Card header — always visible */
+.adm-client-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.adm-client-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 180px;
+}
+
+.adm-client-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(181, 255, 46, 0.12);
+  color: var(--clr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.adm-client-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--clr-white);
+  line-height: 1.2;
+}
+
+.adm-client-email {
+  font-size: 0.74rem;
+  color: var(--clr-muted);
+}
+
+.adm-client-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.adm-client-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--clr-border);
+  font-size: 0.72rem;
+  color: var(--clr-muted);
+  font-weight: 500;
+}
+
+.adm-client-stat-pill.green {
+  background: rgba(181, 255, 46, 0.06);
+  border-color: rgba(181, 255, 46, 0.2);
+  color: var(--clr-accent);
+}
+
+/* Card body — collapsible */
+.adm-client-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.38s ease, padding 0.25s ease;
+  padding: 0 1.35rem;
+}
+
+.adm-client-card.open .adm-client-body {
+  max-height: 600px;
+  padding: 0.2rem 1.35rem 1.25rem;
+}
+
+.adm-client-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.85rem;
+  border-top: 1px solid var(--clr-border);
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Recent requests mini list inside client body */
+.adm-client-history {
+  margin-bottom: 1rem;
+}
+
+.adm-client-history > label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-muted);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.adm-client-req-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.adm-client-req-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--clr-text);
+  padding: 0.3rem 0.6rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+}
+
+/* Light-mode adjustments */
+.db-shell.light-mode .adm-client-card {
+  background: #fff;
+}
+
+.db-shell.light-mode .adm-client-avatar {
+  background: rgba(181, 255, 46, 0.2);
+}
+
+.db-shell.light-mode .adm-client-req-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+
+/* ================================================================
+   FINISHED PROJECTS UPGRADE — new CSS classes
+   Append this block to admin-dashboard.css (or inside the <style>
+   block in admin-dashboard.html, after the existing fp-* rules)
+================================================================ */
+
+/* ── Step label / link row ───────────────────────────────────── */
+.adm-fp-link-row {
+  background: var(--clr-card2, rgba(255,255,255,0.03));
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.adm-fp-link-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+.adm-fp-link-label i {
+  color: var(--clr-accent);
+  font-size: 1rem;
+}
+.adm-fp-link-hint {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+}
+
+/* ── Project select wrapper ──────────────────────────────────── */
+.adm-fp-link-select-wrap {
+  position: relative;
+}
+.adm-fp-project-select {
+  width: 100%;
+  padding-right: 2.5rem !important;
+  cursor: pointer;
+}
+.adm-fp-select-icon {
+  position: absolute;
+  right: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: var(--clr-muted);
+  pointer-events: none;
+}
+
+/* ── Linked project banner ───────────────────────────────────── */
+.adm-fp-linked-banner {
+  background: rgba(77,222,128,0.06);
+  border: 1px solid rgba(77,222,128,0.2);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.adm-fp-linked-info {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.adm-fp-linked-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 180px;
+}
+
+.adm-fp-linked-pill {
+  background: rgba(77,222,128,0.15);
+  color: var(--clr-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.adm-fp-linked-project {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--clr-text);
+  margin-bottom: 0.15rem;
+}
+.adm-fp-linked-client-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--clr-text);
+}
+.adm-fp-linked-dot {
+  color: var(--clr-muted);
+}
+
+/* ── Invoice badge ──────────────────────────────────────────── */
+.adm-fp-linked-right {
+  display: flex;
+  align-items: center;
+}
+
+.adm-fp-inv-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(77,158,255,0.1);
+  border: 1px solid rgba(77,158,255,0.25);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  color: #4D9EFF;
+  font-weight: 600;
+}
+.adm-fp-inv-badge i { font-size: 0.9rem; }
+
+.adm-fp-inv-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.adm-fp-inv-status.paid   { background:rgba(77,222,128,0.15); color:var(--clr-accent); }
+.adm-fp-inv-status.unpaid { background:rgba(255,179,0,0.15);  color:#FFB300; }
+.adm-fp-inv-status.overdue{ background:rgba(255,77,77,0.15);  color:#FF4D4D; }
+
+.adm-fp-inv-peek {
+  background: rgba(77,158,255,0.15);
+  border: none;
+  border-radius: 6px;
+  color: #4D9EFF;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: background 0.18s;
+}
+.adm-fp-inv-peek:hover { background: rgba(77,158,255,0.28); }
+
+.adm-fp-no-inv {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.77rem;
+  color: var(--clr-muted);
+}
+
+/* Unlink button */
+.adm-fp-unlink-btn {
+  background: none;
+  border: 1px solid var(--clr-border);
+  border-radius: 7px;
+  color: var(--clr-muted);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  transition: color 0.16s, border-color 0.16s;
+  align-self: flex-start;
+}
+.adm-fp-unlink-btn:hover { color: #FF4D4D; border-color: #FF4D4D; }
+
+/* ── Divider ────────────────────────────────────────────────── */
+.adm-fp-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.25rem 0 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--clr-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.adm-fp-divider::before,
+.adm-fp-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--clr-border);
+}
+
+/* ── Invoice button ON the finished project card ────────────── */
+.adm-fp-inv-overlay-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(77,158,255,0.18);
+  border: none;
+  border-radius: 7px;
+  color: #4D9EFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.18s;
+  white-space: nowrap;
+}
+.adm-fp-inv-overlay-btn:hover { background: rgba(77,158,255,0.35); }
+
+/* Invoice ref pill on card info row */
+.adm-fp-card-inv-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  color: #4D9EFF;
+  background: rgba(77,158,255,0.1);
+  border-radius: 5px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
+  border: none;
+}
+.adm-fp-card-inv-ref:hover { background: rgba(77,158,255,0.22); }
+
+/* ── Light mode overrides ────────────────────────────────────── */
+.db-shell.light-mode .adm-fp-link-row {
+  background: rgba(0,0,0,0.02);
+}
+.db-shell.light-mode .adm-fp-linked-banner {
+  background: rgba(110,163,13,0.05);
+}
+.db-shell.light-mode .adm-fp-linked-project {
+  color: #111;
+}
+
+
+/* ================================================================
+   COMPLETED PROJECTS — Curated section with detail panel
+   Prefix: cp-* · Adapts to light & dark theme via CSS vars
+================================================================ */
+
+/* ── Active green filter button ───────────────────────────────── */
+.adm-filter-btn.active-green {
+  background: rgba(139, 204, 26, 0.1);
+  border-color: #8BCC1A;
+  color: #8BCC1A;
+}
+.adm-filter-btn.active-green .adm-count {
+  background: #8BCC1A;
+  color: #0D0D0D;
+}
+
+/* ── Projects grid ────────────────────────────────────────────── */
+.cp-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.1rem;
+}
+
+/* ── Project card ─────────────────────────────────────────────── */
+.cp-project-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cp-project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8BCC1A, #6ea30d);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cp-project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  border-color: rgba(139, 204, 26, 0.4);
+}
+
+.cp-project-card:hover::before {
+  opacity: 1;
+}
+
+.cp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cp-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.cp-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.cp-card-id {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--clr-muted);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+}
+
+.cp-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-white);
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+.cp-card-client {
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.cp-card-dot {
+  color: var(--clr-border);
+}
+
+.cp-card-service {
+  color: var(--clr-text);
+}
+
+.cp-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.15rem;
+}
+
+.cp-card-amount {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #8BCC1A;
+  font-family: var(--font-display);
+}
+
+.cp-card-date {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ── Lifecycle mini-timeline on card ──────────────────────────── */
+.cp-card-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 0.2rem;
+}
+
+.cp-tl-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-border);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.cp-tl-dot.done {
+  background: #8BCC1A;
+}
+
+.cp-tl-line {
+  height: 2px;
+  flex: 1;
+  background: var(--clr-border);
+}
+
+.cp-tl-line.done {
+  background: rgba(139, 204, 26, 0.5);
+}
+
+/* ── Card CTA row ─────────────────────────────────────────────── */
+.cp-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--clr-muted);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--clr-border);
+  transition: color 0.2s;
+}
+
+.cp-project-card:hover .cp-card-cta {
+  color: #8BCC1A;
+}
+
+/* ── Detail backdrop & panel ──────────────────────────────────── */
+.cp-detail-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cp-detail-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cp-detail-panel {
+  width: min(600px, 95vw);
+  height: 100%;
+  background: var(--clr-bg);
+  border-left: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.cp-detail-panel.open {
+  transform: translateX(0);
+}
+
+.cp-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  flex-shrink: 0;
+}
+
+.cp-detail-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8BCC1A;
+  margin-bottom: 0.3rem;
+}
+
+.cp-detail-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--clr-white);
+  font-family: var(--font-display);
+}
+
+.cp-detail-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.cp-detail-close:hover {
+  background: rgba(255, 77, 77, 0.12);
+  border-color: #FF4D4D;
+  color: #FF4D4D;
+}
+
+.cp-detail-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Summary chips ────────────────────────────────────────────── */
+.cp-detail-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cp-sum-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--clr-text);
+}
+
+.cp-sum-chip.green {
+  background: rgba(139, 204, 26, 0.08);
+  border-color: rgba(139, 204, 26, 0.3);
+  color: #8BCC1A;
+  font-weight: 700;
+}
+
+.cp-sum-chip.blue {
+  background: rgba(77, 158, 255, 0.08);
+  border-color: rgba(77, 158, 255, 0.3);
+  color: #4D9EFF;
+}
+
+/* ── Lifecycle tabs ───────────────────────────────────────────── */
+.cp-lifecycle-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 0.3rem;
+}
+
+.cp-lc-tab {
+  flex: 1;
+  padding: 0.55rem 0.5rem;
+  border-radius: calc(var(--radius-md) - 4px);
+  border: none;
+  background: transparent;
+  color: var(--clr-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.cp-lc-tab:hover {
+  color: var(--clr-white);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cp-lc-tab.active {
+  background: rgba(139, 204, 26, 0.12);
+  border: 1px solid rgba(139, 204, 26, 0.3);
+  color: #8BCC1A;
+}
+
+/* ── Tab content panels ───────────────────────────────────────── */
+.cp-lc-content {
+  display: none;
+}
+
+.cp-lc-content.active {
+  display: block;
+}
+
+.cp-detail-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--clr-muted);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ── Detail grid (quote fields) ───────────────────────────────── */
+.cp-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+}
+
+.cp-dg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cp-dg-field label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--clr-muted);
+}
+
+.cp-dg-field span {
+  font-size: 0.88rem;
+  color: var(--clr-text);
+}
+
+.cp-dg-field .highlight {
+  color: var(--clr-white);
+  font-weight: 600;
+}
+
+.cp-dg-note {
+  font-size: 0.85rem;
+  color: var(--clr-text);
+  line-height: 1.55;
+  margin: 0;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+}
+
+/* ── Revision items ───────────────────────────────────────────── */
+.cp-revisions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cp-rev-item {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-left: 3px solid #8BCC1A;
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 0.25rem 0.75rem;
+  align-items: start;
+}
+
+.cp-rev-round {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #8BCC1A;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.cp-rev-date {
+  font-size: 0.74rem;
+  color: var(--clr-muted);
+  text-align: right;
+}
+
+.cp-rev-note {
+  font-size: 0.84rem;
+  color: var(--clr-text);
+  line-height: 1.5;
+  grid-column: 1 / 3;
+}
+
+/* ── Invoice block ────────────────────────────────────────────── */
+.cp-inv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cp-inv-ref {
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--clr-white);
+}
+
+.cp-inv-items {
+  margin-top: 1rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cp-inv-item-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--clr-surface-2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-muted);
+}
+
+.cp-inv-item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--clr-text);
+  border-top: 1px solid var(--clr-border);
+}
+
+.cp-inv-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-top: 2px solid var(--clr-border);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--clr-white);
+  background: var(--clr-surface);
+}
+
+/* ── Payment badge ────────────────────────────────────────────── */
+.cp-pay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(139, 204, 26, 0.1);
+  border: 1px solid rgba(139, 204, 26, 0.3);
+  color: #8BCC1A;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-pill);
+}
+
+.cp-pay-badge i {
+  font-size: 1rem;
+}
+
+/* ─── LIGHT MODE OVERRIDES ────────────────────────────────────── */
+.db-shell.light-mode .cp-project-card {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.db-shell.light-mode .cp-project-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.db-shell.light-mode .cp-card-title {
+  color: #111;
+}
+
+.db-shell.light-mode .cp-detail-panel {
+  background: #f8f8f6;
+  border-left: 1px solid #e0e0dc;
+}
+
+.db-shell.light-mode .cp-detail-head {
+  background: #fff;
+  border-bottom-color: #e0e0dc;
+}
+
+.db-shell.light-mode .cp-detail-title {
+  color: #111;
+}
+
+.db-shell.light-mode .cp-lc-tab {
+  color: #666;
+}
+
+.db-shell.light-mode .cp-lc-tab:hover {
+  color: #111;
+  background: rgba(0,0,0,0.04);
+}
+
+.db-shell.light-mode .cp-lc-tab.active {
+  background: rgba(139,204,26,0.1);
+  color: #1a9e4e;
+  border-color: rgba(139,204,26,0.4);
+}
+
+.db-shell.light-mode .cp-lifecycle-tabs {
+  background: #fff;
+  border-color: #e0e0dc;
+}
+
+.db-shell.light-mode .cp-sum-chip {
+  background: #fff;
+  border-color: #e0e0dc;
+  color: #444;
+}
+
+.db-shell.light-mode .cp-sum-chip.green {
+  background: rgba(139,204,26,0.08);
+  color: #1a9e4e;
+}
+
+.db-shell.light-mode .cp-sum-chip.blue {
+  background: rgba(77,158,255,0.08);
+  color: #2272d4;
+}
+
+.db-shell.light-mode .cp-dg-field span {
+  color: #333;
+}
+
+.db-shell.light-mode .cp-dg-field .highlight {
+  color: #111;
+}
+
+.db-shell.light-mode .cp-dg-note {
+  background: #fff;
+  border-color: #e0e0dc;
+  color: #444;
+}
+
+.db-shell.light-mode .cp-rev-item {
+  background: #fff;
+  border-color: #e0e0dc;
+}
+
+.db-shell.light-mode .cp-rev-note {
+  color: #444;
+}
+
+.db-shell.light-mode .cp-inv-item-head {
+  background: #f2f2ef;
+  color: #888;
+}
+
+.db-shell.light-mode .cp-inv-item-row {
+  color: #444;
+  border-top-color: #e8e8e4;
+}
+
+.db-shell.light-mode .cp-inv-total-row {
+  background: #f8f8f6;
+  border-top-color: #e0e0dc;
+  color: #111;
+}
+
+.db-shell.light-mode .cp-inv-items {
+  border-color: #e0e0dc;
+}
+
+.db-shell.light-mode .cp-detail-section-title {
+  color: #888;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .cp-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .cp-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .cp-lifecycle-tabs {
+    flex-wrap: wrap;
+  }
+  .cp-lc-tab {
+    flex: none;
+    width: calc(50% - 0.25rem);
+  }
+}
+
+/* ── Finished Projects — carousel (multi-image) ──────────────── */
+.adm-fp-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.adm-fp-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.adm-fp-prev,
+.adm-fp-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.adm-fp-prev { left: 6px; }
+.adm-fp-next { right: 6px; }
+
+.adm-fp-card-img:hover .adm-fp-prev,
+.adm-fp-card-img:hover .adm-fp-next {
+  opacity: 1;
+}
+
+.adm-fp-dots {
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 3;
+}
+
+.adm-fp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.adm-fp-dot.active {
+  background: var(--clr-accent);
+  transform: scale(1.25);
+}
+
+.adm-fp-img-count {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Lightbox — navigation arrows & footer ───────────────────── */
+.fp-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9600;
+  transition: background 0.2s;
+}
+.fp-lightbox-nav:hover {
+  background: rgba(181,255,46,0.2);
+  border-color: var(--clr-accent);
+}
+#fpLbPrev { left: 1.5rem; }
+#fpLbNext { right: 1.5rem; }
+
+.fp-lightbox-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  z-index: 9600;
+}
+
+.fp-lightbox-caption {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+}
+
+.fp-lightbox-counter {
+  font-size: 0.75rem;
+  color: var(--clr-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ── Light-mode adjustments ──────────────────────────────────── */
+.db-shell.light-mode .adm-fp-prev,
+.db-shell.light-mode .adm-fp-next {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(0,0,0,0.15);
+  color: #1A1D2E;
+}
