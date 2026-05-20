@@ -1,0 +1,617 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JDEVS. — Design Solutions For Every Need</title>
+
+  <!-- Favicon (browser tab logo) -->
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+
+  <!-- SEO Description -->
+  <meta name="description"
+    content="JDEVS offers professional logo design, branding, web design, and creative solutions to help your business stand out and grow.">
+
+  <!-- Social Sharing (Open Graph) -->
+  <meta property="og:title" content="JDEVS — Design Solutions For Every Need">
+  <meta property="og:description"
+    content="Creative design solutions including logos, branding, and web design to elevate your business.">
+  <meta property="og:image" content="assets/img/preview.png">
+  <meta property="og:url" content="https://yourwebsite.com">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       FLOATING NAVIGATION BAR
+       Links to: index.html | portfolio.html | services.html |
+                 pricing.html | about.html | blog.html | quote.html
+  ============================================================ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li><hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;"></li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       Entry point — leads users to Portfolio or Services
+  ============================================================ -->
+  <section class="hero" id="hero">
+
+    <!-- Background decorative blobs -->
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+
+    <div class="container hero-container">
+
+      <!-- Left: Text Content -->
+      <div class="hero-text" data-animate="fade-up">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Available for Projects
+        </div>
+
+        <h1 class="hero-headline">
+          We Design<br />
+          <span class="headline-accent">Brands</span> That<br />
+          Stand Out.
+        </h1>
+
+        <p class="hero-sub">
+          Creative design solutions that help businesses grow, connect and leave
+          a lasting impression — from logos to full brand identities.
+        </p>
+
+        <div class="hero-actions">
+          <!-- Leads to portfolio.html -->
+          <a href="portfolio.html" class="btn-primary">
+            View Portfolio <i class="ri-arrow-right-line"></i>
+          </a>
+          <!-- Leads to services.html -->
+          <a href="services.html" class="btn-outline">Our Services</a>
+        </div>
+        <!-- Quick Stats -->
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num" data-target="6">0</span><span>+</span>
+            <span class="stat-label">Years Exp.</span>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat">
+            <span class="stat-num" data-target="250">0</span><span>+</span>
+            <span class="stat-label">Projects Done</span>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat">
+            <span class="stat-num" data-target="150">0</span><span>+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Floating Portfolio Preview Cards -->
+      <div class="hero-visual" data-animate="fade-left">
+
+        <div class="hero-card card-main">
+          <img src="assets/img/logodesign.png" alt="Logo Design">
+          <div class="card-label">Logo Design</div>
+        </div>
+
+        <div class="hero-card card-top-right">
+          <img src="assets/img/webdesign.png" alt="Print Design">
+          <div class="card-label">web design</div>
+        </div>
+
+        <div class="hero-card card-bottom-left">
+          <img src="assets/img/Printd.png" alt="Website Design">
+          <div class="card-label">Print Design</div>
+        </div>
+
+      </div>
+  </section>
+
+
+  <!-- ============================================================
+       FEATURED WORK SECTION
+       Previews best projects — View All links to portfolio.html
+  ============================================================ -->
+  <section class="featured" id="featured">
+    <div class="container">
+
+      <div class="section-header" data-animate="fade-up">
+        <span class="section-tag">Featured Work</span>
+        <!-- View All leads to portfolio.html -->
+        <a href="portfolio.html" class="view-all">View All <i class="ri-arrow-right-line"></i></a>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-grid">
+
+        <!-- Project Card 1 — links to project-detail.html -->
+        <div class="project-card" data-animate="fade-up" data-delay="0">
+          <div class="project-thumb thumb-poster">
+            <div class="thumb-inner">
+              <i class="ri-image-2-line"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="project-detail.html" class="overlay-btn">View Project <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Motivation Poster</h3>
+            <span class="project-cat">Poster Design</span>
+          </div>
+        </div>
+
+        <!-- Project Card 2 -->
+        <div class="project-card" data-animate="fade-up" data-delay="100">
+          <div class="project-thumb thumb-logo">
+            <div class="thumb-inner">
+              <i class="ri-pentagon-line"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="project-detail.html" class="overlay-btn">View Project <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Velocity Logo</h3>
+            <span class="project-cat">Logo Design</span>
+          </div>
+        </div>
+
+        <!-- Project Card 3 -->
+        <div class="project-card" data-animate="fade-up" data-delay="200">
+          <div class="project-thumb thumb-branding">
+            <div class="thumb-inner">
+              <i class="ri-pages-line"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="project-detail.html" class="overlay-btn">View Project <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Herms Business Card</h3>
+            <span class="project-cat">Branding</span>
+          </div>
+        </div>
+
+        <!-- Project Card 4 -->
+        <div class="project-card" data-animate="fade-up" data-delay="300">
+          <div class="project-thumb thumb-invoice">
+            <div class="thumb-inner">
+              <i class="ri-file-list-3-line"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="project-detail.html" class="overlay-btn">View Project <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Invoice Design</h3>
+            <span class="project-cat">Print Design</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVICES PREVIEW SECTION
+       Overview of services — links to services.html
+  ============================================================ -->
+  <section class="services-preview" id="services-preview">
+    <div class="container">
+
+      <div class="services-layout">
+
+        <!-- Left: Heading -->
+        <div class="services-heading" data-animate="fade-right">
+          <span class="section-tag">What We Do</span>
+          <h2 class="section-title">
+            Design Solutions<br />For <span class="accent">Every Need</span>
+          </h2>
+          <!-- Leads to services.html -->
+          <a href="services.html" class="btn-outline sm-btn">
+            View All Services <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+
+        <!-- Right: Services Grid — each links to services.html -->
+        <div class="services-grid">
+
+          <a href="services.html#logo" class="service-card" data-animate="fade-up" data-delay="0">
+            <div class="service-icon"><i class="ri-pentagon-line"></i></div>
+            <h4>Logo Design</h4>
+            <p>Powerful logos that represent your brand identity and values.</p>
+          </a>
+
+          <a href="services.html#branding" class="service-card" data-animate="fade-up" data-delay="100">
+            <div class="service-icon"><i class="ri-layout-grid-line"></i></div>
+            <h4>Branding</h4>
+            <p>Complete branding solutions to build a strong and consistent brand presence.</p>
+          </a>
+
+          <a href="services.html#print" class="service-card" data-animate="fade-up" data-delay="200">
+            <div class="service-icon"><i class="ri-printer-line"></i></div>
+            <h4>Print Design</h4>
+            <p>High-quality designs for your business and marketing needs.</p>
+          </a>
+
+          <a href="services.html#web" class="service-card" data-animate="fade-up" data-delay="300">
+            <div class="service-icon"><i class="ri-global-line"></i></div>
+            <h4>Web Design</h4>
+            <p>Creative website solutions that deliver great user experience.</p>
+          </a>
+
+          <a href="services.html#social" class="service-card" data-animate="fade-up" data-delay="400">
+            <div class="service-icon"><i class="ri-instagram-line"></i></div>
+            <h4>Social Media</h4>
+            <p>Eye-catching social media graphics that boost engagement.</p>
+          </a>
+
+          <a href="services.html#invoice" class="service-card" data-animate="fade-up" data-delay="500">
+            <div class="service-icon"><i class="ri-file-list-3-line"></i></div>
+            <h4>Invoice Design</h4>
+            <p>Professional invoice and quotation templates for your business.</p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PROCESS SECTION
+       Simple numbered steps — no external page links
+  ============================================================ -->
+   <section class="process" id="process">
+    <div class="container">
+
+      <div class="section-center" data-animate="fade-up">
+        <span class="section-tag">How We Work</span>
+        <h2 class="section-title">Simple Process,<br /><span class="accent">Great Results</span></h2>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step" data-animate="fade-up" data-delay="0">
+          <span class="step-num">01</span>
+          <div class="step-icon"><i class="ri-discuss-line"></i></div>
+          <h4>Discovery</h4>
+          <p>We start by understanding your business, goals, and target audience to set a clear direction.</p>
+        </div>
+
+        <div class="process-arrow"><i class="ri-arrow-right-line"></i></div>
+
+        <div class="process-step" data-animate="fade-up" data-delay="100">
+          <span class="step-num">02</span>
+          <div class="step-icon"><i class="ri-pencil-ruler-line"></i></div>
+          <h4>Concept</h4>
+          <p>We develop multiple creative concepts aligned with your brief, identity and market position.</p>
+        </div>
+
+        <div class="process-arrow"><i class="ri-arrow-right-line"></i></div>
+
+        <div class="process-step" data-animate="fade-up" data-delay="200">
+          <span class="step-num">03</span>
+          <div class="step-icon"><i class="ri-loop-left-line"></i></div>
+          <h4>Refine</h4>
+          <p>You review, we refine. Your feedback shapes the final output into something perfect for your brand.</p>
+        </div>
+
+        <div class="process-arrow"><i class="ri-arrow-right-line"></i></div>
+
+        <div class="process-step" data-animate="fade-up" data-delay="300">
+          <span class="step-num">04</span>
+          <div class="step-icon"><i class="ri-send-plane-2-line"></i></div>
+          <h4>Deliver</h4>
+          <p>Final files are packaged, organised, and delivered ready to use across all platforms and formats.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TESTIMONIALS SECTION
+       Client feedback — no external page links
+  ============================================================ -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+
+      <div class="section-center" data-animate="fade-up">
+        <span class="section-tag">Testimonials</span>
+        <h2 class="section-title">What Clients <span class="accent">Say</span></h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" data-animate="fade-up" data-delay="0">
+          <div class="stars">
+            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+          </div>
+          <p class="testimonial-text">
+            "Absolutely amazing work! The branding created for us was beyond expectations.
+            Very professional and truly understood our vision."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar av1">SJ</div>
+            <div class="author-info">
+              <span class="author-name">Sarah Johnson</span>
+              <span class="author-role">CEO, StartupCo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card featured-testi" data-animate="fade-up" data-delay="150">
+          <div class="stars">
+            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+          </div>
+          <p class="testimonial-text">
+            "Highly professional, creative and delivered on time with real attention
+            to detail. My logo has received so many compliments — highly recommended!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar av2">DG</div>
+            <div class="author-info">
+              <span class="author-name">David Green</span>
+              <span class="author-role">Marketing Director</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-animate="fade-up" data-delay="300">
+          <div class="stars">
+            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+            <i class="ri-star-fill"></i><i class="ri-star-half-line"></i>
+          </div>
+          <p class="testimonial-text">
+            "Delivered on time and the design was exactly what I needed.
+            Will definitely work together again for future projects!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar av3">EW</div>
+            <div class="author-info">
+              <span class="author-name">Emma Williams</span>
+              <span class="author-role">Freelance Designer</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CALL-TO-ACTION BANNER
+       Final push — links to quote.html and portfolio.html
+  ============================================================ -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="container">
+      <div class="cta-inner" data-animate="fade-up">
+        <h2 class="cta-title">Ready to Build<br />Something <span class="accent">Amazing?</span></h2>
+        <p class="cta-sub">Let's create something your audience won't forget.</p>
+        <div class="cta-actions">
+          <!-- Leads to quote.html -->
+          <a href="quote.html" class="btn-primary">
+            Get a Free Quote <i class="ri-arrow-right-line"></i>
+          </a>
+          <!-- Leads to portfolio.html -->
+          <a href="portfolio.html" class="btn-ghost">See Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       Links to all main pages
+  ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="whatsapp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Links -->
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTopBtn">
+    <i class="ri-arrow-up-line"></i>
+  </div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+
+    <!-- Main Button -->
+    <div class="fab-main" id="fabToggle">
+      <i class="ri-add-line"></i>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="fab-options">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp">
+        <i class="ri-whatsapp-line"></i>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok">
+        <i class="ri-tiktok-fill"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a href="#" class="fab-item instagram">
+        <i class="ri-instagram-line"></i>
+      </a>
+
+      <!-- Facebook -->
+      <a href="#" class="fab-item facebook">
+        <i class="ri-facebook-fill"></i>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Main JavaScript -->
+  <script src="assets/Script/script.js"></script>
+</body>
+
+</html>
+<script>
+  const counters = document.querySelectorAll('.stat-num');
+
+  const speed = 200; // lower = faster
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+
+      const increment = target / speed;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    updateCount();
+  });
+</script>

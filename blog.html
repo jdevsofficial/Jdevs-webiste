@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JDEVS. — Blog</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+  <meta name="description" content="Design tips, brand strategy, and creative insights from the JDEVS studio. Helping Kenyan businesses build stronger brands.">
+  <meta property="og:title" content="JDEVS — Blog">
+  <meta property="og:description" content="Design tips, brand strategy, and creative insights from the JDEVS studio.">
+  <meta property="og:image" content="assets/img/preview.png">
+  <meta property="og:url" content="https://yourwebsite.com/blog.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── GLOBAL OVERRIDES FOR WHITE BODY ─────────────────────── */
+    html, body { overflow-x: hidden; max-width: 100%; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    .blog-body { background: #ffffff; color: #0D0D0D; }
+
+    /* ── BLOG HERO ────────────────────────────────────────────── */
+    .blog-hero { background: #0D0D0D; padding: 140px 0 80px; }
+    .blog-hero .section-tag { margin-bottom: 16px; }
+    .blog-hero-title { font-family: 'Syne', sans-serif; font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; color: #ffffff; line-height: 1.1; margin-bottom: 18px; }
+    .blog-hero-sub { font-family: 'Outfit', sans-serif; font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.7; }
+
+    /* ── BLOG CATEGORIES FILTER ───────────────────────────────── */
+    .blog-filter { background: #ffffff; padding: 40px 0 0; border-bottom: 1px solid #ebebeb; }
+    .blog-filter-inner { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 0; }
+    .filter-pill { display: inline-flex; align-items: center; gap: 6px; font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 500; padding: 8px 18px; border-radius: 100px; border: 1.5px solid #e0e0e0; background: transparent; color: #555; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+    .filter-pill:hover, .filter-pill.active { background: #0D0D0D; border-color: #0D0D0D; color: #ffffff; }
+    .filter-pill i { font-size: 0.9rem; }
+
+    /* ── BLOG MAIN LAYOUT ─────────────────────────────────────── */
+    .blog-main { background: #ffffff; padding: 60px 0 80px; }
+    .blog-layout { display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: start; }
+
+    /* ── FEATURED POST ────────────────────────────────────────── */
+    .blog-featured-label { font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #888; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .blog-featured-label::after { content: ''; flex: 1; height: 1px; background: #ebebeb; }
+
+    .featured-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 16px; overflow: hidden; border: 1.5px solid #ebebeb; margin-bottom: 50px; transition: box-shadow 0.3s ease; }
+    .featured-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.10); }
+
+    .featured-thumb { background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 100%); min-height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .featured-thumb-icon { font-size: 8rem; color: rgba(181,255,46,0.08); position: absolute; right: -10px; bottom: -10px; }
+    .featured-thumb-emoji { font-size: 4.5rem; position: relative; z-index: 1; }
+    .featured-thumb-tag { position: absolute; top: 16px; left: 16px; background: #B5FF2E; color: #0D0D0D; font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: 0.05em; }
+
+    .featured-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; background: #fff; }
+    .post-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+    .post-meta span { font-family: 'Outfit', sans-serif; font-size: 0.78rem; color: #888; display: inline-flex; align-items: center; gap: 5px; }
+    .post-meta i { font-size: 0.82rem; }
+
+    .featured-body h2 { font-family: 'Syne', sans-serif; font-size: 1.45rem; font-weight: 700; color: #0D0D0D; line-height: 1.3; margin-bottom: 14px; }
+    .featured-body p { font-family: 'Outfit', sans-serif; font-size: 0.92rem; color: #555; line-height: 1.7; margin-bottom: 24px; }
+
+    .read-more-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 600; color: #0D0D0D; border-bottom: 2px solid #B5FF2E; padding-bottom: 2px; cursor: pointer; transition: gap 0.2s ease; background: none; border-left: none; border-right: none; border-top: none; text-decoration: none; }
+    .read-more-btn:hover { gap: 14px; }
+
+    /* ── BLOG GRID ────────────────────────────────────────────── */
+    .blog-grid-label { font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #888; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .blog-grid-label::after { content: ''; flex: 1; height: 1px; background: #ebebeb; }
+
+    .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+
+    .blog-card { display: flex; flex-direction: column; border-radius: 14px; overflow: hidden; border: 1.5px solid #ebebeb; background: #fff; transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; }
+    .blog-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-3px); }
+
+    .blog-card-thumb { position: relative; height: 160px; background: linear-gradient(135deg, #0D0D0D 0%, #222 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .blog-card-thumb .thumb-icon-bg { font-size: 6rem; color: rgba(181,255,46,0.07); position: absolute; right: -8px; bottom: -8px; }
+    .blog-card-thumb .thumb-emoji { font-size: 3rem; position: relative; z-index: 1; }
+    .blog-card-thumb .card-tag { position: absolute; top: 12px; left: 12px; background: #B5FF2E; color: #0D0D0D; font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+    .blog-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-body .post-meta { margin-bottom: 10px; }
+    .blog-card-body h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #0D0D0D; line-height: 1.35; margin-bottom: 10px; }
+    .blog-card-body p { font-family: 'Outfit', sans-serif; font-size: 0.84rem; color: #666; line-height: 1.6; flex: 1; }
+
+    .card-read-more { display: inline-flex; align-items: center; gap: 6px; font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; color: #0D0D0D; margin-top: 14px; transition: gap 0.2s ease; }
+    .card-read-more:hover { gap: 10px; }
+
+    /* ── HIDDEN CARD STATE FOR FILTERING ─────────────────────── */
+    .blog-card.hidden, .featured-card.hidden { display: none; }
+    .no-results-msg { display: none; font-family: 'Outfit', sans-serif; font-size: 1rem; color: #888; text-align: center; padding: 40px 0; grid-column: 1 / -1; }
+    .no-results-msg.visible { display: block; }
+
+    /* ── LOAD MORE ────────────────────────────────────────────── */
+    .load-more-wrap { text-align: center; margin-top: 10px; }
+    .load-more-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 600; color: #0D0D0D; border: 1.5px solid #e0e0e0; border-radius: 100px; padding: 11px 28px; transition: all 0.2s ease; text-decoration: none; }
+    .load-more-btn:hover { background: #0D0D0D; color: #fff; border-color: #0D0D0D; }
+
+    /* ── SIDEBAR ──────────────────────────────────────────────── */
+    .blog-sidebar { position: sticky; top: 100px; }
+    .sidebar-block { background: #fff; border: 1.5px solid #ebebeb; border-radius: 14px; padding: 22px; margin-bottom: 20px; }
+    .sidebar-block h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: #0D0D0D; margin-bottom: 16px; }
+
+    .sidebar-search { position: relative; }
+    .sidebar-search i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 0.9rem; }
+    .sidebar-search input { width: 100%; padding: 9px 12px 9px 34px; border: 1.5px solid #e0e0e0; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 0.85rem; color: #0D0D0D; background: #fff; outline: none; transition: border-color 0.2s; }
+    .sidebar-search input:focus { border-color: #0D0D0D; }
+
+    .sidebar-cats { display: flex; flex-direction: column; gap: 4px; }
+    .sidebar-cat-item { display: flex; justify-content: space-between; align-items: center; font-family: 'Outfit', sans-serif; font-size: 0.86rem; color: #444; padding: 8px 10px; border-radius: 8px; transition: all 0.2s; cursor: pointer; text-decoration: none; }
+    .sidebar-cat-item:hover { background: #f5f5f5; color: #0D0D0D; }
+    .cat-count { background: #f0f0f0; color: #666; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+
+    .recent-post-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; text-decoration: none; transition: all 0.2s; }
+    .recent-post-item:last-child { border-bottom: none; }
+    .recent-post-thumb-mini { width: 44px; height: 44px; background: #f5f5f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .recent-post-info h5 { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; color: #0D0D0D; line-height: 1.4; margin-bottom: 3px; transition: color 0.2s; }
+    .recent-post-info span { font-family: 'Outfit', sans-serif; font-size: 0.74rem; color: #aaa; }
+    .recent-post-item:hover .recent-post-info h5 { color: #8BCC1A; }
+
+    /* ── NEWSLETTER BUTTON — LIME GREEN ──────────────────────── */
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-form p { font-family: 'Outfit', sans-serif; font-size: 0.84rem; color: #666; line-height: 1.6; margin-bottom: 4px; }
+    .newsletter-input { border: 1.5px solid #e0e0e0; border-radius: 10px; padding: 10px 14px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; color: #0D0D0D; background: #fff; outline: none; width: 100%; transition: border-color 0.2s; }
+    .newsletter-input:focus { border-color: #B5FF2E; }
+    .newsletter-submit {
+      background: #B5FF2E;
+      color: #0D0D0D;
+      border: none;
+      border-radius: 10px;
+      padding: 11px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .newsletter-submit:hover { background: #8BCC1A; transform: translateY(-1px); }
+
+    /* ── CTA BANNER ───────────────────────────────────────────── */
+    .blog-cta { margin-top: 0; }
+
+    /* ══════════════════════════════════════════════════════════
+       ARTICLE MODAL / DRAWER
+    ══════════════════════════════════════════════════════════ */
+    .article-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .article-overlay.open { opacity: 1; pointer-events: all; }
+
+    .article-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(680px, 100vw);
+      height: 100vh;
+      background: #fff;
+      z-index: 2001;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .article-drawer.open { transform: translateX(0); }
+
+    /* Drawer header */
+    .drawer-header {
+      position: sticky;
+      top: 0;
+      background: #0D0D0D;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+    .drawer-header-meta { display: flex; align-items: center; gap: 10px; }
+    .drawer-tag { background: #B5FF2E; color: #0D0D0D; font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+    .drawer-close {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .drawer-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* Drawer hero */
+    .drawer-hero {
+      background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #111 100%);
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .drawer-hero-emoji { font-size: 5rem; position: relative; z-index: 1; }
+    .drawer-hero-icon { font-size: 10rem; color: rgba(181,255,46,0.06); position: absolute; right: -15px; bottom: -15px; }
+
+    /* Drawer body */
+    .drawer-body { padding: 36px 36px 20px; flex: 1; }
+    .drawer-body h1 { font-family: 'Syne', sans-serif; font-size: 1.55rem; font-weight: 800; color: #0D0D0D; line-height: 1.25; margin-bottom: 16px; }
+    .drawer-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebebeb; }
+    .drawer-meta-row span { font-family: 'Outfit', sans-serif; font-size: 0.8rem; color: #888; display: inline-flex; align-items: center; gap: 5px; }
+    .drawer-content { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: #444; line-height: 1.85; }
+    .drawer-content p { margin-bottom: 18px; }
+    .drawer-content h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: #0D0D0D; margin: 28px 0 12px; }
+    .drawer-content ul { padding-left: 20px; margin-bottom: 18px; }
+    .drawer-content ul li { margin-bottom: 8px; color: #555; }
+    .drawer-content strong { color: #0D0D0D; font-weight: 600; }
+
+    /* ── ARTICLE RATING SECTION ───────────────────────────────── */
+    .drawer-rating-section {
+      margin: 32px 36px 0;
+      padding: 24px;
+      background: #f9f9f9;
+      border-radius: 14px;
+      border: 1.5px solid #ebebeb;
+    }
+    .drawer-rating-section h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #0D0D0D; margin-bottom: 6px; }
+    .drawer-rating-section p { font-family: 'Outfit', sans-serif; font-size: 0.84rem; color: #888; margin-bottom: 16px; }
+    .stars-row { display: flex; gap: 8px; margin-bottom: 14px; }
+    .star-btn {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ddd;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.15s, transform 0.15s;
+      line-height: 1;
+    }
+    .star-btn:hover, .star-btn.hover, .star-btn.selected { color: #F5A623; transform: scale(1.15); }
+    .star-btn.selected ~ .star-btn { color: #ddd; transform: scale(1); }
+    .rating-feedback { font-family: 'Outfit', sans-serif; font-size: 0.82rem; color: #888; height: 20px; transition: all 0.2s; }
+    .rating-feedback.submitted { color: #8BCC1A; font-weight: 600; }
+
+    /* ── COMMENTS SECTION ─────────────────────────────────────── */
+    .drawer-comments-section {
+      margin: 0 36px 36px;
+      padding-top: 28px;
+      border-top: 1px solid #ebebeb;
+    }
+    .drawer-comments-section h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #0D0D0D; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .comment-count-badge { background: #0D0D0D; color: #fff; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+
+    /* Comment form */
+    .comment-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .comment-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .comment-input, .comment-textarea {
+      width: 100%;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.87rem;
+      color: #0D0D0D;
+      background: #fff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .comment-input:focus, .comment-textarea:focus { border-color: #B5FF2E; }
+    .comment-textarea { min-height: 90px; }
+    .comment-submit {
+      align-self: flex-start;
+      background: #B5FF2E;
+      color: #0D0D0D;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 24px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .comment-submit:hover { background: #8BCC1A; transform: translateY(-1px); }
+
+    /* Existing comments list */
+    .comments-list { display: flex; flex-direction: column; gap: 16px; }
+    .comment-item { padding: 16px; background: #f9f9f9; border-radius: 12px; border: 1px solid #efefef; }
+    .comment-item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .comment-author { display: flex; align-items: center; gap: 10px; }
+    .comment-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #B5FF2E, #8BCC1A); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 800; color: #0D0D0D; flex-shrink: 0; }
+    .comment-name { font-family: 'Outfit', sans-serif; font-size: 0.86rem; font-weight: 600; color: #0D0D0D; }
+    .comment-date { font-family: 'Outfit', sans-serif; font-size: 0.74rem; color: #aaa; }
+    .comment-text { font-family: 'Outfit', sans-serif; font-size: 0.86rem; color: #555; line-height: 1.6; }
+    .comment-new { animation: commentSlideIn 0.4s ease; }
+    @keyframes commentSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-thumb { min-height: 200px; }
+      .featured-body { padding: 24px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-hero { padding: 120px 0 60px; }
+      .article-drawer { width: 100vw; }
+      .drawer-body { padding: 24px 20px 20px; }
+      .drawer-rating-section { margin: 24px 20px 0; }
+      .drawer-comments-section { margin: 0 20px 28px; }
+      .comment-form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================ FLOATING NAVIGATION BAR ============================================================ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <li><hr style="border:none;border-top:1px solid var(--clr-border);margin:0.5rem 1rem;"></li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ============================================================ BLOG HERO ============================================================ -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="page-hero-inner" data-animate="fade-up">
+        <span class="section-tag">Our Blog</span>
+        <h1 class="blog-hero-title">Ideas, Insights &amp;<br /><span class="accent">Inspiration</span></h1>
+        <p class="blog-hero-sub">Design tips, brand strategy, and creative insights from the JDEVS studio — helping Kenyan businesses build stronger brands.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ CATEGORY FILTER ============================================================ -->
+  <div class="blog-filter blog-body">
+    <div class="container">
+      <div class="blog-filter-inner">
+        <a href="#" class="filter-pill active" data-filter="all"><i class="ri-apps-2-line"></i> All Posts</a>
+        <a href="#" class="filter-pill" data-filter="logo-design"><i class="ri-pentagon-line"></i> Logo Design</a>
+        <a href="#" class="filter-pill" data-filter="branding"><i class="ri-stack-line"></i> Branding</a>
+        <a href="#" class="filter-pill" data-filter="web-design"><i class="ri-global-line"></i> Web Design</a>
+        <a href="#" class="filter-pill" data-filter="social-media"><i class="ri-share-circle-line"></i> Social Media</a>
+        <a href="#" class="filter-pill" data-filter="print-design"><i class="ri-file-paper-2-line"></i> Print Design</a>
+        <a href="#" class="filter-pill" data-filter="business-tips"><i class="ri-lightbulb-line"></i> Business Tips</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ BLOG MAIN ============================================================ -->
+  <section class="blog-main blog-body">
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- ── LEFT: Posts ──────────────────────────────────── -->
+        <div class="blog-posts">
+
+          <!-- Featured Post -->
+          <p class="blog-featured-label">Featured Post</p>
+          <div class="featured-card" data-animate="fade-up" data-category="branding"
+               data-title="The Difference Between a Logo and a Brand — And Why It Matters"
+               data-tag="Branding" data-emoji="🎨" data-icon="ri-stack-line"
+               data-date="5 May 2025" data-read="6 min read" data-author="JDEVS Studio"
+               data-excerpt="Many business owners use 'logo' and 'brand' interchangeably — but they are very different things. Your logo is a mark. Your brand is the entire experience customers have with your business. Understanding the difference is the first step to building something that actually lasts.">
+            <div class="featured-thumb">
+              <span class="featured-thumb-tag">Branding</span>
+              <span class="featured-thumb-emoji">🎨</span>
+              <i class="ri-stack-line featured-thumb-icon"></i>
+            </div>
+            <div class="featured-body">
+              <div class="post-meta">
+                <span><i class="ri-calendar-line"></i> 5 May 2025</span>
+                <span><i class="ri-time-line"></i> 6 min read</span>
+                <span><i class="ri-user-line"></i> JDEVS Studio</span>
+              </div>
+              <h2>The Difference Between a Logo and a Brand — And Why It Matters</h2>
+              <p>Many business owners use "logo" and "brand" interchangeably — but they are very different things. Your logo is a mark. Your brand is the entire experience customers have with your business.</p>
+              <button class="read-more-btn open-article">Read Article <i class="ri-arrow-right-line"></i></button>
+            </div>
+          </div>
+
+          <!-- Blog Grid -->
+          <p class="blog-grid-label">Latest Posts</p>
+          <div class="blog-grid">
+
+            <!-- Card 1 -->
+            <div class="blog-card" data-animate="fade-up" data-category="logo-design"
+                 data-title="5 Reasons Your Business Needs a Professional Logo"
+                 data-tag="Logo Design" data-emoji="✏️" data-icon="ri-pentagon-line"
+                 data-date="28 Apr 2025" data-read="4 min" data-author="JDEVS Studio"
+                 data-excerpt="A DIY logo might save money today but cost you clients tomorrow. Here's why investing in a professional logo is one of the smartest moves a new business can make.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Logo Design</span>
+                <span class="thumb-emoji">✏️</span>
+                <i class="ri-pentagon-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 28 Apr 2025</span>
+                  <span><i class="ri-time-line"></i> 4 min</span>
+                </div>
+                <h3>5 Reasons Your Business Needs a Professional Logo</h3>
+                <p>A DIY logo might save money today but cost you clients tomorrow. Here's why investing in a professional logo is one of the smartest moves a new business can make.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="blog-card" data-animate="fade-up" data-delay="50" data-category="branding"
+                 data-title="How to Choose the Right Colour Palette for Your Brand"
+                 data-tag="Branding" data-emoji="🎯" data-icon="ri-target-line"
+                 data-date="20 Apr 2025" data-read="5 min" data-author="JDEVS Studio"
+                 data-excerpt="Colours trigger emotions and shape how people perceive your business before they even read a word. Learn how to pick a palette that actually works for your audience.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Branding</span>
+                <span class="thumb-emoji">🎯</span>
+                <i class="ri-target-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 20 Apr 2025</span>
+                  <span><i class="ri-time-line"></i> 5 min</span>
+                </div>
+                <h3>How to Choose the Right Colour Palette for Your Brand</h3>
+                <p>Colours trigger emotions and shape how people perceive your business before they even read a word. Learn how to pick a palette that actually works for your audience.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="blog-card" data-animate="fade-up" data-delay="100" data-category="web-design"
+                 data-title="Web Design Trends in 2025 That Kenyan Businesses Should Know"
+                 data-tag="Web Design" data-emoji="💻" data-icon="ri-global-line"
+                 data-date="12 Apr 2025" data-read="5 min" data-author="JDEVS Studio"
+                 data-excerpt="From bold typography to dark-mode first layouts, 2025 has brought a fresh wave of design trends. Here's what's working — and what to avoid — for local businesses.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Web Design</span>
+                <span class="thumb-emoji">💻</span>
+                <i class="ri-global-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 12 Apr 2025</span>
+                  <span><i class="ri-time-line"></i> 5 min</span>
+                </div>
+                <h3>Web Design Trends in 2025 That Kenyan Businesses Should Know</h3>
+                <p>From bold typography to dark-mode first layouts, 2025 has brought a fresh wave of design trends. Here's what's working — and what to avoid — for local businesses.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="blog-card" data-animate="fade-up" data-delay="150" data-category="social-media"
+                 data-title="Why Consistency is the Most Underrated Social Media Strategy"
+                 data-tag="Social Media" data-emoji="📱" data-icon="ri-share-circle-line"
+                 data-date="5 Apr 2025" data-read="4 min" data-author="JDEVS Studio"
+                 data-excerpt="Posting great content once won't build a brand. Showing up with consistent visuals and messaging every week will. Here's how to keep your social media on-brand.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Social Media</span>
+                <span class="thumb-emoji">📱</span>
+                <i class="ri-share-circle-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 5 Apr 2025</span>
+                  <span><i class="ri-time-line"></i> 4 min</span>
+                </div>
+                <h3>Why Consistency is the Most Underrated Social Media Strategy</h3>
+                <p>Posting great content once won't build a brand. Showing up with consistent visuals and messaging every week will. Here's how to keep your social media on-brand.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="blog-card" data-animate="fade-up" data-category="print-design"
+                 data-title="Business Cards Are Not Dead — Here's How to Design One That Works"
+                 data-tag="Print Design" data-emoji="🖨️" data-icon="ri-file-paper-2-line"
+                 data-date="28 Mar 2025" data-read="3 min" data-author="JDEVS Studio"
+                 data-excerpt="In a world obsessed with digital, a well-designed business card still commands attention. We break down what makes a great card and what kills it instantly.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Print Design</span>
+                <span class="thumb-emoji">🖨️</span>
+                <i class="ri-file-paper-2-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 28 Mar 2025</span>
+                  <span><i class="ri-time-line"></i> 3 min</span>
+                </div>
+                <h3>Business Cards Are Not Dead — Here's How to Design One That Works</h3>
+                <p>In a world obsessed with digital, a well-designed business card still commands attention. We break down what makes a great card and what kills it instantly.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="blog-card" data-animate="fade-up" data-delay="50" data-category="business-tips"
+                 data-title="What is Brand Identity and Why Does Every Business Need One?"
+                 data-tag="Business Tips" data-emoji="💡" data-icon="ri-lightbulb-line"
+                 data-date="18 Mar 2025" data-read="6 min" data-author="JDEVS Studio"
+                 data-excerpt="Brand identity is more than colours and fonts — it's how your business looks, sounds, and feels to the world. Here's what it includes and how to build yours from scratch.">
+              <div class="blog-card-thumb">
+                <span class="card-tag">Business Tips</span>
+                <span class="thumb-emoji">💡</span>
+                <i class="ri-lightbulb-line thumb-icon-bg"></i>
+              </div>
+              <div class="blog-card-body">
+                <div class="post-meta">
+                  <span><i class="ri-calendar-line"></i> 18 Mar 2025</span>
+                  <span><i class="ri-time-line"></i> 6 min</span>
+                </div>
+                <h3>What is Brand Identity and Why Does Every Business Need One?</h3>
+                <p>Brand identity is more than colours and fonts — it's how your business looks, sounds, and feels to the world. Here's what it includes and how to build yours from scratch.</p>
+                <span class="card-read-more open-article">Read More <i class="ri-arrow-right-line"></i></span>
+              </div>
+            </div>
+
+            <!-- No results message -->
+            <p class="no-results-msg" id="noResults">No posts found in this category yet. Check back soon!</p>
+
+          </div><!-- /.blog-grid -->
+
+          <!-- Load More -->
+          <div class="load-more-wrap">
+            <a href="#" class="load-more-btn">Load More Posts <i class="ri-refresh-line"></i></a>
+          </div>
+
+        </div><!-- /.blog-posts -->
+
+
+        <!-- ── RIGHT: Sidebar ───────────────────────────────── -->
+        <aside class="blog-sidebar" data-animate="fade-left">
+
+          <!-- Search -->
+          <div class="sidebar-block">
+            <h4>Search</h4>
+            <div class="sidebar-search">
+              <i class="ri-search-line"></i>
+              <input type="text" placeholder="Search articles..." />
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-block">
+            <h4>Categories</h4>
+            <div class="sidebar-cats">
+              <a href="#" class="sidebar-cat-item" data-filter="logo-design">Logo Design <span class="cat-count">8</span></a>
+              <a href="#" class="sidebar-cat-item" data-filter="branding">Branding <span class="cat-count">12</span></a>
+              <a href="#" class="sidebar-cat-item" data-filter="web-design">Web Design <span class="cat-count">6</span></a>
+              <a href="#" class="sidebar-cat-item" data-filter="social-media">Social Media <span class="cat-count">9</span></a>
+              <a href="#" class="sidebar-cat-item" data-filter="print-design">Print Design <span class="cat-count">4</span></a>
+              <a href="#" class="sidebar-cat-item" data-filter="business-tips">Business Tips <span class="cat-count">7</span></a>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-block">
+            <h4>Recent Posts</h4>
+            <a href="#" class="recent-post-item">
+              <div class="recent-post-thumb-mini">🎨</div>
+              <div class="recent-post-info">
+                <h5>The Difference Between a Logo and a Brand</h5>
+                <span>5 May 2025</span>
+              </div>
+            </a>
+            <a href="#" class="recent-post-item">
+              <div class="recent-post-thumb-mini">✏️</div>
+              <div class="recent-post-info">
+                <h5>5 Reasons Your Business Needs a Professional Logo</h5>
+                <span>28 Apr 2025</span>
+              </div>
+            </a>
+            <a href="#" class="recent-post-item">
+              <div class="recent-post-thumb-mini">🎯</div>
+              <div class="recent-post-info">
+                <h5>How to Choose the Right Colour Palette</h5>
+                <span>20 Apr 2025</span>
+              </div>
+            </a>
+            <a href="#" class="recent-post-item">
+              <div class="recent-post-thumb-mini">💻</div>
+              <div class="recent-post-info">
+                <h5>Web Design Trends in 2025</h5>
+                <span>12 Apr 2025</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Newsletter — lime green button -->
+          <div class="sidebar-block">
+            <h4>Stay in the Loop</h4>
+            <div class="newsletter-form">
+              <p>Get design tips and branding insights delivered straight to your inbox every week.</p>
+              <input type="email" class="newsletter-input" placeholder="Your email address" />
+              <button class="newsletter-submit">Subscribe <i class="ri-send-plane-line"></i></button>
+            </div>
+          </div>
+
+        </aside><!-- /.blog-sidebar -->
+
+      </div><!-- /.blog-layout -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================ CTA BANNER ============================================================ -->
+  <section class="cta-banner blog-cta" id="cta-banner">
+    <div class="container">
+      <div class="cta-inner" data-animate="fade-up">
+        <h2 class="cta-title">Ready to Build<br />Something <span class="accent">Amazing?</span></h2>
+        <p class="cta-sub">Let's create something your audience won't forget.</p>
+        <div class="cta-actions">
+          <a href="quote.html" class="btn-primary">Get a Free Quote <i class="ri-arrow-right-line"></i></a>
+          <a href="portfolio.html" class="btn-ghost">See Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ FOOTER ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo"><img src="assets/img/logomain.png" alt="JDEVS Logo"></a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTopBtn"><i class="ri-arrow-up-line"></i></div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+    <div class="fab-main" id="fabToggle"><i class="ri-add-line"></i></div>
+    <div class="fab-options">
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp"><i class="ri-whatsapp-line"></i></a>
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok"><i class="ri-tiktok-fill"></i></a>
+      <a href="#" class="fab-item instagram"><i class="ri-instagram-line"></i></a>
+      <a href="#" class="fab-item facebook"><i class="ri-facebook-fill"></i></a>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       ARTICLE DRAWER MODAL
+  ============================================================ -->
+  <div class="article-overlay" id="articleOverlay"></div>
+
+  <div class="article-drawer" id="articleDrawer" role="dialog" aria-modal="true">
+
+    <!-- Sticky header -->
+    <div class="drawer-header">
+      <div class="drawer-header-meta">
+        <span class="drawer-tag" id="drawerTag">Branding</span>
+        <span style="font-family:'Outfit',sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.5);" id="drawerReadTime">6 min read</span>
+      </div>
+      <button class="drawer-close" id="drawerClose" aria-label="Close article"><i class="ri-close-line"></i></button>
+    </div>
+
+    <!-- Hero thumb -->
+    <div class="drawer-hero">
+      <span class="drawer-hero-emoji" id="drawerEmoji">🎨</span>
+      <i class="drawer-hero-icon" id="drawerIcon"></i>
+    </div>
+
+    <!-- Article body -->
+    <div class="drawer-body">
+      <h1 id="drawerTitle">Article Title</h1>
+      <div class="drawer-meta-row">
+        <span><i class="ri-calendar-line"></i> <span id="drawerDate">5 May 2025</span></span>
+        <span><i class="ri-user-line"></i> <span id="drawerAuthor">JDEVS Studio</span></span>
+        <span><i class="ri-time-line"></i> <span id="drawerReadTime2">6 min read</span></span>
+      </div>
+      <div class="drawer-content" id="drawerContent">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- Rating Section -->
+    <div class="drawer-rating-section">
+      <h3>Rate this Article</h3>
+      <p>Was this helpful? Let us know how you'd rate it.</p>
+      <div class="stars-row" id="starsRow">
+        <button class="star-btn" data-val="1">★</button>
+        <button class="star-btn" data-val="2">★</button>
+        <button class="star-btn" data-val="3">★</button>
+        <button class="star-btn" data-val="4">★</button>
+        <button class="star-btn" data-val="5">★</button>
+      </div>
+      <p class="rating-feedback" id="ratingFeedback">Click a star to rate</p>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="drawer-comments-section">
+      <h3>
+        Comments
+        <span class="comment-count-badge" id="commentCountBadge">2</span>
+      </h3>
+
+      <!-- Comment Form -->
+      <div class="comment-form">
+        <div class="comment-form-row">
+          <input type="text" class="comment-input" id="commentName" placeholder="Your name" />
+          <input type="email" class="comment-input" id="commentEmail" placeholder="Email (optional)" />
+        </div>
+        <textarea class="comment-textarea" id="commentText" placeholder="Share your thoughts on this article..."></textarea>
+        <button class="comment-submit" id="commentSubmit">
+          Post Comment <i class="ri-send-plane-line"></i>
+        </button>
+      </div>
+
+      <!-- Comments List -->
+      <div class="comments-list" id="commentsList">
+        <!-- Seed comments populated by JS -->
+      </div>
+    </div>
+
+  </div><!-- /.article-drawer -->
+
+
+  <script src="assets/Script/script.js"></script>
+
+  <script>
+  /* ================================================================
+     BLOG PAGE ENHANCEMENTS
+     1. Category filter (pills + sidebar cats)
+     2. Article drawer / modal with full content
+     3. Star rating
+     4. Comments (add + display)
+  ================================================================ */
+  (function () {
+
+    /* ── 1. CATEGORY FILTER ──────────────────────────────────── */
+    const pills     = document.querySelectorAll('.filter-pill');
+    const sidebarCats = document.querySelectorAll('.sidebar-cat-item');
+    const cards     = document.querySelectorAll('.blog-card');
+    const featured  = document.querySelector('.featured-card');
+    const noResults = document.getElementById('noResults');
+    const featuredLabel = document.querySelector('.blog-featured-label');
+
+    function applyFilter(filter) {
+      // Update active pill
+      pills.forEach(p => p.classList.toggle('active', p.dataset.filter === filter));
+
+      // Show/hide featured card
+      if (featured) {
+        const fc = featured.dataset.category;
+        const showFeatured = filter === 'all' || fc === filter;
+        featured.classList.toggle('hidden', !showFeatured);
+        if (featuredLabel) featuredLabel.style.display = showFeatured ? '' : 'none';
+      }
+
+      // Show/hide grid cards
+      let visible = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      noResults.classList.toggle('visible', visible === 0);
+    }
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', e => {
+        e.preventDefault();
+        applyFilter(pill.dataset.filter);
+        // sync sidebar highlight
+        sidebarCats.forEach(c => c.style.fontWeight = c.dataset.filter === pill.dataset.filter ? '700' : '');
+      });
+    });
+
+    sidebarCats.forEach(cat => {
+      cat.addEventListener('click', e => {
+        e.preventDefault();
+        applyFilter(cat.dataset.filter);
+        window.scrollTo({ top: document.querySelector('.blog-filter').offsetTop - 80, behavior: 'smooth' });
+      });
+    });
+
+
+    /* ── 2. ARTICLE DRAWER ───────────────────────────────────── */
+    const overlay = document.getElementById('articleOverlay');
+    const drawer  = document.getElementById('articleDrawer');
+    const closeBtn = document.getElementById('drawerClose');
+
+    // Full article content map keyed by a slug derived from the title
+    const articleContent = {
+      default: `
+        <p>This is a full-length article from the JDEVS studio. We explore this topic in depth to help Kenyan businesses make smarter design decisions.</p>
+        <h3>Why This Matters</h3>
+        <p>Understanding the fundamentals is what separates businesses that thrive from those that struggle with their visual identity. Design isn't decoration — it's strategy.</p>
+        <h3>Key Takeaways</h3>
+        <ul>
+          <li>Your visual identity communicates before you speak a word.</li>
+          <li>Consistency builds trust faster than any marketing campaign.</li>
+          <li>Investing early in good design saves significantly in rebranding costs.</li>
+          <li>Local context matters — design for your actual audience.</li>
+        </ul>
+        <p>At JDEVS, we've helped dozens of Kenyan businesses transform their visual presence. The results speak for themselves — stronger recognition, more referrals, and a brand that actually reflects the quality of the business behind it.</p>
+        <h3>Ready to Take Action?</h3>
+        <p>If this article resonated with you, we'd love to chat about what we can build together. Head over to our <strong>Get a Quote</strong> page and let's start a conversation.</p>
+      `,
+    };
+
+    // Seed comments per article
+    const seedComments = {
+      default: [
+        { name: 'Amina W.', text: 'Really insightful read! This helped me understand why my old logo wasn\'t working for my business.', date: '3 days ago' },
+        { name: 'Brian K.', text: 'JDEVS content is always top quality. Shared this with my business partner immediately.', date: '1 week ago' },
+      ]
+    };
+
+    // Per-article comment storage
+    const commentStore = {};
+
+    function getSlug(title) {
+      return title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40) : 'default';
+    }
+
+    function openArticle(card) {
+      const title   = card.dataset.title   || 'Article';
+      const tag     = card.dataset.tag     || 'Blog';
+      const emoji   = card.dataset.emoji   || '📝';
+      const icon    = card.dataset.icon    || 'ri-article-line';
+      const date    = card.dataset.date    || '';
+      const read    = card.dataset.read    || '';
+      const author  = card.dataset.author  || 'JDEVS Studio';
+
+      const slug = getSlug(title);
+
+      document.getElementById('drawerTag').textContent       = tag;
+      document.getElementById('drawerTitle').textContent     = title;
+      document.getElementById('drawerEmoji').textContent     = emoji;
+      document.getElementById('drawerIcon').className        = 'drawer-hero-icon ' + icon;
+      document.getElementById('drawerDate').textContent      = date;
+      document.getElementById('drawerAuthor').textContent    = author;
+      document.getElementById('drawerReadTime').textContent  = read;
+      document.getElementById('drawerReadTime2').textContent = read;
+      document.getElementById('drawerContent').innerHTML     = articleContent[slug] || articleContent.default;
+
+      // Reset rating
+      document.querySelectorAll('.star-btn').forEach(s => s.classList.remove('selected'));
+      document.getElementById('ratingFeedback').textContent = 'Click a star to rate';
+      document.getElementById('ratingFeedback').classList.remove('submitted');
+
+      // Load comments
+      if (!commentStore[slug]) {
+        commentStore[slug] = (seedComments[slug] || seedComments.default).map(c => ({ ...c }));
+      }
+      drawer.dataset.slug = slug;
+      renderComments(slug);
+
+      // Reset form
+      document.getElementById('commentName').value  = '';
+      document.getElementById('commentEmail').value = '';
+      document.getElementById('commentText').value  = '';
+
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      drawer.scrollTop = 0;
+    }
+
+    function closeArticle() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    overlay.addEventListener('click', closeArticle);
+    closeBtn.addEventListener('click', closeArticle);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+
+    // Attach open handlers to all cards and featured card
+    function attachOpenHandlers() {
+      document.querySelectorAll('.open-article').forEach(trigger => {
+        trigger.addEventListener('click', e => {
+          e.preventDefault();
+          const card = trigger.closest('[data-title]');
+          if (card) openArticle(card);
+        });
+      });
+
+      // Clicking anywhere on blog-card also opens it
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', e => {
+          if (!e.target.closest('a[href]')) openArticle(card);
+        });
+      });
+    }
+    attachOpenHandlers();
+
+
+    /* ── 3. STAR RATING ──────────────────────────────────────── */
+    const starBtns = document.querySelectorAll('.star-btn');
+    const ratingFeedback = document.getElementById('ratingFeedback');
+    const labels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
+
+    starBtns.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        const val = parseInt(btn.dataset.val);
+        starBtns.forEach((s, i) => s.classList.toggle('hover', i < val));
+      });
+      btn.addEventListener('mouseleave', () => {
+        starBtns.forEach(s => s.classList.remove('hover'));
+      });
+      btn.addEventListener('click', () => {
+        const val = parseInt(btn.dataset.val);
+        starBtns.forEach((s, i) => {
+          s.classList.toggle('selected', i < val);
+          s.classList.remove('hover');
+        });
+        ratingFeedback.textContent = `You rated this ${labels[val]} (${val}/5) — Thanks!`;
+        ratingFeedback.classList.add('submitted');
+      });
+    });
+
+
+    /* ── 4. COMMENTS ─────────────────────────────────────────── */
+    function renderComments(slug) {
+      const list    = document.getElementById('commentsList');
+      const badge   = document.getElementById('commentCountBadge');
+      const comments = commentStore[slug] || [];
+      badge.textContent = comments.length;
+      list.innerHTML = comments.map((c, i) => `
+        <div class="comment-item${i === 0 && c._new ? ' comment-new' : ''}">
+          <div class="comment-item-header">
+            <div class="comment-author">
+              <div class="comment-avatar">${c.name.slice(0,2).toUpperCase()}</div>
+              <div>
+                <div class="comment-name">${escHtml(c.name)}</div>
+                <div class="comment-date">${c.date}</div>
+              </div>
+            </div>
+          </div>
+          <p class="comment-text">${escHtml(c.text)}</p>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('commentSubmit').addEventListener('click', () => {
+      const name = document.getElementById('commentName').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      if (!name || !text) {
+        document.getElementById('commentName').style.borderColor = name ? '#e0e0e0' : '#ff4d4d';
+        document.getElementById('commentText').style.borderColor = text ? '#e0e0e0' : '#ff4d4d';
+        return;
+      }
+      document.getElementById('commentName').style.borderColor = '';
+      document.getElementById('commentText').style.borderColor = '';
+
+      const slug = drawer.dataset.slug || 'default';
+      if (!commentStore[slug]) commentStore[slug] = [];
+      commentStore[slug].unshift({ name, text, date: 'Just now', _new: true });
+      renderComments(slug);
+
+      document.getElementById('commentName').value  = '';
+      document.getElementById('commentEmail').value = '';
+      document.getElementById('commentText').value  = '';
+    });
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

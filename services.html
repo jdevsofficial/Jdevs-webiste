@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JDEVS. — Our Services</title>
+
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+
+  <meta name="description"
+    content="Explore JDEVS design services: logo design, branding, print design, web design, and social media design.">
+
+  <meta property="og:title" content="JDEVS — Our Services">
+  <meta property="og:description" content="Creative design solutions including logos, branding, print, and web design.">
+  <meta property="og:image" content="assets/img/preview.png">
+  <meta property="og:url" content="https://yourwebsite.com/services.html">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       FLOATING NAVIGATION BAR
+  ============================================================ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HERO — SERVICES
+  ============================================================ -->
+  <section class="portfolio-header dark-hero">
+    <div class="container">
+      <div class="page-hero-inner" data-animate="fade-up">
+        <span class="section-tag">Our services</span>
+        <h1 class="portfolio-header-title" style="color:#0D0D0D;">
+          We offer <span class="accent" style="color:var(--clr-accent-dim);">Brand</span> Needs
+        </h1>
+        <p class="services-detail-lead">
+          Each service is crafted with precision, creativity, and a deep understanding of what makes brands stand out.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVICES DETAIL SECTION — WHITE BACKGROUND
+  ============================================================ -->
+  <section class="services-detail" id="services-detail">
+    <div class="container">
+      <hr class="section-divider">
+
+      <!-- Services layout: sticky left + cards right -->
+      <div class="svc-layout">
+
+        <!-- Left: Sticky quick-nav -->
+        <aside class="svc-aside">
+          <p class="svc-aside-label">Jump to Service</p>
+          <ul class="svc-aside-nav">
+            <li><a href="#logo" class="svc-aside-link active-link"><i class="ri-pentagon-line"></i> Logo Design</a></li>
+            <li><a href="#branding" class="svc-aside-link"><i class="ri-stack-line"></i> Branding</a></li>
+            <li><a href="#print" class="svc-aside-link"><i class="ri-file-paper-2-line"></i> Print Design</a></li>
+            <li><a href="#web" class="svc-aside-link"><i class="ri-global-line"></i> Web Design</a></li>
+            <li><a href="#social" class="svc-aside-link"><i class="ri-share-circle-line"></i> Social Media</a></li>
+          </ul>
+          <a href="quote.html" class="btn-primary svc-aside-cta">
+            Start a Project <i class="ri-arrow-right-line"></i>
+          </a>
+        </aside>
+
+        <!-- Right: Detailed service blocks -->
+        <div class="svc-cards">
+
+          <!-- 01 — Logo Design -->
+          <div class="svc-block" id="logo" data-animate="fade-up">
+            <div class="svc-block-header">
+              <div class="svc-block-icon">
+                <i class="ri-pentagon-line"></i>
+              </div>
+              <div>
+                <span class="svc-block-num">01</span>
+                <h3 class="svc-block-title">Logo Design</h3>
+              </div>
+            </div>
+            <p class="svc-block-desc">
+              A great logo is more than just an image — it's the foundation of your brand identity. We craft memorable,
+              timeless logos that capture your business essence and leave a lasting impression on your audience.
+            </p>
+            <div class="svc-block-content">
+              <ul class="svc-feature-list">
+                <li><i class="ri-checkbox-circle-fill"></i> Concept exploration & sketches</li>
+                <li><i class="ri-checkbox-circle-fill"></i> 2–3 unique logo concepts</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Full vector source files (AI, EPS, SVG)</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Light & dark logo variations</li>
+                <li><i class="ri-checkbox-circle-fill"></i> High-resolution PNG exports</li>
+                <li><i class="ri-checkbox-circle-fill"></i> 2 rounds of revisions</li>
+              </ul>
+              <div class="svc-block-thumb svc-thumb-logo">
+                <img src="assets/img/logodesign.png" alt="Logo Design">
+                <span>Logo Design</span>
+              </div>
+            </div>
+            <div class="svc-block-footer">
+              <a href="pricing.html" class="btn-outline sm-btn">View Pricing</a>
+              <a href="portfolio.html?filter=logo" class="svc-see-work">See Logo Work <i
+                  class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+
+          <!-- 02 — Branding -->
+          <div class="svc-block" id="branding" data-animate="fade-up" data-delay="50">
+            <div class="svc-block-header">
+              <div class="svc-block-icon svc-icon-brand">
+                <i class="ri-stack-line"></i>
+              </div>
+              <div>
+                <span class="svc-block-num">02</span>
+                <h3 class="svc-block-title">Branding</h3>
+              </div>
+            </div>
+            <p class="svc-block-desc">
+              Complete branding solutions designed to build a strong, consistent, and recognisable brand presence.
+              From colour palettes to typography systems, we define the visual language of your business.
+            </p>
+            <div class="svc-block-content">
+              <ul class="svc-feature-list">
+                <li><i class="ri-checkbox-circle-fill"></i> Brand strategy & positioning</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Colour palette & typography system</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Logo suite & brand mark variations</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Brand voice & guidelines document</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Business card & stationery mockups</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Brand identity presentation</li>
+              </ul>
+              <div class="svc-block-thumb svc-thumb-logo">
+                <img src="assets/img/brandingcard.png" alt="Logo Design">
+                <span>Branding</span>
+              </div>
+            </div>
+            <div class="svc-block-footer">
+              <a href="pricing.html" class="btn-outline sm-btn">View Pricing</a>
+              <a href="portfolio.html?filter=branding" class="svc-see-work">See Branding Work <i
+                  class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+
+          <!-- 03 — Print Design -->
+          <div class="svc-block" id="print" data-animate="fade-up" data-delay="100">
+            <div class="svc-block-header">
+              <div class="svc-block-icon svc-icon-print">
+                <i class="ri-file-paper-2-line"></i>
+              </div>
+              <div>
+                <span class="svc-block-num">03</span>
+                <h3 class="svc-block-title">Print Design</h3>
+              </div>
+            </div>
+            <p class="svc-block-desc">
+              High-quality print designs that represent your business professionally and expand your reach. From
+              business cards to flyers, banners, and marketing materials — we make print count.
+            </p>
+            <div class="svc-block-content">
+              <ul class="svc-feature-list">
+                <li><i class="ri-checkbox-circle-fill"></i> Business cards & letterheads</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Flyers, posters & banners</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Brochures & catalogues</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Packaging & label design</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Print-ready CMYK files</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Bleed & crop marks included</li>
+              </ul>
+              <div class="svc-block-thumb svc-thumb-logo">
+                <img src="assets/img/Printdesign.png" alt="Logo Design">
+                <span>Print design</span>
+              </div>
+            </div>
+            <div class="svc-block-footer">
+              <a href="pricing.html" class="btn-outline sm-btn">View Pricing</a>
+              <a href="portfolio.html?filter=print" class="svc-see-work">See Print Work <i
+                  class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+
+          <!-- 04 — Web Design -->
+          <div class="svc-block" id="web" data-animate="fade-up" data-delay="150">
+            <div class="svc-block-header">
+              <div class="svc-block-icon svc-icon-web">
+                <i class="ri-global-line"></i>
+              </div>
+              <div>
+                <span class="svc-block-num">04</span>
+                <h3 class="svc-block-title">Web Design</h3>
+              </div>
+            </div>
+            <p class="svc-block-desc">
+              Professional website designs that deliver a great user experience and reflect your brand's quality.
+              We design beautiful, conversion-focused websites that look incredible on every device.
+            </p>
+            <div class="svc-block-content">
+              <ul class="svc-feature-list">
+                <li><i class="ri-checkbox-circle-fill"></i> UI/UX wireframing & prototyping</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Responsive desktop, tablet & mobile design</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Landing pages & multi-page websites</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Figma or Adobe XD source files</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Style guide & component library</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Developer handoff ready</li>
+              </ul>
+              <div class="svc-block-thumb svc-thumb-logo">
+                <img src="assets/img/webdesign.png" alt="Logo Design">
+                <span>Web Design</span>
+              </div>
+            </div>
+            <div class="svc-block-footer">
+              <a href="pricing.html" class="btn-outline sm-btn">View Pricing</a>
+              <a href="portfolio.html?filter=web" class="svc-see-work">See Web Work <i
+                  class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+
+          <!-- 05 — Social Media -->
+          <div class="svc-block" id="social" data-animate="fade-up" data-delay="200">
+            <div class="svc-block-header">
+              <div class="svc-block-icon svc-icon-social">
+                <i class="ri-share-circle-line"></i>
+              </div>
+              <div>
+                <span class="svc-block-num">05</span>
+                <h3 class="svc-block-title">Social Media Design</h3>
+              </div>
+            </div>
+            <p class="svc-block-desc">
+              Eye-catching social media graphics that boost engagement and make your brand shine online.
+              Consistent, on-brand posts, stories, and banners designed to stop the scroll.
+            </p>
+            <div class="svc-block-content">
+              <ul class="svc-feature-list">
+                <li><i class="ri-checkbox-circle-fill"></i> Feed posts & carousel designs</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Instagram & Facebook stories</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Profile & cover photo design</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Monthly post templates</li>
+                <li><i class="ri-checkbox-circle-fill"></i> On-brand graphics in your colour palette</li>
+                <li><i class="ri-checkbox-circle-fill"></i> Editable Canva or PSD files</li>
+              </ul>
+              <div class="svc-block-thumb svc-thumb-logo">
+                <img src="assets/img/Socialmedia.png" alt="Logo Design">
+                <span>Social media design</span>
+              </div>
+            </div>
+            <div class="svc-block-footer">
+              <a href="pricing.html" class="btn-outline sm-btn">View Pricing</a>
+              <a href="portfolio.html?filter=social" class="svc-see-work">See Social Work <i
+                  class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+
+        </div><!-- /.svc-cards -->
+      </div><!-- /.svc-layout -->
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHY CHOOSE JDEVS — DARK BACKGROUND
+  ============================================================ -->
+  <section class="why-us">
+    <div class="container">
+
+      <div class="section-center" data-animate="fade-up">
+        <span class="section-tag">Why JDEVS</span>
+        <h2 class="section-title">
+          Design You Can <span class="accent">Trust</span>
+        </h2>
+        <p class="why-us-lead">
+          We don't just deliver files — we deliver results, relationships, and a brand that works for you.
+        </p>
+      </div>
+
+      <div class="why-us-grid">
+
+        <div class="why-card" data-animate="fade-up" data-delay="0">
+          <div class="why-icon">
+            <i class="ri-medal-line"></i>
+          </div>
+          <h4>Premium Quality</h4>
+          <p>Every design is crafted with meticulous attention to detail — no templates, no shortcuts.</p>
+        </div>
+
+        <div class="why-card" data-animate="fade-up" data-delay="100">
+          <div class="why-icon">
+            <i class="ri-time-line"></i>
+          </div>
+          <h4>Fast Turnaround</h4>
+          <p>We respect your timeline. Projects are delivered on schedule without compromising quality.</p>
+        </div>
+
+        <div class="why-card" data-animate="fade-up" data-delay="200">
+          <div class="why-icon">
+            <i class="ri-chat-smile-3-line"></i>
+          </div>
+          <h4>Clear Communication</h4>
+          <p>Stay informed at every stage. We keep you in the loop from brief to final delivery.</p>
+        </div>
+
+        <div class="why-card" data-animate="fade-up" data-delay="300">
+          <div class="why-icon">
+            <i class="ri-loop-left-line"></i>
+          </div>
+          <h4>Unlimited Revisions</h4>
+          <p>Your satisfaction is the goal. We refine until your design is exactly right for your brand.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CALL-TO-ACTION BANNER
+  ============================================================ -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="container">
+      <div class="cta-inner" data-animate="fade-up">
+        <h2 class="cta-title">Ready to Build<br />Something <span class="accent">Amazing?</span></h2>
+        <p class="cta-sub">Let's create something your audience won't forget.</p>
+        <div class="cta-actions">
+          <a href="quote.html" class="btn-primary">
+            Get a Free Quote <i class="ri-arrow-right-line"></i>
+          </a>
+          <a href="portfolio.html" class="btn-ghost">See Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="whatsapp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTopBtn">
+    <i class="ri-arrow-up-line"></i>
+  </div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+    <div class="fab-main" id="fabToggle">
+      <i class="ri-add-line"></i>
+    </div>
+    <div class="fab-options">
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp">
+        <i class="ri-whatsapp-line"></i>
+      </a>
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok">
+        <i class="ri-tiktok-fill"></i>
+      </a>
+      <a href="#" class="fab-item instagram">
+        <i class="ri-instagram-line"></i>
+      </a>
+      <a href="#" class="fab-item facebook">
+        <i class="ri-facebook-fill"></i>
+      </a>
+    </div>
+  </div>
+
+  <script src="assets/Script/script.js"></script>
+</body>
+
+</html>

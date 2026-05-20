@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JDEVS. — About Us</title>
+
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+
+  <meta name="description"
+    content="Learn about JDEVS — a passionate design studio crafting brands that inspire and leave lasting impressions.">
+
+  <meta property="og:title" content="JDEVS — About Us">
+  <meta property="og:description" content="Designing with passion. Delivering with purpose.">
+  <meta property="og:image" content="assets/img/preview.png">
+  <meta property="og:url" content="https://yourwebsite.com/about.html">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+
+<body class="auth-page">
+
+  <!-- ════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════════
+       AUTH CARD
+  ════════════════════════════════════ -->
+  <div class="auth-container" id="authContainer">
+
+    <!-- Tab bar (visible on mobile only via CSS) -->
+    <div class="auth-tab-bar" id="authTabBar">
+      <button class="auth-tab active" id="tabSignIn" type="button">Log In</button>
+      <button class="auth-tab" id="tabSignUp" type="button">Sign Up</button>
+    </div>
+
+
+    <!-- ── SIGN IN ── -->
+    <div class="form-container sign-in-container mob-active" id="signInContainer">
+      <form class="auth-form" id="signInForm" action="#" novalidate>
+
+        <h1>Welcome Back</h1>
+
+        <div class="social-container">
+          <a href="#" aria-label="Google"><i class="ri-google-fill"></i></a>
+          <a href="#" aria-label="Apple"><i class="ri-apple-fill"></i></a>
+          <a href="#" aria-label="Phone"><i class="ri-phone-fill"></i></a>
+        </div>
+
+        <div class="or-divider"><span>or use your account</span></div>
+
+        <div class="input-group">
+          <input type="email" id="si-email" placeholder="Email Address" autocomplete="email" />
+          <i class="ri-mail-line input-icon"></i>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="si-password" placeholder="Password" autocomplete="current-password" />
+          <i class="ri-lock-line input-icon"></i>
+          <button type="button" class="toggle-pw" data-target="si-password" aria-label="Show password">
+            <i class="ri-eye-off-line"></i>
+          </button>
+        </div>
+
+        <div class="remember-row">
+          <label class="remember-label">
+            <input type="checkbox" id="rememberMe" />
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-pw-link" id="openFpModal">Forgot password?</a>
+        </div>
+
+        <button class="btn-primary" type="button" onclick="window.location.href='dashboard.html'"
+          style="width:100%;justify-content:center;margin-top:14px;">
+          <i class="ri-login-box-line"></i> Log In
+        </button>
+
+      </form>
+    </div>
+
+
+    <!-- ── SIGN UP ── -->
+    <div class="form-container sign-up-container" id="signUpContainer">
+      <form class="auth-form" id="signUpForm" action="#" novalidate>
+
+        <h1>Create Account</h1>
+
+        <div class="social-container">
+          <a href="#" aria-label="Google"><i class="ri-google-fill"></i></a>
+          <a href="#" aria-label="Apple"><i class="ri-apple-fill"></i></a>
+          <a href="#" aria-label="Phone"><i class="ri-phone-fill"></i></a>
+        </div>
+
+        <div class="or-divider"><span>or register with email</span></div>
+
+        <div class="input-group">
+          <input type="text" id="su-name" placeholder="Full Name" autocomplete="name" />
+          <i class="ri-user-3-line input-icon"></i>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="su-email" placeholder="Email Address" autocomplete="email" />
+          <i class="ri-mail-line input-icon"></i>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="su-password" placeholder="Create Password" autocomplete="new-password" />
+          <i class="ri-lock-line input-icon"></i>
+          <button type="button" class="toggle-pw" data-target="su-password" aria-label="Show password">
+            <i class="ri-eye-off-line"></i>
+          </button>
+        </div>
+
+        <div class="strength-wrap">
+          <div class="strength-bars">
+            <div class="strength-seg" id="seg1"></div>
+            <div class="strength-seg" id="seg2"></div>
+            <div class="strength-seg" id="seg3"></div>
+            <div class="strength-seg" id="seg4"></div>
+          </div>
+          <span class="strength-text" id="strengthText"></span>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="su-confirm" placeholder="Confirm Password" autocomplete="new-password" />
+          <i class="ri-lock-password-line input-icon"></i>
+          <button type="button" class="toggle-pw" data-target="su-confirm" aria-label="Show confirm password">
+            <i class="ri-eye-off-line"></i>
+          </button>
+        </div>
+
+        <button class="btn-primary" type="submit" style="width:100%;justify-content:center;margin-top:14px;">
+          <i class="ri-user-add-line"></i> Create Account
+        </button>
+
+        <p class="terms-note">
+          By signing up you agree to our <a href="terms-of-service.html">Terms of Service</a>
+          and <a href="privacy-policy.html">Privacy Policy</a>.
+        </p>
+
+      </form>
+    </div>
+
+
+    <!-- ── DESKTOP SLIDING OVERLAY (hidden on mobile via CSS) ── -->
+    <div class="overlay-container">
+      <div class="overlay">
+
+        <div class="overlay-panel overlay-left">
+          <h1 style="font-family:var(--font-display);font-weight:800;margin-bottom:10px;">
+            Welcome Back!
+          </h1>
+          <p style="margin-bottom:24px;color:#CCCCCC;font-size:0.9rem;line-height:1.6;">
+            Already have an account? Log in and continue your creative journey.
+          </p>
+          <button class="btn-outline" id="signInBtn" style="border-color:#FFFFFF;color:#FFFFFF;">
+            <i class="ri-login-box-line"></i> Log In
+          </button>
+        </div>
+
+        <div class="overlay-panel overlay-right">
+          <h1 style="font-family:var(--font-display);font-weight:800;margin-bottom:10px;">
+            New Here?
+          </h1>
+          <p style="margin-bottom:24px;color:#CCCCCC;font-size:0.9rem;line-height:1.6;">
+            Enter your details and start your creative journey with us.
+          </p>
+          <button class="btn-outline" id="signUpBtn" style="border-color:#FFFFFF;color:#FFFFFF;">
+            <i class="ri-user-add-line"></i> Sign Up
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /auth-container -->
+
+
+  <!-- ════════════════════════════════════
+       FORGOT PASSWORD MODAL
+  ════════════════════════════════════ -->
+  <div class="fp-backdrop" id="fpBackdrop" role="dialog" aria-modal="true" aria-labelledby="fpHeading">
+    <div class="fp-card">
+
+      <button class="fp-close-btn" id="fpClose" aria-label="Close"><i class="ri-close-line"></i></button>
+
+      <div id="fpStep1">
+        <h2 id="fpHeading">Reset Password</h2>
+        <p>Enter the email linked to your account and we'll send a reset link.</p>
+
+        <div class="input-group" style="margin-bottom:1rem;">
+          <input type="email" id="fp-email" placeholder="Email Address" />
+          <i class="ri-mail-line input-icon"></i>
+        </div>
+
+        <button class="btn-primary" id="fpSendBtn" type="button" style="width:100%;justify-content:center;">
+          <i class="ri-send-plane-line"></i> Send Reset Link
+        </button>
+      </div>
+
+      <div class="fp-success" id="fpStep2">
+        <i class="ri-mail-check-line"></i>
+        <h3>Check Your Inbox</h3>
+        <p>A reset link has been sent. It may take a moment to arrive.</p>
+        <button class="btn-primary" id="fpDoneBtn" type="button" style="width:100%;justify-content:center;">
+          <i class="ri-check-line"></i> Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Main JS -->
+  <script src="assets/Script/script.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Desktop: sliding panel ── */
+      const authContainer = document.getElementById('authContainer');
+
+      document.getElementById('signUpBtn').addEventListener('click', () => {
+        authContainer.classList.add('right-panel-active');
+      });
+
+      document.getElementById('signInBtn').addEventListener('click', () => {
+        authContainer.classList.remove('right-panel-active');
+      });
+
+
+      /* ── Mobile: tab switcher ── */
+      const siContainer = document.getElementById('signInContainer');
+      const suContainer = document.getElementById('signUpContainer');
+      const tabSI = document.getElementById('tabSignIn');
+      const tabSU = document.getElementById('tabSignUp');
+
+      tabSI.addEventListener('click', () => {
+        tabSI.classList.add('active');
+        tabSU.classList.remove('active');
+        siContainer.classList.add('mob-active');
+        suContainer.classList.remove('mob-active');
+      });
+
+      tabSU.addEventListener('click', () => {
+        tabSU.classList.add('active');
+        tabSI.classList.remove('active');
+        suContainer.classList.add('mob-active');
+        siContainer.classList.remove('mob-active');
+      });
+
+
+      /* ── Show / hide password ── */
+      document.querySelectorAll('.toggle-pw').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const input = document.getElementById(btn.dataset.target);
+          const icon = btn.querySelector('i');
+          const show = input.type === 'password';
+          input.type = show ? 'text' : 'password';
+          icon.className = show ? 'ri-eye-line' : 'ri-eye-off-line';
+          btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        });
+      });
+
+
+      /* ── Password strength ── */
+      const pwInput = document.getElementById('su-password');
+      const segs = ['seg1', 'seg2', 'seg3', 'seg4'].map(id => document.getElementById(id));
+      const strengthTxt = document.getElementById('strengthText');
+      const LEVELS = [
+        { label: '', cls: '' },
+        { label: 'Weak', cls: 'weak' },
+        { label: 'Fair', cls: 'fair' },
+        { label: 'Good', cls: 'good' },
+        { label: 'Strong', cls: 'strong' },
+      ];
+
+      function scorePassword(v) {
+        if (!v) return 0;
+        let s = 0;
+        if (v.length >= 8) s++;
+        if (/[A-Z]/.test(v)) s++;
+        if (/[0-9]/.test(v)) s++;
+        if (/[^A-Za-z0-9]/.test(v)) s++;
+        return Math.max(1, s);
+      }
+
+      pwInput.addEventListener('input', () => {
+        const score = pwInput.value.length ? scorePassword(pwInput.value) : 0;
+        const lvl = LEVELS[score];
+        segs.forEach((seg, i) => {
+          seg.className = 'strength-seg' + (i < score ? ' ' + lvl.cls : '');
+        });
+        strengthTxt.textContent = pwInput.value.length ? lvl.label : '';
+      });
+
+
+      /* ── Confirm password match ── */
+      const confirmInput = document.getElementById('su-confirm');
+      confirmInput.addEventListener('input', () => {
+        if (!confirmInput.value) {
+          confirmInput.classList.remove('input-match', 'input-no-match');
+          return;
+        }
+        const match = confirmInput.value === pwInput.value;
+        confirmInput.classList.toggle('input-match', match);
+        confirmInput.classList.toggle('input-no-match', !match);
+      });
+
+
+      /* ── Forgot password modal ── */
+      const fpBackdrop = document.getElementById('fpBackdrop');
+      const fpStep1 = document.getElementById('fpStep1');
+      const fpStep2 = document.getElementById('fpStep2');
+
+      function openFp() {
+        fpBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => document.getElementById('fp-email').focus(), 350);
+      }
+      function closeFp() {
+        fpBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          fpStep1.style.display = '';
+          fpStep2.style.display = 'none';
+          document.getElementById('fp-email').value = '';
+          document.getElementById('fp-email').style.borderColor = '';
+        }, 320);
+      }
+
+      document.getElementById('openFpModal').addEventListener('click', e => { e.preventDefault(); openFp(); });
+      document.getElementById('fpClose').addEventListener('click', closeFp);
+      fpBackdrop.addEventListener('click', e => { if (e.target === fpBackdrop) closeFp(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && fpBackdrop.classList.contains('open')) closeFp();
+      });
+
+      document.getElementById('fpSendBtn').addEventListener('click', () => {
+        const emailEl = document.getElementById('fp-email');
+        if (!emailEl.value.trim() || !/\S+@\S+\.\S+/.test(emailEl.value.trim())) {
+          emailEl.style.borderColor = '#FF4D4D';
+          return;
+        }
+        fpStep1.style.display = 'none';
+        fpStep2.style.display = 'flex';
+      });
+
+      document.getElementById('fpDoneBtn').addEventListener('click', closeFp);
+
+
+      /* ── Form submit handlers ── */
+      document.getElementById('signInForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('si-email').value.trim();
+        const pw = document.getElementById('si-password').value;
+        const remember = document.getElementById('rememberMe').checked;
+        if (!email || !pw) return;
+        console.log('Sign in:', { email, remember });
+        // ← Wire to your auth API here
+      });
+
+      document.getElementById('signUpForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('su-name').value.trim();
+        const email = document.getElementById('su-email').value.trim();
+        const pw = document.getElementById('su-password').value;
+        const confirm = document.getElementById('su-confirm').value;
+        if (!name || !email || !pw || !confirm) return;
+        if (pw !== confirm) { confirmInput.classList.add('input-no-match'); return; }
+        if (scorePassword(pw) < 2) {
+          document.getElementById('su-password').style.borderColor = '#FF4D4D';
+          return;
+        }
+        console.log('Register:', { name, email });
+        // ← Wire to your auth API here
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

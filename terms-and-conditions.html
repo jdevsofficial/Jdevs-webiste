@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms &amp; Conditions — JDEVS.</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+  <meta name="description"
+    content="JDEVS Terms &amp; Conditions — the rules and agreements that govern use of our design services and platform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ════════════════════════════════════════════════
+       HERO — black background + radial glow + stripes
+    ════════════════════════════════════════════════ */
+    .legal-hero {
+      background-color: #0D0D0D;
+    }
+
+    .legal-hero::before {
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(181, 255, 46, 0.10) 0%, transparent 70%);
+    }
+
+    .legal-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 340px;
+      height: 100%;
+      background: repeating-linear-gradient(-55deg,
+          transparent,
+          transparent 18px,
+          rgba(181, 255, 46, 0.045) 18px,
+          rgba(181, 255, 46, 0.045) 19px);
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════════════════════
+       BODY CONTENT — white theme overrides
+    ════════════════════════════════════════════════ */
+    .legal-layout {
+      padding-top: 3rem;
+    }
+
+    .toc-label {
+      color: #999999;
+    }
+
+    .toc-list {
+      border-left-color: #E5E5E5;
+    }
+
+    .toc-list li a {
+      color: #888888;
+    }
+
+    .toc-list li a:hover,
+    .toc-list li a.active {
+      color: var(--clr-accent-dim);
+      border-left-color: var(--clr-accent-dim);
+    }
+
+    .legal-section h2 {
+      color: #0D0D0D;
+      border-bottom-color: #E5E5E5;
+    }
+
+    .legal-section p,
+    .legal-section ul li {
+      color: #444444;
+    }
+
+    .legal-highlight {
+      color: #444444;
+    }
+
+    .legal-warning {
+      color: #444444;
+    }
+
+    .legal-divider {
+      border-top-color: #E5E5E5;
+    }
+
+    .legal-contact-card {
+      background: #F7F7F7;
+      border-color: #E5E5E5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="legal-hero">
+    <div class="container">
+      <div class="legal-hero-inner">
+        <span class="legal-eyebrow"><i class="ri-file-shield-2-line"></i> Legal</span>
+        <h1>Terms &amp; <span>Conditions</span></h1>
+        <p>By accessing our website, requesting our services, or entering into a project agreement with JDEVS, you
+          confirm that you have read and agree to be bound by the following terms and conditions.</p>
+        <div class="legal-meta">
+          <span class="legal-meta-item"><i class="ri-calendar-line"></i> Effective: January 1, 2024</span>
+          <span class="legal-meta-item"><i class="ri-refresh-line"></i> Last Updated: January 1, 2024</span>
+          <span class="legal-meta-item"><i class="ri-map-pin-line"></i> Jurisdiction: Kenya</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTENT -->
+  <section style="background:#FFFFFF; width:100%;">
+    <div class="container">
+      <div class="legal-layout">
+
+        <!-- Sidebar TOC -->
+        <aside class="legal-toc">
+          <p class="toc-label">Contents</p>
+          <ul class="toc-list" id="tocList">
+            <li><a href="#agreement">Agreement</a></li>
+            <li><a href="#services">Our Services</a></li>
+            <li><a href="#eligibility">Eligibility</a></li>
+            <li><a href="#website-use">Website Use</a></li>
+            <li><a href="#accounts">Accounts & Access</a></li>
+            <li><a href="#project-terms">Project Terms</a></li>
+            <li><a href="#payments">Payments & Fees</a></li>
+            <li><a href="#delivery">Delivery & Timelines</a></li>
+            <li><a href="#revisions">Revisions & Changes</a></li>
+            <li><a href="#ip">Intellectual Property</a></li>
+            <li><a href="#prohibited">Prohibited Use</a></li>
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#liability">Limitation of Liability</a></li>
+            <li><a href="#termination">Termination</a></li>
+            <li><a href="#governing-law">Governing Law</a></li>
+            <li><a href="#contact-tc">Contact Us</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="legal-content">
+
+          <section class="legal-section" id="agreement">
+            <p class="legal-section-num">01 — Agreement</p>
+            <h2>Agreement to Terms</h2>
+            <p>These Terms and Conditions ("Terms") form a legally binding agreement between you ("you", "Client", or
+              "User") and JDEVS ("we", "us", or "our"), a professional creative design studio registered and operating
+              in Kenya.</p>
+            <p>These Terms apply to all visitors to our website, all individuals who request or receive our services,
+              and all persons who create an account on our platform. By continuing to use our website or services, you
+              confirm your unconditional acceptance of these Terms.</p>
+            <div class="legal-highlight">
+              <strong>On behalf of a business?</strong> If you are accepting these Terms on behalf of a company,
+              organisation, or other legal entity, you represent and warrant that you have full authority to bind that
+              entity to these Terms. In that case, "you" refers to that entity.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="services">
+            <p class="legal-section-num">02 — Services</p>
+            <h2>Our Services</h2>
+            <p>JDEVS is a professional creative and digital design studio. Our services include but are not limited to:
+            </p>
+            <ul>
+              <li>Logo design and brand identity development</li>
+              <li>Full brand systems including colour palettes, typography, and brand guidelines</li>
+              <li>Print design — business cards, flyers, posters, banners, brochures, and packaging</li>
+              <li>Web design, landing pages, and UI/UX design</li>
+              <li>Social media content design, templates, and strategy assets</li>
+              <li>Motion graphics and animated design assets</li>
+              <li>Consultation and creative direction</li>
+            </ul>
+            <p>All services are rendered subject to a mutually agreed project brief, scope of work, agreed timeline,
+              and applicable payment terms. We reserve the right to decline any project request at our discretion,
+              without obligation to provide reasons for doing so.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="eligibility">
+            <p class="legal-section-num">03 — Eligibility</p>
+            <h2>Eligibility</h2>
+            <p>Our services are available to individuals and businesses who meet the following requirements:</p>
+            <ul>
+              <li>You are at least 18 years of age, or are acting on behalf of a legally registered business entity</li>
+              <li>You have the legal capacity to enter into a binding contract under Kenyan law or the laws of your
+                jurisdiction</li>
+              <li>You are not subject to any legal prohibition or restriction that would prevent you from engaging our
+                services</li>
+              <li>The information you provide to us is accurate, current, and complete to the best of your knowledge
+              </li>
+            </ul>
+            <p>By engaging our services, you represent and warrant that you satisfy all of the above eligibility
+              requirements. JDEVS reserves the right to refuse service to anyone at any time if eligibility cannot be
+              confirmed.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="website-use">
+            <p class="legal-section-num">04 — Website Use</p>
+            <h2>Website Use</h2>
+            <p>Our website is made available for general information and to facilitate enquiries about our services.
+              When
+              using our website, you agree to the following:</p>
+            <ul>
+              <li>You will use the website only for lawful purposes and in a manner that does not infringe the rights of
+                others</li>
+              <li>You will not attempt to gain unauthorised access to any part of our website, server, or associated
+                systems</li>
+              <li>You will not transmit any harmful, offensive, or disruptive content through any form or communication
+                channel on our website</li>
+              <li>You will not use automated tools, bots, or scrapers to extract content from our website without prior
+                written consent</li>
+              <li>You will not misrepresent your identity or impersonate any person or entity</li>
+            </ul>
+            <p>We reserve the right to restrict or terminate your access to our website at any time and without notice
+              if we believe you are in breach of these Terms.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="accounts">
+            <p class="legal-section-num">05 — Accounts</p>
+            <h2>Accounts & Platform Access</h2>
+            <p>Where access to a client portal or account is provided, the following conditions apply:</p>
+            <ul>
+              <li>You are responsible for maintaining the confidentiality of your login credentials and for all activity
+                that occurs under your account</li>
+              <li>You must notify us immediately if you suspect any unauthorised use of or access to your account</li>
+              <li>You must not share your account credentials with any third party</li>
+              <li>We reserve the right to suspend or terminate any account that we believe has been compromised or used
+                in violation of these Terms</li>
+              <li>Account access is granted on a per-client basis and is non-transferable</li>
+            </ul>
+            <div class="legal-highlight">
+              <strong>Keep your account secure.</strong> JDEVS will never ask for your password via email or message.
+              If you receive such a request, please contact us immediately.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="project-terms">
+            <p class="legal-section-num">06 — Project Terms</p>
+            <h2>Project Terms & Client Obligations</h2>
+            <p>To allow us to deliver the best possible work, all clients agree to:</p>
+            <ul>
+              <li>Provide a clear, accurate, and complete project brief before work commences</li>
+              <li>Supply all required content, materials, and assets in a timely manner</li>
+              <li>Designate a single point of contact to provide consolidated and consistent feedback</li>
+              <li>Review design deliverables and provide feedback within agreed timeframes</li>
+              <li>Confirm that all content, images, and assets supplied do not infringe any third-party rights</li>
+              <li>Communicate any changes to the project scope in writing as early as possible</li>
+            </ul>
+            <p>Delays caused by the client — including slow feedback, missing assets, or changing requirements — may
+              result in revised delivery timelines or additional costs. JDEVS will communicate any such impacts as
+              promptly as possible.</p>
+            <div class="legal-warning">
+              <strong>Scope creep:</strong> Any additions, new deliverables, or significant changes to the original
+              agreed brief will be treated as a new scope of work and will require a separate written agreement and
+              quotation before work proceeds.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="payments">
+            <p class="legal-section-num">07 — Payments</p>
+            <h2>Payments & Fees</h2>
+            <p>All fees are quoted in Kenyan Shillings (KES) unless explicitly stated otherwise in writing. The
+              following payment terms apply to all engagements:</p>
+            <ul>
+              <li>A non-refundable deposit of 50% of the total agreed fee is required before any work commences</li>
+              <li>The remaining 50% balance is due upon project completion, before final files are released</li>
+              <li>For larger or multi-phase projects, a phased payment schedule may be agreed in writing</li>
+              <li>All invoices are payable within 7 days of issue unless a different arrangement has been confirmed in
+                writing</li>
+              <li>Overdue invoices may attract a 5% monthly interest charge on the outstanding balance</li>
+              <li>We reserve the right to pause or suspend work on any project where payment obligations are not met
+                after reasonable written notice</li>
+            </ul>
+            <div class="legal-highlight">
+              <strong>Final files are released only upon receipt of full payment.</strong> This includes source files,
+              editable formats (e.g. Adobe Illustrator, Figma, Photoshop), and any licensed assets included in the
+              delivery.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="delivery">
+            <p class="legal-section-num">08 — Delivery</p>
+            <h2>Delivery & Timelines</h2>
+            <p>All project timelines are agreed upon at the start of each engagement. The following conditions apply:
+            </p>
+            <ul>
+              <li>Timelines commence from the date the deposit is received and all required brief information has been
+                provided</li>
+              <li>Estimated timelines are provided in good faith but may be affected by the complexity of the project,
+                client response times, or unforeseen circumstances</li>
+              <li>JDEVS will communicate any delays as soon as they are identified and will work to minimise any
+                disruption</li>
+              <li>Delays caused by the client — including late feedback, missing content, or scope changes — will result
+                in a revised delivery date and are not the responsibility of JDEVS</li>
+              <li>Rush or expedited projects may be available subject to availability and an additional premium fee</li>
+            </ul>
+            <p>JDEVS is not liable for any loss or damage arising from delays in delivery, whether caused by client
+              delays, technical issues, or circumstances beyond our reasonable control.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="revisions">
+            <p class="legal-section-num">09 — Revisions</p>
+            <h2>Revisions & Changes</h2>
+            <p>Each project package includes a defined number of revision rounds, which are specified in your agreed
+              quote or service package. The following terms govern the revision process:</p>
+            <ul>
+              <li>A revision is defined as minor changes within the original agreed design direction and scope</li>
+              <li>All revision requests must be submitted in a single, consolidated round — not piecemeal over multiple
+                messages</li>
+              <li>Additional revision rounds beyond those included will be charged at our prevailing hourly rate</li>
+              <li>A complete change of creative direction or concept after initial designs have been approved
+                constitutes
+                a new scope of work and will be quoted separately</li>
+              <li>Revision requests must be submitted within 14 calendar days of delivery; designs not responded to
+                within this period are considered approved by default</li>
+            </ul>
+            <p>We strongly recommend clients review all deliverables carefully before approving, as changes requested
+              after sign-off may incur additional charges.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="ip">
+            <p class="legal-section-num">10 — Intellectual Property</p>
+            <h2>Intellectual Property</h2>
+            <p>Ownership and intellectual property rights of design work are governed as follows:</p>
+            <ul>
+              <li>Upon receipt of full and final payment, the client is granted full commercial ownership of the agreed
+                final deliverables</li>
+              <li>Until full payment is received, all designs and creative work remain the exclusive intellectual
+                property of JDEVS</li>
+              <li>JDEVS retains ownership of all preliminary concepts, rejected designs, and working files not included
+                in the final delivery</li>
+              <li>Source files (e.g. .ai, .psd, .fig formats) are provided only if explicitly included in the agreed
+                package or purchased as an add-on</li>
+              <li>Any third-party assets used — including stock images, fonts, and icon libraries — remain subject to
+                their respective licences, which are the client's responsibility to maintain</li>
+              <li>JDEVS retains the right to display completed work in our portfolio and promotional materials unless
+                restricted by a signed NDA</li>
+            </ul>
+            <div class="legal-warning">
+              <strong>Client-supplied content:</strong> JDEVS accepts no liability for intellectual property
+              infringement arising from content, text, images, or instructions provided by the client. The client
+              warrants that all materials they supply are free of third-party IP conflicts.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="prohibited">
+            <p class="legal-section-num">11 — Prohibited Use</p>
+            <h2>Prohibited Use</h2>
+            <p>You agree not to use JDEVS services, our website, or any deliverables we produce for any of the
+              following purposes:</p>
+            <ul>
+              <li>Any activity that is unlawful, fraudulent, or harmful under Kenyan law or international law</li>
+              <li>Reproducing, reselling, or sublicensing our design work without prior written consent</li>
+              <li>Creating content that is defamatory, offensive, discriminatory, or violates the rights of any
+                individual or group</li>
+              <li>Using our deliverables to misrepresent your identity, impersonate another brand, or engage in
+                deceptive trade practices</li>
+              <li>Attempting to reverse-engineer, copy, or replicate our proprietary design processes or systems</li>
+              <li>Using our platform or website to transmit malware, viruses, or any other harmful software</li>
+            </ul>
+            <p>Breach of this clause may result in immediate termination of services, forfeiture of any fees paid, and
+              may expose you to legal liability.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="disclaimer">
+            <p class="legal-section-num">12 — Disclaimer</p>
+            <h2>Disclaimer of Warranties</h2>
+            <p>Our services and website are provided on an "as is" and "as available" basis. While we strive to
+              maintain the highest standards of quality and professionalism, JDEVS makes no warranties, express or
+              implied, including but not limited to:</p>
+            <ul>
+              <li>That our services will meet every specific business outcome or commercial objective you may have</li>
+              <li>That our website will be available, uninterrupted, or free of errors at all times</li>
+              <li>That design deliverables will be suitable for every platform, print supplier, or use case beyond
+                those specified in the agreed brief</li>
+              <li>That any third-party tools, services, or platforms referenced or integrated will perform without issue
+              </li>
+            </ul>
+            <p>It is the client's responsibility to review all final deliverables carefully before approving them for
+              print, publication, or any commercial use.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="liability">
+            <p class="legal-section-num">13 — Liability</p>
+            <h2>Limitation of Liability</h2>
+            <p>To the fullest extent permitted by applicable law, JDEVS shall not be liable for any:</p>
+            <ul>
+              <li>Indirect, incidental, special, or consequential loss or damage arising out of or in connection with
+                our services or deliverables</li>
+              <li>Loss of revenue, profit, business opportunity, goodwill, or data arising from the use of our
+                services</li>
+              <li>Errors in content, text, or information supplied by the client that has been reproduced in the final
+                design</li>
+              <li>Printing errors, colour variations, or production defects once print-ready files have been approved
+                and submitted to a third-party supplier by the client</li>
+              <li>Delays, losses, or damages arising from circumstances beyond our reasonable control, including acts
+                of God, internet outages, or supplier failures</li>
+            </ul>
+            <p>In any event, our total liability to you for any claim arising from our services shall not exceed the
+              total amount paid by you for the specific project to which the claim relates.</p>
+            <div class="legal-highlight">
+              <strong>Your responsibility:</strong> Always review and approve all deliverables thoroughly before
+              final sign-off. Once approved, JDEVS bears no responsibility for errors found after that point.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="termination">
+            <p class="legal-section-num">14 — Termination</p>
+            <h2>Termination</h2>
+            <p>Either party may terminate the working relationship under the following conditions:</p>
+            <ul>
+              <li>JDEVS may immediately suspend or terminate services if a client engages in abusive, threatening, or
+                unethical conduct toward any member of our team</li>
+              <li>JDEVS may terminate services if payment obligations remain outstanding after written notice and a
+                reasonable grace period</li>
+              <li>The client may terminate a project subject to the cancellation terms set out in our separate Terms
+                of Service document</li>
+              <li>Upon termination by either party, all outstanding fees for work completed up to the point of
+                termination must be settled within 14 days</li>
+              <li>JDEVS will not release any files or deliverables if outstanding payments exist at the time of
+                termination</li>
+            </ul>
+            <p>Termination does not affect any rights or obligations that have accrued prior to the date of
+              termination, including payment obligations and intellectual property terms.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="governing-law">
+            <p class="legal-section-num">15 — Governing Law</p>
+            <h2>Governing Law & Disputes</h2>
+            <p>These Terms and Conditions are governed by, and shall be construed in accordance with, the laws of the
+              Republic of Kenya. Any dispute, claim, or controversy arising out of or in connection with these Terms or
+              our services shall first be addressed through good-faith negotiation between both parties.</p>
+            <p>If a dispute cannot be resolved informally within 30 days of written notice, both parties agree to
+              submit to the exclusive jurisdiction of the courts of Kenya for final resolution. Neither party shall
+              initiate formal legal proceedings before this negotiation period has elapsed.</p>
+            <p>We reserve the right to update or revise these Terms at any time. Where changes are material, we will
+              provide reasonable notice to existing clients. Your continued engagement with our services after any
+              update constitutes acceptance of the revised Terms.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="contact-tc">
+            <p class="legal-section-num">16 — Contact</p>
+            <h2>Questions & Contact</h2>
+            <p>If you have any questions about these Terms and Conditions, wish to discuss a specific clause before
+              entering into an agreement, or need any further clarification, please reach out to us directly:</p>
+            <div class="legal-contact-card">
+              <a href="mailto:jdevsdigital2@gmail.com"><i class="ri-mail-line"></i> jdevsdigital2@gmail.com</a>
+              <a href="tel:+254745222588"><i class="ri-phone-line"></i> +254 745 222 588</a>
+              <a href="contact.html"><i class="ri-arrow-right-circle-line"></i> Visit our Contact Page</a>
+            </div>
+            <p style="margin-top:1.25rem;">You may also review our
+              <a href="privacy-policy.html" style="color:var(--clr-accent);font-weight:500;">Privacy Policy</a>
+              to understand how we collect and protect your personal data, and our
+              <a href="terms-of-service.html" style="color:var(--clr-accent);font-weight:500;">Terms of Service</a>
+              for detailed project-specific rules and processes.
+            </p>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTopBtn">
+    <i class="ri-arrow-up-line"></i>
+  </div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+
+    <!-- Main Button -->
+    <div class="fab-main" id="fabToggle">
+      <i class="ri-add-line"></i>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="fab-options">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp">
+        <i class="ri-whatsapp-line"></i>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok">
+        <i class="ri-tiktok-fill"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a href="#" class="fab-item instagram">
+        <i class="ri-instagram-line"></i>
+      </a>
+
+      <!-- Facebook -->
+      <a href="#" class="fab-item facebook">
+        <i class="ri-facebook-fill"></i>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="scroll-top" id="scrollTopBtn"><i class="ri-arrow-up-line"></i></div>
+
+  <script src="assets/Script/script.js"></script>
+  <script>
+    // TOC active highlight on scroll
+    const sections = document.querySelectorAll('.legal-section');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+
+</html>

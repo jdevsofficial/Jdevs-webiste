@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JDEVS. — Project Detail</title>
+
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+
+  <meta name="description"
+    content="View this JDEVS design project in full detail — carousel, process overview, tools used and related work.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       FLOATING NAVIGATION BAR
+  ============================================================ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO — WHITE — BREADCRUMB + PROJECT TITLE
+  ============================================================ -->
+  <section class="pd-hero">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="pd-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="ri-arrow-right-s-line"></i>
+        <a href="portfolio.html">Portfolio</a>
+        <i class="ri-arrow-right-s-line"></i>
+        <span id="pdBreadcrumbTitle">Project</span>
+      </nav>
+
+      <!-- 2-col hero grid: left = title/desc, right = meta card -->
+      <div class="pd-hero-grid">
+
+        <div class="pd-hero-left">
+          <span class="section-tag" id="pdCategory">Category</span>
+          <h1 class="pd-title" id="pdTitle">Loading...</h1>
+          <p class="pd-desc" id="pdDesc"></p>
+          <div class="pd-tags" id="pdTags"></div>
+        </div>
+
+        <div class="pd-hero-right">
+          <div class="pd-meta-card">
+            <div class="pd-meta-item">
+              <span>Category</span>
+              <strong id="pdMetaCat">—</strong>
+            </div>
+            <div class="pd-meta-divider"></div>
+            <div class="pd-meta-item">
+              <span>Tools Used</span>
+              <strong id="pdMetaTools">—</strong>
+            </div>
+            <div class="pd-meta-divider"></div>
+            <div class="pd-meta-item">
+              <span>Deliverables</span>
+              <strong id="pdMetaDel">—</strong>
+            </div>
+            <div class="pd-meta-divider"></div>
+            <a href="quote.html" class="btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;">
+              Request Similar <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       IMAGE CAROUSEL — WHITE
+  ============================================================ -->
+  <section class="pd-carousel-section">
+    <div class="container">
+      <div class="pd-carousel" id="pdCarousel">
+
+        <!-- Slide counter badge -->
+        <div class="pd-slide-counter" id="pdSlideCounter">1 / 3</div>
+
+        <!-- Track (slides injected by JS) -->
+        <div class="pd-carousel-track" id="pdCarouselTrack"></div>
+
+        <!-- Prev / Next buttons -->
+        <button class="pd-carousel-btn pd-prev" id="pdPrev" aria-label="Previous image">
+          <i class="ri-arrow-left-s-line"></i>
+        </button>
+        <button class="pd-carousel-btn pd-next" id="pdNext" aria-label="Next image">
+          <i class="ri-arrow-right-s-line"></i>
+        </button>
+
+        <!-- Dot nav -->
+        <div class="pd-carousel-dots" id="pdDots"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PROJECT OVERVIEW — WHITE
+  ============================================================ -->
+  <section class="pd-overview-section">
+    <div class="container">
+      <div class="pd-overview-grid">
+
+        <div class="pd-overview-left">
+          <span class="section-tag"
+            style="color:var(--clr-accent-dim);background:rgba(139,204,26,0.1);border-color:rgba(139,204,26,0.3);">
+            Project Overview
+          </span>
+          <h2 class="pd-ov-title">About This Project</h2>
+          <p class="pd-ov-text" id="pdOverviewText"></p>
+
+          <h4
+            style="font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:#0D0D0D;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">
+            Deliverables
+          </h4>
+          <div class="pd-checklist" id="pdChecklist"></div>
+        </div>
+
+        <div class="pd-overview-right">
+          <div class="pd-tools-box">
+            <h4>Tools Used</h4>
+            <div class="pd-tools-list" id="pdToolsList"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       LIKE THIS DESIGN? — BLACK CTA
+  ============================================================ -->
+  <section class="pd-like-cta">
+    <div class="container">
+      <div class="pd-like-inner">
+        <div class="pd-like-text">
+          <h3>Like This Design?</h3>
+          <p>Let's create something similar for your brand.</p>
+        </div>
+        <a href="quote.html" class="btn-primary" style="font-size:1rem; padding:0.85rem 2rem;">
+          Request Similar Design <i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       RELATED PROJECTS — WHITE
+  ============================================================ -->
+  <section class="pd-related-section">
+    <div class="container">
+      <div class="section-center" data-animate="fade-up">
+        <span class="section-tag"
+          style="color:var(--clr-accent-dim);background:rgba(139,204,26,0.1);border-color:rgba(139,204,26,0.3);">
+          More Work
+        </span>
+        <h2 class="pd-related-title">Related Projects</h2>
+      </div>
+      <div class="pd-related-grid" id="pdRelatedGrid"></div>
+      <div style="text-align:center;margin-top:3rem;" data-animate="fade-up">
+        <a href="portfolio.html" class="btn-outline" style="color:#0D0D0D;border-color:#CCCCCC;">
+          View All Projects <i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CTA BANNER — DARK
+  ============================================================ -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="container">
+      <div class="cta-inner" data-animate="fade-up">
+        <h2 class="cta-title">Ready to Start<br />Your <span class="accent">Project?</span></h2>
+        <p class="cta-sub">Tell us what you need — we'll make it happen.</p>
+        <div class="cta-actions">
+          <a href="quote.html" class="btn-primary">
+            Get a Free Quote <i class="ri-arrow-right-line"></i>
+          </a>
+          <a href="services.html" class="btn-ghost">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP -->
+  <div class="scroll-top" id="scrollTopBtn">
+    <i class="ri-arrow-up-line"></i>
+  </div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+    <div class="fab-main" id="fabToggle"><i class="ri-add-line"></i></div>
+    <div class="fab-options">
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp">
+        <i class="ri-whatsapp-line"></i>
+      </a>
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok">
+        <i class="ri-tiktok-fill"></i>
+      </a>
+      <a href="#" class="fab-item instagram"><i class="ri-instagram-line"></i></a>
+      <a href="#" class="fab-item facebook"><i class="ri-facebook-fill"></i></a>
+    </div>
+  </div>
+
+  <script src="assets/Script/script.js"></script>
+</body>
+
+</html>

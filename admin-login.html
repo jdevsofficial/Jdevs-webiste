@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JDEVS. — Admin Login</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Main CSS (navbar, btn-cta, etc.) -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── All classes prefixed with "al-" to avoid style.css conflicts ── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --al-accent:     #B5FF2E;
+      --al-accent-dim: #8BCC1A;
+      --al-font-head:  'Syne', sans-serif;
+      --al-font-body:  'Outfit', sans-serif;
+      --al-font-mono:  'Space Mono', monospace;
+    }
+
+    /* ── PAGE SHELL ── */
+    .al-page-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #f7f7f5;
+      font-family: var(--al-font-body);
+    }
+
+    .al-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem 3rem;
+    }
+
+    /* ── TWO-PANEL CARD ── */
+    .al-card {
+      display: flex !important;
+      flex-direction: row !important;
+      width: 100%;
+      max-width: 880px;
+      min-height: 560px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.04),
+        0 20px 60px rgba(0,0,0,0.10);
+    }
+
+    /* ══════════════════════
+       LEFT — FORM PANEL
+    ══════════════════════ */
+    .al-form-panel {
+      width: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 3rem 2.75rem !important;
+      background: #fff !important;
+      position: relative;
+    }
+
+    .al-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Badge */
+    .al-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(181,255,46,0.1);
+      border: 1px solid rgba(181,255,46,0.35);
+      border-radius: 999px;
+      font-family: var(--al-font-mono);
+      font-size: 0.58rem;
+      color: #5a7a00;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+
+    .al-badge-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--al-accent);
+      animation: al-blink 1.8s ease-in-out infinite;
+    }
+    @keyframes al-blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    /* Headings */
+    .al-h1 {
+      font-family: var(--al-font-head);
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #111;
+      margin-bottom: 0.3rem;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .al-sub {
+      font-size: 0.82rem;
+      color: #999;
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Alert */
+    .al-alert {
+      width: 100%;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255,50,50,0.05);
+      border: 1px solid rgba(255,50,50,0.15);
+      border-radius: 10px;
+      font-size: 0.8rem; color: #c93030;
+      margin-bottom: 1rem;
+      opacity: 0; transform: translateY(-4px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    .al-alert.al-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* Input group */
+    .al-field {
+      position: relative;
+      width: 100%;
+      margin-bottom: 0.85rem;
+    }
+
+    .al-field input {
+      width: 100%;
+      padding: 12px 42px 12px 42px;
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      color: #111;
+      font-family: var(--al-font-body);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .al-field input::placeholder { color: #bbb; }
+    .al-field input:focus {
+      border-color: rgba(181,255,46,0.7);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(181,255,46,0.1);
+    }
+    .al-field input.al-error {
+      border-color: rgba(255,50,50,0.4) !important;
+      box-shadow: 0 0 0 3px rgba(255,50,50,0.07) !important;
+    }
+
+    .al-field-icon {
+      position: absolute; left: 13px; top: 50%;
+      transform: translateY(-50%);
+      color: #ccc; font-size: 1rem;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+    .al-field:focus-within .al-field-icon { color: var(--al-accent-dim); }
+
+    .al-pw-toggle {
+      position: absolute; right: 11px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: #ccc; cursor: pointer; font-size: 0.95rem;
+      padding: 4px; transition: color 0.2s;
+    }
+    .al-pw-toggle:hover { color: #555; }
+
+    /* Remember row */
+    .al-remember-row {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.25rem;
+      font-size: 0.8rem;
+    }
+
+    .al-remember-label {
+      display: flex; align-items: center; gap: 7px;
+      color: #888; cursor: pointer; user-select: none;
+    }
+
+    .al-remember-label input[type="checkbox"] {
+      appearance: none;
+      width: 15px; height: 15px;
+      border: 1px solid #ddd; border-radius: 4px;
+      background: #f8f8f8; cursor: pointer;
+      position: relative; flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .al-remember-label input[type="checkbox"]:checked {
+      background: var(--al-accent); border-color: var(--al-accent);
+    }
+    .al-remember-label input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 4px;
+      width: 4px; height: 7px;
+      border: 1.5px solid #0D0D0D;
+      border-top: none; border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .al-forgot {
+      color: var(--al-accent-dim);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .al-forgot:hover { opacity: 0.7; }
+
+    /* Submit button */
+    .al-btn {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 20px;
+      background: #111;
+      color: #fff;
+      border: none; border-radius: 10px;
+      font-family: var(--al-font-head);
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .al-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(181,255,46,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    .al-btn:hover::after { transform: translateX(100%); }
+    .al-btn:hover { background: #222; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .al-btn:active { transform: translateY(0); }
+    .al-btn.al-loading { pointer-events: none; opacity: 0.8; }
+    .al-btn.al-loading .al-spinner { display: block; }
+    .al-btn.al-loading .al-btn-txt { display: none; }
+
+    .al-spinner {
+      display: none;
+      width: 17px; height: 17px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: al-spin 0.65s linear infinite;
+    }
+    @keyframes al-spin { to { transform: rotate(360deg); } }
+
+    /* Security strip */
+    .al-sec-strip {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-top: 1.5rem;
+      font-family: var(--al-font-mono);
+      font-size: 0.58rem; color: #ccc;
+      letter-spacing: 0.07em;
+    }
+    .al-sec-strip i { color: var(--al-accent-dim); }
+
+    /* ── 2FA STEP ── */
+    .al-step-2fa { display: none; width: 100%; }
+    .al-step-2fa.al-visible {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: al-fadeup 0.35s ease both;
+    }
+    @keyframes al-fadeup {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .al-otp-desc {
+      font-size: 0.8rem; color: #999;
+      margin-bottom: 1.1rem; line-height: 1.65;
+      text-align: center; width: 100%;
+    }
+    .al-otp-desc strong { color: #111; }
+
+    .al-otp-row { display: flex; gap: 8px; margin-bottom: 1.1rem; width: 100%; }
+
+    .al-otp-row input {
+      flex: 1;
+      text-align: center;
+      padding: 13px 0;
+      font-family: var(--al-font-mono);
+      font-size: 1.2rem; font-weight: 700;
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      color: #111;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .al-otp-row input:focus {
+      border-color: rgba(181,255,46,0.7);
+      box-shadow: 0 0 0 3px rgba(181,255,46,0.1);
+      background: #fff;
+    }
+    .al-otp-row input.al-filled {
+      border-color: rgba(181,255,46,0.45);
+      background: #fff;
+    }
+
+    .al-otp-resend {
+      font-size: 0.77rem; color: #aaa;
+      text-align: center; margin-bottom: 1.1rem; width: 100%;
+    }
+    .al-otp-resend button {
+      background: none; border: none;
+      color: var(--al-accent-dim); cursor: pointer;
+      font-size: 0.77rem; padding: 0;
+      font-family: var(--al-font-body);
+      transition: opacity 0.2s;
+    }
+    .al-otp-resend button:disabled { opacity: 0.35; cursor: default; }
+
+    .al-back {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; color: #aaa;
+      text-decoration: none; margin-top: 0.85rem;
+      transition: color 0.2s;
+    }
+    .al-back:hover { color: #111; }
+
+    /* ══════════════════════
+       RIGHT — BRANDING PANEL
+    ══════════════════════ */
+    .al-overlay-panel {
+      width: 50% !important;
+      position: relative;
+      overflow: hidden;
+      background: #111 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 3rem 2.5rem !important;
+    }
+
+    .al-ov-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(181,255,46,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(181,255,46,0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      animation: al-grid 22s linear infinite;
+    }
+    @keyframes al-grid {
+      0%   { background-position: 0 0; }
+      100% { background-position: 42px 42px; }
+    }
+
+    .al-ov-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, #111 75%);
+      pointer-events: none;
+    }
+
+    .al-ov-orb {
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(181,255,46,0.1) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: al-orb 6s ease-in-out infinite;
+    }
+    @keyframes al-orb {
+      0%,100%{ transform: translate(-50%,-50%) scale(1); opacity: 1; }
+      50%    { transform: translate(-50%,-50%) scale(1.12); opacity: 0.6; }
+    }
+
+    .al-ov-scan {
+      position: absolute; left: 0; right: 0; top: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(181,255,46,0.45), transparent);
+      animation: al-scan 5s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes al-scan {
+      0%  { top: 0%;   opacity: 0; }
+      5%  { opacity: 1; }
+      95% { opacity: 1; }
+      100%{ top: 100%; opacity: 0; }
+    }
+
+    .al-ov-corner {
+      position: absolute;
+      width: 56px; height: 56px;
+      opacity: 0.2; pointer-events: none;
+    }
+    .al-ov-corner.tl { top: 22px; left: 22px; border-top: 1.5px solid var(--al-accent); border-left: 1.5px solid var(--al-accent); }
+    .al-ov-corner.tr { top: 22px; right: 22px; border-top: 1.5px solid var(--al-accent); border-right: 1.5px solid var(--al-accent); }
+    .al-ov-corner.bl { bottom: 22px; left: 22px; border-bottom: 1.5px solid var(--al-accent); border-left: 1.5px solid var(--al-accent); }
+    .al-ov-corner.br { bottom: 22px; right: 22px; border-bottom: 1.5px solid var(--al-accent); border-right: 1.5px solid var(--al-accent); }
+
+    .al-ov-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+    }
+
+    .al-ov-logo {
+      font-family: var(--al-font-head);
+      font-size: 1.7rem; font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff; text-decoration: none;
+      display: block;
+      margin-bottom: 2rem;
+    }
+    .al-ov-logo span { color: var(--al-accent); }
+
+    .al-ov-icon {
+      width: 68px; height: 68px;
+      border-radius: 18px;
+      background: rgba(181,255,46,0.09);
+      border: 1px solid rgba(181,255,46,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.85rem; color: var(--al-accent);
+      margin: 0 auto 1.5rem;
+      animation: al-icon-glow 3s ease-in-out infinite;
+    }
+    @keyframes al-icon-glow {
+      0%,100%{ box-shadow: 0 0 0 0 rgba(181,255,46,0); }
+      50%    { box-shadow: 0 0 0 12px rgba(181,255,46,0.07); }
+    }
+
+    .al-ov-content h2 {
+      font-family: var(--al-font-head);
+      font-size: 1.45rem; font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .al-ov-content p {
+      font-size: 0.83rem; color: #666;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 230px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    .al-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-items: center;
+    }
+
+    .al-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 999px;
+      font-family: var(--al-font-mono);
+      font-size: 0.58rem; color: #555;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .al-pill i { color: var(--al-accent); font-size: 0.72rem; }
+
+    /* ── FORGOT PW MODAL ── */
+    .al-modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+      padding: 1.5rem;
+    }
+    .al-modal-bg.al-open { opacity: 1; pointer-events: auto; }
+
+    .al-modal {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 18px;
+      padding: 1.75rem;
+      width: 100%; max-width: 360px;
+      position: relative;
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.12);
+    }
+    .al-modal-bg.al-open .al-modal { transform: translateY(0) scale(1); }
+
+    .al-modal-close {
+      position: absolute; top: 12px; right: 12px;
+      background: #f5f5f5; border: 1px solid #e8e8e8;
+      color: #999; cursor: pointer;
+      font-size: 1rem; padding: 5px 7px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .al-modal-close:hover { color: #111; background: #ebebeb; }
+
+    .al-modal h2 {
+      font-family: var(--al-font-head);
+      font-size: 1.1rem; font-weight: 800;
+      color: #111;
+      margin-bottom: 0.3rem; letter-spacing: -0.02em;
+    }
+    .al-modal p { font-size: 0.8rem; color: #999; margin-bottom: 1.1rem; line-height: 1.6; }
+
+    .al-modal-success {
+      display: none; flex-direction: column;
+      align-items: center; text-align: center; gap: 0.5rem;
+    }
+    .al-modal-success i { font-size: 2.1rem; color: var(--al-accent-dim); }
+    .al-modal-success h3 { font-family: var(--al-font-head); font-size: 1rem; font-weight: 700; color: #111; }
+    .al-modal-success p { font-size: 0.8rem; color: #999; margin-bottom: 0.5rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .al-card {
+        flex-direction: column-reverse !important;
+        max-width: 440px;
+        min-height: auto;
+        border-radius: 16px;
+      }
+      .al-form-panel,
+      .al-overlay-panel { width: 100% !important; }
+      .al-overlay-panel { padding: 1.75rem 2rem !important; min-height: 200px; }
+      .al-ov-content h2 { font-size: 1.15rem; }
+      .al-ov-content p { display: none; }
+      .al-pills { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .al-ov-icon { width: 50px; height: 50px; font-size: 1.3rem; margin-bottom: 1rem; }
+      .al-ov-logo { margin-bottom: 1rem; font-size: 1.4rem; }
+      .al-form-panel { padding: 2.25rem 1.75rem !important; }
+    }
+
+    @media (max-width: 400px) {
+      .al-otp-row { gap: 5px; }
+      .al-otp-row input { padding: 10px 0; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body class="auth-page al-page-body">
+
+  <!-- ══════════════════════════════
+       NAVBAR — same as auth.html
+  ══════════════════════════════ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"     class="nav-link">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html"  class="nav-link">Services</a></li>
+        <li><a href="pricing.html"   class="nav-link">Pricing</a></li>
+        <li><a href="about.html"     class="nav-link">About</a></li>
+        <li><a href="blog.html"      class="nav-link">Blog</a></li>
+        <li><a href="contact.html"   class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html"     class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html"  class="mobile-link">Services</a></li>
+        <li><a href="pricing.html"   class="mobile-link">Pricing</a></li>
+        <li><a href="about.html"     class="mobile-link">About</a></li>
+        <li><a href="blog.html"      class="mobile-link">Blog</a></li>
+        <li><a href="contact.html"   class="mobile-link">Contact Us</a></li>
+        <li><hr style="border:none;border-top:1px solid var(--clr-border);margin:0.5rem 1rem;"></li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════════════
+       AUTH CARD
+  ══════════════════════════════ -->
+  <div class="al-wrapper">
+    <div class="al-card">
+
+      <!-- ── LEFT: Sign In Form ── -->
+      <div class="al-form-panel">
+        <form class="al-form" id="alSignInForm" novalidate>
+
+          <!-- STEP 1: Credentials -->
+          <div id="alStepCreds">
+
+            <span class="al-badge">
+              <span class="al-badge-dot"></span>
+              Admin Portal
+            </span>
+
+            <h1 class="al-h1">Admin Sign In</h1>
+            <p class="al-sub">Restricted access — authorised personnel only.</p>
+
+            <div class="al-alert" id="alAlertBox" role="alert">
+              <i class="ri-error-warning-line"></i>
+              <span id="alAlertMsg">Invalid credentials. Please try again.</span>
+            </div>
+
+            <div class="al-field">
+              <input type="email" id="alEmail" placeholder="Admin email address" autocomplete="email" />
+              <i class="ri-mail-line al-field-icon"></i>
+            </div>
+
+            <div class="al-field">
+              <input type="password" id="alPassword" placeholder="Password" autocomplete="current-password" />
+              <i class="ri-lock-line al-field-icon"></i>
+              <button type="button" class="al-pw-toggle" id="alTogglePw" aria-label="Show password">
+                <i class="ri-eye-off-line"></i>
+              </button>
+            </div>
+
+            <div class="al-remember-row">
+              <label class="al-remember-label">
+                <input type="checkbox" id="alRemember" />
+                <span>Keep me signed in</span>
+              </label>
+              <a href="#" class="al-forgot" id="alOpenFp">Forgot password?</a>
+            </div>
+
+            <button class="al-btn" id="alLoginBtn" type="button">
+              <div class="al-spinner"></div>
+              <span class="al-btn-txt"><i class="ri-login-box-line"></i>&nbsp; Sign In to Dashboard</span>
+            </button>
+
+            <div class="al-sec-strip">
+              <i class="ri-lock-fill"></i>
+              256-BIT SSL &middot; SESSION EXPIRES AFTER 8H
+            </div>
+
+          </div><!-- /alStepCreds -->
+
+
+          <!-- STEP 2: 2FA OTP -->
+          <div class="al-step-2fa" id="alStep2FA">
+
+            <span class="al-badge">
+              <span class="al-badge-dot"></span>
+              Two-Factor Auth
+            </span>
+
+            <h1 class="al-h1">Verify Identity</h1>
+            <p class="al-sub">Two-factor authentication required.</p>
+
+            <p class="al-otp-desc">
+              A 6-digit code was sent to <strong id="alMasked">ad***@jdevs.com</strong>.<br>
+              It expires in 5 minutes.
+            </p>
+
+            <div class="al-otp-row" id="alOtpRow">
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+              <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" class="al-otp-digit" />
+            </div>
+
+            <div class="al-otp-resend">
+              Didn't receive it?&nbsp;
+              <button type="button" id="alResendBtn" disabled>
+                Resend (<span id="alCountdown">30</span>s)
+              </button>
+            </div>
+
+            <button class="al-btn" id="alVerifyBtn" type="button">
+              <div class="al-spinner"></div>
+              <span class="al-btn-txt"><i class="ri-check-double-line"></i>&nbsp; Verify &amp; Enter</span>
+            </button>
+
+            <a href="#" class="al-back" id="alBackBtn">
+              <i class="ri-arrow-left-line"></i> Back to Sign In
+            </a>
+
+            <div class="al-sec-strip">
+              <i class="ri-lock-fill"></i>
+              256-BIT SSL &middot; SESSION EXPIRES AFTER 8H
+            </div>
+
+          </div><!-- /alStep2FA -->
+
+        </form>
+      </div><!-- /al-form-panel -->
+
+
+      <!-- ── RIGHT: Admin Branding Panel ── -->
+      <div class="al-overlay-panel">
+        <div class="al-ov-grid"></div>
+        <div class="al-ov-vignette"></div>
+        <div class="al-ov-orb"></div>
+        <div class="al-ov-scan"></div>
+        <div class="al-ov-corner tl"></div>
+        <div class="al-ov-corner tr"></div>
+        <div class="al-ov-corner bl"></div>
+        <div class="al-ov-corner br"></div>
+
+        <div class="al-ov-content">
+          <a href="index.html" class="al-ov-logo">JDEVS<span>.</span></a>
+
+          <div class="al-ov-icon">
+            <i class="ri-shield-keyhole-line"></i>
+          </div>
+
+          <h2>Admin Control Centre</h2>
+          <p>This portal is strictly restricted to authorised JDEVS administrators and staff.</p>
+
+          <div class="al-pills">
+            <span class="al-pill"><i class="ri-lock-fill"></i> 256-Bit SSL Encrypted</span>
+            <span class="al-pill"><i class="ri-timer-line"></i> Session Expires After 8H</span>
+            <span class="al-pill"><i class="ri-shield-check-line"></i> 2FA Verification Required</span>
+          </div>
+        </div>
+      </div><!-- /al-overlay-panel -->
+
+    </div><!-- /al-card -->
+  </div><!-- /al-wrapper -->
+
+
+  <!-- ══════════════════════════════
+       FORGOT PASSWORD MODAL
+  ══════════════════════════════ -->
+  <div class="al-modal-bg" id="alFpBackdrop" role="dialog" aria-modal="true" aria-labelledby="alFpHeading">
+    <div class="al-modal">
+      <button class="al-modal-close" id="alFpClose" aria-label="Close">
+        <i class="ri-close-line"></i>
+      </button>
+
+      <div id="alFpStep1">
+        <h2 id="alFpHeading">Reset Admin Password</h2>
+        <p>Enter your admin email and we'll send a secure reset link.</p>
+
+        <div class="al-field" style="margin-bottom:1rem;">
+          <input type="email" id="alFpEmail" placeholder="Admin email address" />
+          <i class="ri-mail-line al-field-icon"></i>
+        </div>
+
+        <button class="al-btn" id="alFpSendBtn" type="button">
+          <div class="al-spinner"></div>
+          <span class="al-btn-txt"><i class="ri-send-plane-line"></i>&nbsp; Send Reset Link</span>
+        </button>
+      </div>
+
+      <div class="al-modal-success" id="alFpStep2">
+        <i class="ri-mail-check-line"></i>
+        <h3>Check Your Inbox</h3>
+        <p>A reset link has been sent to your admin email. It may take a moment to arrive.</p>
+        <button class="al-btn" id="alFpDoneBtn" type="button">
+          <span class="al-btn-txt"><i class="ri-check-line"></i>&nbsp; Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Main JS -->
+  <script src="assets/Script/script.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ── Helpers ── */
+      function showAlert(msg) {
+        const box = document.getElementById('alAlertBox');
+        document.getElementById('alAlertMsg').textContent = msg || 'Invalid credentials. Please try again.';
+        box.classList.add('al-visible');
+      }
+      function hideAlert() { document.getElementById('alAlertBox').classList.remove('al-visible'); }
+      function setLoading(btn, state) { btn.classList.toggle('al-loading', state); }
+      function maskEmail(email) {
+        const [user, domain] = email.split('@');
+        return user.slice(0, 2) + '***@' + domain;
+      }
+
+      /* ── Toggle password ── */
+      const togglePw = document.getElementById('alTogglePw');
+      const pwInput  = document.getElementById('alPassword');
+      togglePw.addEventListener('click', () => {
+        const show = pwInput.type === 'password';
+        pwInput.type = show ? 'text' : 'password';
+        togglePw.querySelector('i').className = show ? 'ri-eye-line' : 'ri-eye-off-line';
+        togglePw.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+
+      /* ── STEP 1: Login ── */
+      const loginBtn = document.getElementById('alLoginBtn');
+      loginBtn.addEventListener('click', () => {
+        hideAlert();
+        const email = document.getElementById('alEmail').value.trim();
+        const pw    = document.getElementById('alPassword').value;
+
+        if (!email || !/\S+@\S+\.\S+/.test(email)) {
+          document.getElementById('alEmail').classList.add('al-error');
+          showAlert('Please enter a valid email address.'); return;
+        }
+        if (!pw) {
+          document.getElementById('alPassword').classList.add('al-error');
+          showAlert('Password is required.'); return;
+        }
+
+        document.getElementById('alEmail').classList.remove('al-error');
+        document.getElementById('alPassword').classList.remove('al-error');
+
+        setLoading(loginBtn, true);
+        setTimeout(() => {
+          setLoading(loginBtn, false);
+          document.getElementById('alMasked').textContent = maskEmail(email);
+          document.getElementById('alStepCreds').style.display = 'none';
+          const twoFA = document.getElementById('alStep2FA');
+          twoFA.classList.add('al-visible');
+          setTimeout(() => twoFA.querySelectorAll('.al-otp-digit')[0].focus(), 100);
+          startCountdown();
+        }, 1400);
+      });
+
+      [document.getElementById('alEmail'), pwInput].forEach(el => {
+        el.addEventListener('keydown', e => { if (e.key === 'Enter') loginBtn.click(); });
+      });
+
+      /* ── STEP 2: OTP ── */
+      const otpDigits = document.querySelectorAll('.al-otp-digit');
+
+      otpDigits.forEach((input, i) => {
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/\D/g, '').slice(-1);
+          input.classList.toggle('al-filled', !!input.value);
+          if (input.value && i < otpDigits.length - 1) otpDigits[i + 1].focus();
+          if ([...otpDigits].every(d => d.value)) setTimeout(() => document.getElementById('alVerifyBtn').click(), 200);
+        });
+
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Backspace' && !input.value && i > 0) {
+            otpDigits[i - 1].focus();
+            otpDigits[i - 1].value = '';
+            otpDigits[i - 1].classList.remove('al-filled');
+          }
+        });
+
+        input.addEventListener('paste', e => {
+          e.preventDefault();
+          const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+          [...paste].slice(0, 6).forEach((ch, j) => {
+            if (otpDigits[j]) { otpDigits[j].value = ch; otpDigits[j].classList.add('al-filled'); }
+          });
+          if (paste.length >= 6) document.getElementById('alVerifyBtn').focus();
+        });
+      });
+
+      const verifyBtn = document.getElementById('alVerifyBtn');
+      verifyBtn.addEventListener('click', () => {
+        const code = [...otpDigits].map(d => d.value).join('');
+        if (code.length < 6) { otpDigits[code.length]?.focus(); return; }
+        setLoading(verifyBtn, true);
+        setTimeout(() => {
+          setLoading(verifyBtn, false);
+          window.location.href = 'admin-dashboard.html';
+        }, 1400);
+      });
+
+      /* ── Countdown & Resend ── */
+      let countdownTimer = null;
+      function startCountdown() {
+        const resendBtn = document.getElementById('alResendBtn');
+        let seconds = 30;
+        resendBtn.disabled = true;
+        const countEl = document.getElementById('alCountdown');
+        if (countEl) countEl.textContent = seconds;
+        clearInterval(countdownTimer);
+        countdownTimer = setInterval(() => {
+          seconds--;
+          const el = document.getElementById('alCountdown');
+          if (el) el.textContent = seconds;
+          if (seconds <= 0) {
+            clearInterval(countdownTimer);
+            resendBtn.disabled = false;
+            resendBtn.innerHTML = 'Resend code';
+          }
+        }, 1000);
+      }
+
+      document.getElementById('alResendBtn').addEventListener('click', function () {
+        this.innerHTML = 'Resend (<span id="alCountdown">30</span>s)';
+        otpDigits.forEach(d => { d.value = ''; d.classList.remove('al-filled'); });
+        otpDigits[0].focus();
+        startCountdown();
+      });
+
+      document.getElementById('alBackBtn').addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('alStep2FA').classList.remove('al-visible');
+        document.getElementById('alStepCreds').style.display = '';
+        otpDigits.forEach(d => { d.value = ''; d.classList.remove('al-filled'); });
+        clearInterval(countdownTimer);
+      });
+
+      /* ── Forgot PW Modal ── */
+      const fpBackdrop = document.getElementById('alFpBackdrop');
+      const fpStep1    = document.getElementById('alFpStep1');
+      const fpStep2    = document.getElementById('alFpStep2');
+
+      function openFp() {
+        fpBackdrop.classList.add('al-open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => document.getElementById('alFpEmail').focus(), 350);
+      }
+      function closeFp() {
+        fpBackdrop.classList.remove('al-open');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          fpStep1.style.display = '';
+          fpStep2.style.display = 'none';
+          document.getElementById('alFpEmail').value = '';
+          document.getElementById('alFpEmail').style.borderColor = '';
+        }, 320);
+      }
+
+      document.getElementById('alOpenFp').addEventListener('click', e => { e.preventDefault(); openFp(); });
+      document.getElementById('alFpClose').addEventListener('click', closeFp);
+      fpBackdrop.addEventListener('click', e => { if (e.target === fpBackdrop) closeFp(); });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && fpBackdrop.classList.contains('al-open')) closeFp();
+      });
+
+      document.getElementById('alFpSendBtn').addEventListener('click', () => {
+        const emailEl = document.getElementById('alFpEmail');
+        if (!emailEl.value.trim() || !/\S+@\S+\.\S+/.test(emailEl.value.trim())) {
+          emailEl.style.borderColor = 'rgba(255,50,50,0.4)'; return;
+        }
+        emailEl.style.borderColor = '';
+        fpStep1.style.display = 'none';
+        fpStep2.style.display = 'flex';
+      });
+
+      document.getElementById('alFpDoneBtn').addEventListener('click', closeFp);
+
+    });
+  </script>
+
+</body>
+</html>

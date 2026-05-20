@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing — JDEVS.</title>
+    <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+    <meta name="description"
+        content="Simple, transparent pricing for every business size. Choose from Basic, Standard, or Premium design packages.">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- ======================================================
+       PRICING PAGE — LIGHT / DARK SECTION OVERRIDES
+  ====================================================== -->
+</head>
+
+<body>
+
+    <!-- ============================================================ NAVBAR ============================================================ -->
+    <header class="nav-wrapper" id="navWrapper">
+        <nav class="navbar" id="navbar">
+
+            <!-- Logo — links back to home -->
+            <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+            <!-- Desktop Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+            </ul>
+
+            <!-- NEW: Authentication & CTA Buttons -->
+            <div class="nav-actions">
+                <a href="auth.html" class="nav-link">Log In</a>
+                <a href="auth.html" class="nav-link">Sign Up</a>
+                <!-- CTA Button — links to quote.html -->
+                <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
+
+        <!-- Mobile Dropdown Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html" class="mobile-link">Home</a></li>
+                <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+                <li><a href="services.html" class="mobile-link">Services</a></li>
+                <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+                <li><a href="about.html" class="mobile-link">About</a></li>
+                <li><a href="blog.html" class="mobile-link">Blog</a></li>
+                <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+                <!-- Mobile Auth & CTA -->
+                <li>
+                    <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+                </li>
+                <li><a href="auth.html" class="mobile-link">Log In</a></li>
+                <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+                <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+            </ul>
+        </div>
+    </header>
+
+
+    <!-- ============================================================ PAGE HERO ============================================================ -->
+    <section class="portfolio-header dark-hero">
+        <div class="container">
+            <div class="portfolio-header-inner" data-animate="fade-up">
+                <span class="section-tag">Transparent Pricing</span>
+                <h1 class="portfolio-header-title">Pay for your<br /><span class="accent">Need</span></h1>
+                <p class="page-hero-sub">No hidden subscriptions. No surprises. Straightforward design packages built
+                    for local
+                    businesses ready to grow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ BILLING TOGGLE ============================================================ -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+
+            <!-- Pricing Cards -->
+            <div class="pricing-cards-grid" data-animate="fade-up" data-delay="100">
+
+                <!-- Basic — Logo Design Package -->
+                <div class="pricing-card-new">
+                    <div class="pc-header">
+                        <span class="pc-plan">Basic</span>
+                        <p class="pc-desc">Ideal for new businesses that need a clean, professional logo to launch with
+                            confidence.</p>
+                    </div>
+                    <div class="pc-price-wrap">
+                        <span class="pc-currency">KES</span>
+                        <span class="price pc-amount">3,500</span>
+                        <span class="pc-per">/design</span>
+                    </div>
+                    <ul class="pc-features">
+                        <li><i class="ri-check-line"></i> Logo Design (2 Concepts)</li>
+                        <li><i class="ri-check-line"></i> 3 Rounds of Revisions</li>
+                        <li><i class="ri-check-line"></i> High-Resolution Files</li>
+                        <li><i class="ri-check-line"></i> JPG, PNG &amp; PDF Formats</li>
+                        <li><i class="ri-check-line"></i> Print-Ready &amp; Web-Optimised</li>
+                        <li><i class="ri-check-line"></i> 1–3 Days Delivery</li>
+                        <li><i class="ri-check-line"></i> Brand Guidelines</li>
+                        <li class="pc-feature-muted"><i class="ri-close-line"></i> <s>Stationery Design</s></li>
+                        <li class="pc-feature-muted"><i class="ri-close-line"></i> <s>Social Media Kit</s></li>
+                    </ul>
+                    <a href="https://wa.me/254745222588?text=Hi%20JDEVS!%20I%20would%20love%20the%20*Basic%20Package*%20(KES%203%2C500)%20%F0%9F%99%8C%0A%0AHere%27s%20what%20I%20understand%20it%20includes%3A%0A%E2%9C%85%20Logo%20Design%20(2%20Concepts)%0A%E2%9C%85%203%20Rounds%20of%20Revisions%0A%E2%9C%85%20High-Resolution%20Files%0A%E2%9C%85%20JPG%2C%20PNG%20%26%20PDF%20Formats%0A%E2%9C%85%20Print-Ready%20%26%20Web-Optimised%0A%E2%9C%85%201%E2%80%933%20Days%20Delivery%0A%E2%9C%85%20Brand%20Guidelines%0A%0APlease%20get%20me%20started!" target="_blank" rel="noopener noreferrer" class="pc-btn pc-btn-outline">Get Started</a>
+                </div>
+
+                <!-- Standard (Featured) — Brand & Business Package -->
+                <div class="pricing-card-new pc-featured">
+                    <div class="pc-badge">Most Popular</div>
+                    <div class="pc-header">
+                        <span class="pc-plan">Standard</span>
+                        <p class="pc-desc">A complete brand and business identity — from logo to website, all in one
+                            package.</p>
+                    </div>
+                    <div class="pc-price-wrap">
+                        <span class="pc-currency">KES</span>
+                        <span class="price pc-amount">65,000</span>
+                        <span class="pc-per">/design</span>
+                    </div>
+                    <ul class="pc-features">
+                        <li><i class="ri-check-line"></i> Logo Design (4 Concepts)</li>
+                        <li><i class="ri-check-line"></i> Business Card Design</li>
+                        <li><i class="ri-check-line"></i> Invoice &amp; Quotation Design</li>
+                        <li><i class="ri-check-line"></i> Letterhead &amp; Envelope Design</li>
+                        <li><i class="ri-check-line"></i> Web Design (Up to 5 Pages)</li>
+                        <li><i class="ri-check-line"></i> Brand Guidelines</li>
+                        <li><i class="ri-check-line"></i> Unlimited Revisions</li>
+                        <li><i class="ri-check-line"></i> Source Files (AI, PDF, SVG, PNG)</li>
+                        <li><i class="ri-check-line"></i> 7–10 Days Delivery</li>
+                    </ul>
+                    <a href="https://wa.me/254745222588?text=Hi%20JDEVS!%20I%20would%20love%20the%20*Standard%20Package*%20(KES%2065%2C000)%20%F0%9F%99%8C%0A%0AHere%27s%20what%20I%20understand%20it%20includes%3A%0A%E2%9C%85%20Logo%20Design%20(4%20Concepts)%0A%E2%9C%85%20Business%20Card%20Design%0A%E2%9C%85%20Invoice%20%26%20Quotation%20Design%0A%E2%9C%85%20Letterhead%20%26%20Envelope%20Design%0A%E2%9C%85%20Web%20Design%20(Up%20to%205%20Pages)%0A%E2%9C%85%20Brand%20Guidelines%0A%E2%9C%85%20Unlimited%20Revisions%0A%E2%9C%85%20Source%20Files%20(AI%2C%20PDF%2C%20SVG%2C%20PNG)%0A%E2%9C%85%207%E2%80%9310%20Days%20Delivery%0A%0APlease%20get%20me%20started!" target="_blank" rel="noopener noreferrer" class="pc-btn pc-btn-primary">Get Started</a>
+                </div>
+
+                <!-- Premium — Full Brand & Growth Package -->
+                <div class="pricing-card-new">
+                    <div class="pc-header">
+                        <span class="pc-plan">Premium</span>
+                        <p class="pc-desc">Everything in Standard plus ongoing social media management and website
+                            maintenance — your brand, always on.</p>
+                    </div>
+                    <div class="pc-price-wrap" style="flex-wrap:wrap; gap: 4px 0;">
+                        <span class="pc-currency">KES</span>
+                        <span class="price pc-amount">75,000</span>
+                        <span class="pc-per">/design</span>
+                        <span
+                            style="width:100%; font-size:0.78rem; color:var(--clr-accent, #a78bfa); font-weight:600; letter-spacing:0.04em; margin-top:4px;">+
+                            KES 18,000 / month</span>
+                    </div>
+                    <ul class="pc-features">
+                        <li><i class="ri-check-line"></i> Everything in Standard</li>
+                        <li><i class="ri-check-line"></i> Social Media Management</li>
+                        <li><i class="ri-check-line"></i> Custom Social Media Templates</li>
+                        <li><i class="ri-check-line"></i> Monthly Content Calendar</li>
+                        <li><i class="ri-check-line"></i> Website Maintenance (Monthly)</li>
+                        <li><i class="ri-check-line"></i> Performance &amp; Analytics Reports</li>
+                        <li><i class="ri-check-line"></i> Unlimited Revisions</li>
+                        <li><i class="ri-check-line"></i> All Source Files</li>
+                        <li><i class="ri-check-line"></i> Priority Support</li>
+                    </ul>
+                    <a href="https://wa.me/254745222588?text=Hi%20JDEVS!%20I%20would%20love%20the%20*Premium%20Package*%20(KES%2075%2C000%20%2B%20KES%2018%2C000%2Fmonth)%20%F0%9F%99%8C%0A%0AHere%27s%20what%20I%20understand%20it%20includes%3A%0A%E2%9C%85%20Everything%20in%20the%20Standard%20Package%0A%E2%9C%85%20Social%20Media%20Management%0A%E2%9C%85%20Custom%20Social%20Media%20Templates%0A%E2%9C%85%20Monthly%20Content%20Calendar%0A%E2%9C%85%20Website%20Maintenance%20(Monthly)%0A%E2%9C%85%20Performance%20%26%20Analytics%20Reports%0A%E2%9C%85%20Unlimited%20Revisions%0A%E2%9C%85%20All%20Source%20Files%0A%E2%9C%85%20Priority%20Support%0A%0APlease%20get%20me%20started!" target="_blank" rel="noopener noreferrer" class="pc-btn pc-btn-outline">Get Started</a>
+                </div>
+
+            </div>
+
+            <!-- Custom Quote Banner -->
+            <div class="custom-quote-banner" data-animate="fade-up" data-delay="200">
+                <div class="cqb-inner">
+                    <div class="cqb-text">
+                        <h3>Need Something Custom?</h3>
+                        <p>We'll create a custom package that fits your needs and budget.</p>
+                    </div>
+                    <a href="quote.html" class="btn-primary">Get a Custom Quote <i class="ri-arrow-right-line"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ COMPARISON TABLE ============================================================ -->
+    <section class="compare-section" data-animate="fade-up">
+        <div class="container">
+            <div class="section-center">
+                <span class="section-tag">Compare Plans</span>
+                <h2 class="section-title">What's Included</h2>
+            </div>
+
+            <div class="compare-table-wrap">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th class="ct-feature-col">Feature</th>
+                            <th>Basic</th>
+                            <th class="ct-featured-col">Standard</th>
+                            <th>Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pricing Model</td>
+                            <td>Per Design</td>
+                            <td class="ct-featured-col">Per Design</td>
+                            <td>Per Design + /mo</td>
+                        </tr>
+                        <tr>
+                            <td>Logo Concepts</td>
+                            <td>2</td>
+                            <td class="ct-featured-col">4</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Revisions</td>
+                            <td>3 Rounds</td>
+                            <td class="ct-featured-col">Unlimited</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>File Formats</td>
+                            <td>JPG, PNG, PDF</td>
+                            <td class="ct-featured-col">JPG, PNG, PDF, SVG, AI</td>
+                            <td>All Formats</td>
+                        </tr>
+                        <tr>
+                            <td>Brand Guidelines</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-check-line ct-yes"></i></td>
+                            <td><i class="ri-check-line ct-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Invoice &amp; Quotation Design</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-check-line ct-yes"></i></td>
+                            <td><i class="ri-check-line ct-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Web Design</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col">Up to 5 Pages</td>
+                            <td>Full Website</td>
+                        </tr>
+                        <tr>
+                            <td>Business Card Design</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-check-line ct-yes"></i></td>
+                            <td><i class="ri-check-line ct-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Social Media Management</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-close-line ct-no"></i></td>
+                            <td>Monthly</td>
+                        </tr>
+                        <tr>
+                            <td>Website Maintenance</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-close-line ct-no"></i></td>
+                            <td>Monthly</td>
+                        </tr>
+                        <tr>
+                            <td>Source Files</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-check-line ct-yes"></i></td>
+                            <td><i class="ri-check-line ct-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Priority Support</td>
+                            <td><i class="ri-close-line ct-no"></i></td>
+                            <td class="ct-featured-col"><i class="ri-close-line ct-no"></i></td>
+                            <td><i class="ri-check-line ct-yes"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Time</td>
+                            <td>3–5 Days</td>
+                            <td class="ct-featured-col">7–10 Days</td>
+                            <td>7–10 Days</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ FAQ ============================================================ -->
+    <section class="faq-section" data-animate="fade-up">
+        <div class="container">
+            <div class="section-center">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">Frequently Asked <span class="accent">Questions</span></h2>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button>
+                        <span>What payment methods do you accept?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>We accept M-Pesa, bank transfers, and major credit/debit cards. Payment plans are
+                        available for Standard and Premium packages.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>Can I upgrade my plan later?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>Absolutely! You can upgrade from Basic to Standard or Premium at any time. We'll only charge the
+                        difference in price.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>What does "per design" mean?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>It means you pay a one-time fee for the design deliverable — not a recurring subscription. Basic
+                        and Standard are single-project payments. Premium includes a one-time design fee plus a monthly
+                        retainer for social media management and website maintenance.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>What if I'm not satisfied with the design?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>All packages include revisions. Standard and Premium have unlimited revisions until you're
+                        completely happy. We also offer a satisfaction guarantee — if we can't get it right, we'll
+                        refund you.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>How long does the process take?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>Delivery time depends on the package: Basic (3–5 days), Standard (7–10 days), Premium (7–10 days
+                        for the initial design).
+                        Rush delivery is available for an additional fee.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>Do you offer refunds?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>We offer a full refund before work begins. Once design work starts, we do not offer refunds — but
+                        we're committed to revising until you're satisfied.</p>
+                </div>
+
+                <div class="faq-item">
+                    <button>
+                        <span>What files will I receive?</span>
+                        <i class="ri-add-line faq-icon"></i>
+                    </button>
+                    <p>Basic packages include JPG, PNG &amp; PDF. Standard and Premium include JPG, PNG, PDF, SVG, and
+                        editable
+                        source files (AI or PSD). All files are print-ready and web-optimised.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ CTA BANNER ============================================================ -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-inner" data-animate="fade-up">
+                <h2 class="cta-title">Ready to Build<br />Something <span class="accent">Amazing?</span></h2>
+                <p class="cta-sub">Let's create something your audience won't forget.</p>
+                <div class="cta-actions">
+                    <a href="quote.html" class="btn-primary">Get a Free Quote <i class="ri-arrow-right-line"></i></a>
+                    <a href="portfolio.html" class="btn-ghost">See Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ FOOTER ============================================================ -->
+    <footer class="footer" id="footer">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <img src="assets/img/logomain.png" alt="JDEVS Logo">
+                    </a>
+                    <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+                        <a href="#" class="social-btn" aria-label="whatsapp"><i class="ri-whatsapp-line"></i></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" class="social-btn" aria-label="facebook"><i class="ri-facebook-line"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Links -->
+                <div class="footer-col">
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="services.html#logo">Logo Design</a></li>
+                        <li><a href="services.html#branding">Branding</a></li>
+                        <li><a href="services.html#print">Print Design</a></li>
+                        <li><a href="services.html#web">Web Design</a></li>
+                        <li><a href="services.html#social">Social Media</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-col">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+                        <li><a href="tel:+254745222588">+254745222588</a></li>
+                        <li><a href="contact.html">Contact Page</a></li>
+                        <li><a href="quote.html">Get a Quote</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 JDEVS. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SCROLL TO TOP -->
+    <div class="scroll-top" id="scrollTopBtn"><i class="ri-arrow-up-line"></i></div>
+
+    <!-- FAB -->
+    <div class="fab-container">
+        <div class="fab-main" id="fabToggle"><i class="ri-add-line"></i></div>
+        <div class="fab-options">
+            <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp"><i
+                    class="ri-whatsapp-line"></i></a>
+            <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok"><i class="ri-tiktok-fill"></i></a>
+            <a href="#" class="fab-item instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="fab-item facebook"><i class="ri-facebook-fill"></i></a>
+        </div>
+    </div>
+
+    <script src="assets/Script/script.js"></script>
+</body>
+
+</html>

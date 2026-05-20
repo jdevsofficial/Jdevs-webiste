@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — JDEVS.</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+  <meta name="description"
+    content="JDEVS Privacy Policy — how we collect, use, and protect your personal data when you use our services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ════════════════════════════════════════════════
+       HERO — black background + radial glow + stripes
+    ════════════════════════════════════════════════ */
+    /* Fix 1: Override any overflow:hidden that's breaking sticky */
+    body {
+      overflow-x: clip;
+      /* 'clip' stops horizontal overflow WITHOUT breaking sticky */
+    }
+
+    /* Fix 2: Adjust top to clear the taller navbar */
+    .legal-toc {
+      position: sticky;
+      top: 100px;
+      /* increase this if your navbar is taller — try 90px–120px */
+      align-self: flex-start;
+      /* REQUIRED — without this, sticky won't work in flex/grid */
+    }
+
+    .legal-hero {
+      background-color: #0D0D0D;
+    }
+
+    /* Stronger glow — centred, matches dark-hero pattern */
+    .legal-hero::before {
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(181, 255, 46, 0.10) 0%, transparent 70%);
+    }
+
+    /* Diagonal stripe texture on the right edge */
+    .legal-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 340px;
+      height: 100%;
+      background: repeating-linear-gradient(-55deg,
+          transparent,
+          transparent 18px,
+          rgba(181, 255, 46, 0.045) 18px,
+          rgba(181, 255, 46, 0.045) 19px);
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════════════════════
+       BODY CONTENT AREA — white background
+    ════════════════════════════════════════════════ */
+    .legal-layout {
+      padding-top: 3rem;
+    }
+
+    /* Wrap the layout in a white surface */
+    .container:has(.legal-layout) {
+      background: #FFFFFF;
+    }
+
+    /* ── TOC sidebar ── */
+    .toc-label {
+      color: #999999;
+    }
+
+    .toc-list {
+      border-left-color: #E5E5E5;
+    }
+
+    .toc-list li a {
+      color: #888888;
+    }
+
+    .toc-list li a:hover,
+    .toc-list li a.active {
+      color: var(--clr-accent-dim);
+      border-left-color: var(--clr-accent-dim);
+    }
+
+    /* ── Section headings & text ── */
+    .legal-section h2 {
+      color: #0D0D0D;
+      border-bottom-color: #E5E5E5;
+    }
+
+    .legal-section p,
+    .legal-section ul li {
+      color: #444444;
+    }
+
+    /* ── Highlight & warning blocks ── */
+    .legal-highlight {
+      color: #444444;
+    }
+
+    .legal-warning {
+      color: #444444;
+    }
+
+    /* ── Section dividers ── */
+    .legal-divider {
+      border-top-color: #E5E5E5;
+    }
+
+    /* ── Contact card ── */
+    .legal-contact-card {
+      background: #F7F7F7;
+      border-color: #E5E5E5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="legal-hero">
+    <div class="container">
+      <div class="legal-hero-inner">
+        <span class="legal-eyebrow"><i class="ri-shield-check-line"></i> Legal</span>
+        <h1>Privacy <span>Policy</span></h1>
+        <p>Your privacy matters to us. This policy explains what personal data we collect, why we collect it, how we
+          use it, and the rights you have over your information when you engage with JDEVS.</p>
+        <div class="legal-meta">
+          <span class="legal-meta-item"><i class="ri-calendar-line"></i> Effective: January 1, 2024</span>
+          <span class="legal-meta-item"><i class="ri-refresh-line"></i> Last Updated: January 1, 2024</span>
+          <span class="legal-meta-item"><i class="ri-map-pin-line"></i> Jurisdiction: Kenya</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTENT -->
+  <section style="background:#FFFFFF; width:100%;">
+    <div class="container">
+      <div class="legal-layout">
+
+        <!-- Sidebar TOC -->
+        <aside class="legal-toc">
+          <p class="toc-label">Contents</p>
+          <ul class="toc-list" id="tocList">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#data-collected">Data We Collect</a></li>
+            <li><a href="#how-collected">How We Collect Data</a></li>
+            <li><a href="#how-used">How We Use Your Data</a></li>
+            <li><a href="#legal-basis">Legal Basis</a></li>
+            <li><a href="#data-sharing">Data Sharing</a></li>
+            <li><a href="#data-retention">Data Retention</a></li>
+            <li><a href="#your-rights">Your Rights</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#third-party">Third-Party Links</a></li>
+            <li><a href="#children">Children's Privacy</a></li>
+            <li><a href="#security">Data Security</a></li>
+            <li><a href="#changes">Policy Changes</a></li>
+            <li><a href="#contact-pp">Contact Us</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="legal-content">
+
+          <section class="legal-section" id="overview">
+            <p class="legal-section-num">01 — Overview</p>
+            <h2>Overview</h2>
+            <p>JDEVS ("we", "us", or "our") is a professional creative design studio based in Nairobi, Kenya. We are
+              committed to protecting the privacy and personal data of everyone who interacts with our business —
+              whether
+              you are a current client, a prospective client, or simply visiting our website.</p>
+            <p>This Privacy Policy explains how we collect, use, store, and protect your personal information in
+              connection with our services, website, and all other points of contact with JDEVS. By using our services
+              or engaging with us in any capacity, you agree to the practices described in this policy.</p>
+            <div class="legal-highlight">
+              <strong>Short version:</strong> We only collect what we need, we use it only to serve you, we never sell
+              it, and we keep it secure. You have the right to see, correct, or delete your data at any time.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="data-collected">
+            <p class="legal-section-num">02 — Data We Collect</p>
+            <h2>Data We Collect</h2>
+            <p>Depending on how you interact with us, we may collect the following categories of personal information:
+            </p>
+            <ul>
+              <li><strong style="color:#0D0D0D">Identity data:</strong> Your full name, business or company name, and
+                job title</li>
+              <li><strong style="color:#0D0D0D">Contact data:</strong> Email address, phone number, and physical or
+                postal address</li>
+              <li><strong style="color:#0D0D0D">Project data:</strong> Brief details, design requirements, brand assets,
+                feedback, and any content you supply for your project</li>
+              <li><strong style="color:#0D0D0D">Financial data:</strong> Invoice records and payment references (we do
+                not store card or M-Pesa PIN details)</li>
+              <li><strong style="color:#0D0D0D">Communication data:</strong> Records of messages, emails, and WhatsApp
+                conversations with our team</li>
+              <li><strong style="color:#0D0D0D">Technical data:</strong> IP address, browser type, device type, and
+                pages visited on our website (collected via analytics tools)</li>
+              <li><strong style="color:#0D0D0D">Usage data:</strong> Information about how you interact with our
+                website, platform, and any client portal</li>
+            </ul>
+            <p>We do not collect or process sensitive personal data such as race, religion, health information, or
+              political opinions unless you choose to share such information as part of a project brief, in which case
+              it
+              is used solely for that purpose.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="how-collected">
+            <p class="legal-section-num">03 — How We Collect</p>
+            <h2>How We Collect Your Data</h2>
+            <p>We collect personal information through the following channels:</p>
+            <ul>
+              <li>When you fill in a contact form, quote request, or onboarding form on our website</li>
+              <li>When you send us an email, WhatsApp message, or reach out via social media</li>
+              <li>When you enter into a project agreement or sign a contract with us</li>
+              <li>When you make a payment or receive an invoice from us</li>
+              <li>When you create an account on our client platform or dashboard</li>
+              <li>Automatically, through cookies and analytics tools when you visit our website</li>
+              <li>When you follow, message, or interact with our social media profiles</li>
+            </ul>
+            <p>We will always aim to be transparent about what we are collecting and why at the point of collection.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="how-used">
+            <p class="legal-section-num">04 — How We Use It</p>
+            <h2>How We Use Your Data</h2>
+            <p>We use your personal information only for legitimate business purposes, including:</p>
+            <ul>
+              <li>To respond to your enquiries, quote requests, and messages</li>
+              <li>To onboard you as a client and manage your project from start to finish</li>
+              <li>To send you invoices, payment reminders, and receipts</li>
+              <li>To communicate project updates, deliverables, and revision feedback</li>
+              <li>To provide access to our client portal or dashboard where applicable</li>
+              <li>To improve our website, services, and overall client experience</li>
+              <li>To send you occasional updates, offers, or portfolio showcases — only if you have opted in</li>
+              <li>To comply with legal obligations and resolve any disputes</li>
+            </ul>
+            <div class="legal-highlight">
+              <strong>We do not sell your data.</strong> Your personal information is never sold, rented, or traded to
+              third parties for marketing or commercial purposes — ever.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="legal-basis">
+            <p class="legal-section-num">05 — Legal Basis</p>
+            <h2>Legal Basis for Processing</h2>
+            <p>We only process your personal data where we have a lawful basis to do so. The legal bases we rely on
+              include:</p>
+            <ul>
+              <li><strong style="color:#0D0D0D">Contract:</strong> Processing is necessary to perform a contract with
+                you or to take steps at your request before entering into one</li>
+              <li><strong style="color:#0D0D0D">Legitimate interests:</strong> We may process your data where it is in
+                our legitimate business interests to do so, provided those interests are not overridden by your rights
+              </li>
+              <li><strong style="color:#0D0D0D">Consent:</strong> Where you have given us clear consent, such as opting
+                in to marketing communications</li>
+              <li><strong style="color:#0D0D0D">Legal obligation:</strong> Where we are required to process data to
+                comply with a legal duty</li>
+            </ul>
+            <p>Where we rely on consent as the basis for processing, you have the right to withdraw that consent at any
+              time by contacting us. Withdrawal of consent does not affect the lawfulness of processing carried out
+              prior
+              to withdrawal.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="data-sharing">
+            <p class="legal-section-num">06 — Data Sharing</p>
+            <h2>Data Sharing & Third Parties</h2>
+            <p>We do not share your personal data with third parties except in the following limited circumstances:</p>
+            <ul>
+              <li><strong style="color:#0D0D0D">Service providers:</strong> Trusted tools we use to run our business,
+                such as Google Workspace for email, payment processors, and project management platforms. These
+                providers are bound by their own privacy policies and are prohibited from using your data for any other
+                purpose</li>
+              <li><strong style="color:#0D0D0D">Legal compliance:</strong> Where we are required by law, court order, or
+                government authority to disclose information</li>
+              <li><strong style="color:#0D0D0D">Business transfers:</strong> In the unlikely event of a merger,
+                acquisition, or sale of assets, your data may be transferred as part of that transaction, with
+                equivalent protections in place</li>
+              <li><strong style="color:#0D0D0D">With your consent:</strong> In any other situation, only with your
+                explicit written permission</li>
+            </ul>
+            <div class="legal-warning">
+              <strong>Important:</strong> Any third-party links or integrations on our website or platform are governed
+              by those parties' own privacy policies. We are not responsible for their data practices.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="data-retention">
+            <p class="legal-section-num">07 — Retention</p>
+            <h2>Data Retention</h2>
+            <p>We retain your personal data only for as long as necessary to fulfil the purposes for which it was
+              collected, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+            <ul>
+              <li>Active client project data is retained for the duration of the project and up to 3 years after
+                completion</li>
+              <li>Financial and invoice records are retained for a minimum of 7 years in accordance with Kenyan tax law
+              </li>
+              <li>Enquiries that do not result in a project are retained for up to 12 months, then securely deleted</li>
+              <li>Website analytics data is retained in anonymised form for up to 26 months</li>
+              <li>Marketing communication preferences and records are retained until you unsubscribe or request deletion
+              </li>
+            </ul>
+            <p>When your data is no longer required, we will securely delete or anonymise it in a manner that prevents
+              identification or recovery.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="your-rights">
+            <p class="legal-section-num">08 — Your Rights</p>
+            <h2>Your Rights</h2>
+            <p>Under applicable data protection law, you have the following rights regarding your personal data:</p>
+            <ul>
+              <li><strong style="color:#0D0D0D">Right of access:</strong> You may request a copy of the personal data we
+                hold about you</li>
+              <li><strong style="color:#0D0D0D">Right to rectification:</strong> You may ask us to correct inaccurate or
+                incomplete data</li>
+              <li><strong style="color:#0D0D0D">Right to erasure:</strong> You may request that we delete your personal
+                data where there is no lawful reason for us to continue holding it</li>
+              <li><strong style="color:#0D0D0D">Right to restrict processing:</strong> You may ask us to pause
+                processing your data in certain circumstances</li>
+              <li><strong style="color:#0D0D0D">Right to data portability:</strong> You may request your data in a
+                structured, machine-readable format</li>
+              <li><strong style="color:#0D0D0D">Right to object:</strong> You may object to processing based on
+                legitimate interests or for direct marketing purposes</li>
+              <li><strong style="color:#0D0D0D">Right to withdraw consent:</strong> Where processing is based on
+                consent, you may withdraw it at any time</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us at <a href="mailto:jdevsdigital2@gmail.com"
+                style="color:var(--clr-accent);font-weight:500;">jdevsdigital2@gmail.com</a>. We will respond to all
+              verifiable requests within 30 days.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="cookies">
+            <p class="legal-section-num">09 — Cookies</p>
+            <h2>Cookies</h2>
+            <p>Our website uses cookies — small text files placed on your device — to improve your experience and help
+              us understand how the site is used. The types of cookies we use include:</p>
+            <ul>
+              <li><strong style="color:#0D0D0D">Essential cookies:</strong> Required for the website to function
+                correctly. These cannot be disabled</li>
+              <li><strong style="color:#0D0D0D">Analytics cookies:</strong> Help us understand how visitors interact
+                with our site (e.g. pages visited, time spent). We use anonymised data only</li>
+              <li><strong style="color:#0D0D0D">Preference cookies:</strong> Remember your settings and choices to
+                personalise your experience</li>
+            </ul>
+            <p>You can control or disable non-essential cookies through your browser settings at any time. Please note
+              that disabling cookies may affect the functionality of certain parts of our website.</p>
+            <div class="legal-highlight">
+              <strong>We do not use advertising or tracking cookies</strong> designed to build profiles for third-party
+              ad networks. Our analytics use is strictly for improving your experience on our site.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="third-party">
+            <p class="legal-section-num">10 — Third-Party Links</p>
+            <h2>Third-Party Links & Platforms</h2>
+            <p>Our website, social media profiles, and communications may contain links to third-party websites,
+              platforms, or services — such as Instagram, TikTok, WhatsApp, or payment gateways. These are operated by
+              independent companies and are governed by their own privacy policies.</p>
+            <p>We have no control over the content, privacy practices, or security of third-party sites. We encourage
+              you to review the privacy policy of any external service before providing your personal information to
+              them. JDEVS accepts no responsibility or liability for third-party privacy practices.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="children">
+            <p class="legal-section-num">11 — Children</p>
+            <h2>Children's Privacy</h2>
+            <p>Our services are intended for use by businesses and individuals aged 18 years and above. We do not
+              knowingly collect personal data from children under the age of 18.</p>
+            <p>If you believe we have inadvertently collected data from a minor, please contact us immediately at
+              <a href="mailto:jdevsdigital2@gmail.com"
+                style="color:var(--clr-accent);font-weight:500;">jdevsdigital2@gmail.com</a> and we will take prompt
+              steps to delete that information.
+            </p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="security">
+            <p class="legal-section-num">12 — Security</p>
+            <h2>Data Security</h2>
+            <p>We take the security of your personal data seriously and implement appropriate technical and
+              organisational
+              measures to protect it against unauthorised access, loss, disclosure, or destruction. These measures
+              include:</p>
+            <ul>
+              <li>Encrypted communication channels (HTTPS, end-to-end encrypted messaging)</li>
+              <li>Secure, password-protected cloud storage with access controls</li>
+              <li>Limited access to personal data — only team members who need it to perform their role</li>
+              <li>Regular reviews of our data handling practices and security posture</li>
+            </ul>
+            <div class="legal-warning">
+              <strong>Please note:</strong> No method of data transmission or storage is 100% secure. While we strive
+              to use commercially acceptable means to protect your data, we cannot guarantee its absolute security. In
+              the event of a data breach that affects your rights, we will notify you promptly.
+            </div>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="changes">
+            <p class="legal-section-num">13 — Changes</p>
+            <h2>Policy Changes</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, services, or
+              applicable law. When we make material changes, we will update the "Last Updated" date at the top of this
+              page and, where appropriate, notify existing clients by email.</p>
+            <p>We encourage you to review this policy periodically to stay informed about how we protect your
+              information. Your continued engagement with JDEVS after any changes constitutes acceptance of the updated
+              policy.</p>
+            <p>Previous versions of this policy are available on request by contacting us directly.</p>
+          </section>
+
+          <hr class="legal-divider">
+
+          <section class="legal-section" id="contact-pp">
+            <p class="legal-section-num">14 — Contact</p>
+            <h2>Questions & Contact</h2>
+            <p>If you have any questions, concerns, or requests relating to this Privacy Policy or the way we handle
+              your personal data, please do not hesitate to reach out to us directly. We aim to respond to all privacy
+              enquiries within 30 days:</p>
+            <div class="legal-contact-card">
+              <a href="mailto:jdevsdigital2@gmail.com"><i class="ri-mail-line"></i> jdevsdigital2@gmail.com</a>
+              <a href="tel:+254745222588"><i class="ri-phone-line"></i> +254 745 222 588</a>
+              <a href="contact.html"><i class="ri-arrow-right-circle-line"></i> Visit our Contact Page</a>
+            </div>
+            <p style="margin-top:1.25rem;">You may also review our <a href="terms-of-service.html"
+                style="color:var(--clr-accent);font-weight:500;">Terms of Service</a> for the full rules and agreements
+              that govern our working relationship.</p>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTopBtn">
+    <i class="ri-arrow-up-line"></i>
+  </div>
+
+  <!-- FLOATING SOCIAL FAB -->
+  <div class="fab-container">
+
+    <!-- Main Button -->
+    <div class="fab-main" id="fabToggle">
+      <i class="ri-add-line"></i>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="fab-options">
+
+      <!-- WhatsApp -->
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp">
+        <i class="ri-whatsapp-line"></i>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok">
+        <i class="ri-tiktok-fill"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a href="#" class="fab-item instagram">
+        <i class="ri-instagram-line"></i>
+      </a>
+
+      <!-- Facebook -->
+      <a href="#" class="fab-item facebook">
+        <i class="ri-facebook-fill"></i>
+      </a>
+
+    </div>
+  </div>
+  <script src="assets/Script/script.js" defer></script>
+  <script>
+    // TOC active highlight on scroll
+    const sections = document.querySelectorAll('.legal-section');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+
+</html>

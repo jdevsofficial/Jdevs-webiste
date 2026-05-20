@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JDEVS. — Our Portfolio</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+  <meta name="description"
+    content="Browse the JDEVS portfolio — logo design, branding, print, web design and social media work.">
+  <meta property="og:title" content="JDEVS — Our Portfolio">
+  <meta property="og:description" content="A showcase of logo design, branding, print, and web design projects.">
+  <meta property="og:image" content="assets/img/preview.png">
+  <meta property="og:url" content="https://yourwebsite.com/portfolio.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- PORTFOLIO HEADER -->
+  <section class="portfolio-header dark-hero">
+    <div class="container">
+      <div class="portfolio-header-inner" data-animate="fade-up">
+        <span class="section-tag">Our Work</span>
+        <h1 class="portfolio-header-title" style="color:#0D0D0D;">
+          Our Port<span class="accent" style="color:var(--clr-accent-dim);">Folio</span>
+        </h1>
+        <p class="portfolio-header-sub">
+          We create designs across different categories — browse our work and find what inspires you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO GRID -->
+  <section class="portfolio-grid-section">
+    <div class="container">
+
+      <div class="filter-tabs" data-animate="fade-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="logo">Logo Design</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+        <button class="filter-btn" data-filter="print">Print Design</button>
+        <button class="filter-btn" data-filter="web">Web Design</button>
+        <button class="filter-btn" data-filter="social">Social Media</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- 1 — HeroLab Logo -->
+        <div class="portfolio-item" data-category="logo" data-animate="fade-up" data-delay="0">
+          <div class="portfolio-thumb pt-logo">
+            <img src="assets/img/Logos/MYKHA ENTERPRISES LTD LOGO ASSETS/MYKHA ENTERPRISES LTD LOGO -FORGE CHARCOAL.jpg"
+              alt="HeroLab Logo Design" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-pentagon-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Logo Design</span>
+                <h4 class="po-title">Mykha Enterprises LTD</h4>
+                <a href="project-detail.html?id=herolab" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Mykha Enterprises LTD</h3>
+            <span class="portfolio-cat">Logo Design</span>
+          </div>
+        </div>
+
+        <!-- 2 — Coffee Brand Identity -->
+        <div class="portfolio-item" data-category="branding" data-animate="fade-up" data-delay="60">
+          <div class="portfolio-thumb pt-brand">
+            <img src="assets/img/portfolio/coffee-thumb.jpg" alt="Coffee Brand Identity" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-cup-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Branding · Packaging</span>
+                <h4 class="po-title">Coffee Brand Identity</h4>
+                <a href="project-detail.html?id=coffee-brand" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Coffee Brand Identity</h3>
+            <span class="portfolio-cat">Branding · Packaging</span>
+          </div>
+        </div>
+
+        <!-- 3 — Beyond Boundaries -->
+        <div class="portfolio-item" data-category="branding" data-animate="fade-up" data-delay="120">
+          <div class="portfolio-thumb pt-beyond">
+            <img src="assets/img/portfolio/beyond-thumb.jpg" alt="Beyond Boundaries" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-stack-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Branding</span>
+                <h4 class="po-title">Beyond Boundaries</h4>
+                <a href="project-detail.html?id=beyond-boundaries" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Beyond Boundaries</h3>
+            <span class="portfolio-cat">Branding</span>
+          </div>
+        </div>
+
+        <!-- 4 — Vortex Business Card -->
+        <div class="portfolio-item" data-category="branding" data-animate="fade-up" data-delay="0">
+          <div class="portfolio-thumb pt-vortex">
+            <img src="assets/img/portfolio/vortex-thumb.jpg" alt="Vortex Business Card" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-contacts-book-2-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Branding</span>
+                <h4 class="po-title">Vortex Business Card</h4>
+                <a href="project-detail.html?id=vortex-card" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Vortex Business Card</h3>
+            <span class="portfolio-cat">Branding</span>
+          </div>
+        </div>
+
+        <!-- 5 — Modern Invoice -->
+        <div class="portfolio-item" data-category="print" data-animate="fade-up" data-delay="60">
+          <div class="portfolio-thumb pt-invoice">
+            <img src="assets/img/portfolio/invoice-thumb.jpg" alt="Modern Invoice" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-file-text-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Print Design</span>
+                <h4 class="po-title">Modern Invoice</h4>
+                <a href="project-detail.html?id=modern-invoice" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Modern Invoice</h3>
+            <span class="portfolio-cat">Print Design</span>
+          </div>
+        </div>
+
+        <!-- 6 — Landing Page UI -->
+        <div class="portfolio-item" data-category="web" data-animate="fade-up" data-delay="120">
+          <div class="portfolio-thumb pt-web">
+            <img src="assets/img/portfolio/landing-thumb.jpg" alt="Landing Page UI" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-window-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Web Design</span>
+                <h4 class="po-title">Landing Page UI</h4>
+                <a href="project-detail.html?id=landing-page-ui" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Landing Page UI</h3>
+            <span class="portfolio-cat">Web Design</span>
+          </div>
+        </div>
+
+        <!-- 7 — Nature Care -->
+        <div class="portfolio-item" data-category="social" data-animate="fade-up" data-delay="0">
+          <div class="portfolio-thumb pt-social">
+            <img src="assets/img/portfolio/nature-thumb.jpg" alt="Nature Care Social Media" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-leaf-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Social Media</span>
+                <h4 class="po-title">Nature Care</h4>
+                <a href="project-detail.html?id=nature-care" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Nature Care</h3>
+            <span class="portfolio-cat">Social Media</span>
+          </div>
+        </div>
+
+        <!-- 8 — Real Estate Flyer -->
+        <div class="portfolio-item" data-category="print" data-animate="fade-up" data-delay="60">
+          <div class="portfolio-thumb pt-realestate">
+            <img src="assets/img/portfolio/realestate-thumb.jpg" alt="Real Estate Flyer" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-building-2-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Print Design</span>
+                <h4 class="po-title">Real Estate Flyer</h4>
+                <a href="project-detail.html?id=real-estate-flyer" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Real Estate Flyer</h3>
+            <span class="portfolio-cat">Print Design</span>
+          </div>
+        </div>
+
+        <!-- 9 — Tech Conference -->
+        <div class="portfolio-item" data-category="print" data-animate="fade-up" data-delay="120">
+          <div class="portfolio-thumb pt-tech">
+            <img src="assets/img/portfolio/tech-thumb.jpg" alt="Tech Conference" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-computer-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Print Design</span>
+                <h4 class="po-title">Tech Conference</h4>
+                <a href="project-detail.html?id=tech-conference" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Tech Conference</h3>
+            <span class="portfolio-cat">Print Design</span>
+          </div>
+        </div>
+
+        <!-- 10 — Motivation Poster -->
+        <div class="portfolio-item" data-category="print" data-animate="fade-up" data-delay="0">
+          <div class="portfolio-thumb pt-poster">
+            <img src="assets/img/portfolio/poster-thumb.jpg" alt="Motivation Poster" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-image-2-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Poster Design</span>
+                <h4 class="po-title">Motivation Poster</h4>
+                <a href="project-detail.html?id=motivation-poster" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Motivation Poster</h3>
+            <span class="portfolio-cat">Poster Design</span>
+          </div>
+        </div>
+
+        <!-- 11 — Velocity Logo -->
+        <div class="portfolio-item" data-category="logo" data-animate="fade-up" data-delay="60">
+          <div class="portfolio-thumb pt-velocity">
+            <img src="assets/img/portfolio/velocity-thumb.jpg" alt="Velocity Logo" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-flashlight-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Logo Design</span>
+                <h4 class="po-title">Velocity Logo</h4>
+                <a href="project-detail.html?id=velocity-logo" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Velocity Logo</h3>
+            <span class="portfolio-cat">Logo Design</span>
+          </div>
+        </div>
+
+        <!-- 12 — Hermes Business Card -->
+        <div class="portfolio-item" data-category="branding" data-animate="fade-up" data-delay="120">
+          <div class="portfolio-thumb pt-hermes">
+            <img src="assets/img/portfolio/hermes-thumb.jpg" alt="Hermes Business Card" class="portfolio-thumb-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pt-inner"><i class="ri-wallet-3-line"></i></div>
+            <div class="portfolio-overlay">
+              <div class="po-content">
+                <span class="po-cat">Branding</span>
+                <h4 class="po-title">Hermes Business Card</h4>
+                <a href="project-detail.html?id=hermes-card" class="overlay-btn">
+                  View Project <i class="ri-arrow-right-up-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <h3 class="portfolio-title">Hermes Business Card</h3>
+            <span class="portfolio-cat">Branding</span>
+          </div>
+        </div>
+
+      </div><!-- /.portfolio-grid -->
+
+      <div class="portfolio-empty" id="portfolioEmpty" style="display:none;">
+        <i class="ri-folder-open-line"></i>
+        <p>No projects in this category yet. More coming soon!</p>
+      </div>
+
+      <div class="pagination" data-animate="fade-up">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn page-next">Next <i class="ri-arrow-right-line"></i></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="container">
+      <div class="cta-inner" data-animate="fade-up">
+        <h2 class="cta-title">Like What You See?<br />Let's <span class="accent">Work Together.</span></h2>
+        <p class="cta-sub">Have a project in mind? We'd love to bring your vision to life.</p>
+        <div class="cta-actions">
+          <a href="quote.html" class="btn-primary">Get a Free Quote <i class="ri-arrow-right-line"></i></a>
+          <a href="services.html" class="btn-ghost">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="whatsapp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="scroll-top" id="scrollTopBtn"><i class="ri-arrow-up-line"></i></div>
+
+  <div class="fab-container">
+    <div class="fab-main" id="fabToggle"><i class="ri-add-line"></i></div>
+    <div class="fab-options">
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp"><i
+          class="ri-whatsapp-line"></i></a>
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok"><i class="ri-tiktok-fill"></i></a>
+      <a href="#" class="fab-item instagram"><i class="ri-instagram-line"></i></a>
+      <a href="#" class="fab-item facebook"><i class="ri-facebook-fill"></i></a>
+    </div>
+  </div>
+
+  <script src="assets/Script/script.js"></script>
+
+  <!-- ── Admin Portfolio Sync ─────────────────────────────────
+       Reads items saved by the admin Portfolio Manager and
+       injects them into the grid. Admin items appear AFTER the
+       existing static items. Remove or skip any whose src is a
+       data-URL (base64) since those don't persist across
+       deployments — only real file paths survive.
+  ──────────────────────────────────────────────────────────── -->
+  <script>
+  (function injectAdminPortfolioItems() {
+    const CAT_LABELS = {
+      logo:     'Logo Design',
+      branding: 'Branding',
+      print:    'Print Design',
+      web:      'Web Design',
+      social:   'Social Media',
+    };
+
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem('jdevs_portfolio') || '[]'); }
+    catch { return; }
+    if (!saved.length) return;
+
+    const grid  = document.getElementById('portfolioGrid');
+    const empty = document.getElementById('portfolioEmpty');
+    if (!grid) return;
+
+    saved.forEach(entry => {
+      // Skip base64 blobs — they are upload previews, not real paths
+      if (!entry.src || entry.src.startsWith('data:')) return;
+
+      const catLabel = CAT_LABELS[entry.cat] || entry.cat || '';
+      const catSlug  = entry.cat || '';
+      const id       = entry.id  || entry.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-') || 'project';
+
+      const item = document.createElement('div');
+      item.className          = 'portfolio-item';
+      item.dataset.category   = catSlug;
+      item.dataset.animate    = 'fade-up';
+      item.dataset.delay      = '0';
+      item.innerHTML = `
+        <div class="portfolio-thumb">
+          <img src="${entry.src}"
+               alt="${entry.title}"
+               class="portfolio-thumb-img"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="pt-inner"><i class="ri-image-2-line"></i></div>
+          <div class="portfolio-overlay">
+            <div class="po-content">
+              <span class="po-cat">${catLabel}</span>
+              <h4 class="po-title">${entry.title}</h4>
+              <a href="project-detail.html?id=${id}" class="overlay-btn">
+                View Project <i class="ri-arrow-right-up-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3 class="portfolio-title">${entry.title}</h3>
+          <span class="portfolio-cat">${catLabel}</span>
+        </div>
+      `;
+      grid.appendChild(item);
+    });
+
+    // Re-run the filter if a tab is already active so new items obey it
+    const activeFilter = document.querySelector('.filter-btn.active');
+    if (activeFilter && typeof activeFilter.click === 'function') {
+      activeFilter.click();
+    }
+  })();
+  </script>
+</body>
+
+</html>

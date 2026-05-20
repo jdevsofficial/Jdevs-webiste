@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote — JDEVS.</title>
+  <link rel="icon" type="image/png" href="assets/img/tablogo.png">
+  <meta name="description"
+    content="Tell us about your project and we'll get back to you with a custom quote as soon as possible.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+</head>
+
+<body>
+
+  <!-- ============================================================ NAVBAR ============================================================ -->
+  <header class="nav-wrapper" id="navWrapper">
+    <nav class="navbar" id="navbar">
+
+      <!-- Logo — links back to home -->
+      <a href="index.html" class="nav-logo">JDEVS<span class="dot">.</span></a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+
+      <!-- NEW: Authentication & CTA Buttons -->
+      <div class="nav-actions">
+        <a href="auth.html" class="nav-link">Log In</a>
+        <a href="auth.html" class="nav-link">Sign Up</a>
+        <!-- CTA Button — links to quote.html -->
+        <a href="quote.html" class="btn-cta nav-cta">Get a Quote</a>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html" class="mobile-link">Home</a></li>
+        <li><a href="portfolio.html" class="mobile-link">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-link">Services</a></li>
+        <li><a href="pricing.html" class="mobile-link">Pricing</a></li>
+        <li><a href="about.html" class="mobile-link">About</a></li>
+        <li><a href="blog.html" class="mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="mobile-link">Contact Us</a></li>
+        <!-- Mobile Auth & CTA -->
+        <li>
+          <hr style="border: none; border-top: 1px solid var(--clr-border); margin: 0.5rem 1rem;">
+        </li>
+        <li><a href="auth.html" class="mobile-link">Log In</a></li>
+        <li><a href="auth.html" class="mobile-link">Sign Up</a></li>
+        <li><a href="quote.html" class="btn-cta mobile-cta">Get a Quote</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ============================================================ PAGE HERO ============================================================ -->
+  <section class="portfolio-header dark-hero">
+    <div class="container">
+      <div class="portfolio-header-inner" data-animate="fade-up">
+        <span class="section-tag">Work with us</span>
+        <h1 class="portfolio-header-title">
+          Bring your <span class="accent">Idea</span> To life
+        </h1>
+        <p class="services-detail-lead">
+          Tell us about your project and we'll get back to you with a custom plan as soon as possible.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ QUOTE FORM ============================================================ -->
+
+  <section class="quote-section">
+    <div class="container">
+      <!-- <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>v
+        </div>
+      </div> -->
+      <hr class="section-divider">
+
+      <div class="quote-layout">
+
+        <!-- ── LEFT: Multi-step Form ── -->
+        <div class="quote-form-wrap" data-animate="fade-up">
+
+          <!-- Step Indicator -->
+          <div class="quote-steps">
+            <div class="q-step active" data-step="1">
+              <div class="q-step-dot"><span>1</span></div>
+              <span class="q-step-label">Your Info</span>
+            </div>
+            <div class="q-step-line"></div>
+            <div class="q-step" data-step="2">
+              <div class="q-step-dot"><span>2</span></div>
+              <span class="q-step-label">Project Details</span>
+            </div>
+            <div class="q-step-line"></div>
+            <div class="q-step" data-step="3">
+              <div class="q-step-dot"><span>3</span></div>
+              <span class="q-step-label">Project Brief</span>
+            </div>
+          </div>
+
+          <form class="quote-form" id="quoteForm" novalidate>
+
+            <!-- ── STEP 1: Your Info ── -->
+            <div class="form-step active" id="step1">
+              <div class="form-step-header">
+                <h3>1. Your Information</h3>
+                <p>Let's start with the basics — we'll use this to get in touch with you.</p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name <span class="req">*</span></label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Enter your name" required />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name <span class="req">*</span></label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Enter your surname" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address <span class="req">*</span></label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+254 700 000 000" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="businessName">Business Name (Optional)</label>
+                <input type="text" id="businessName" name="businessName" placeholder="Enter your business name" />
+              </div>
+
+              <div class="form-nav">
+                <div></div>
+                <button type="button" class="btn-primary step-next" data-next="2">
+                  Next: Project Details <i class="ri-arrow-right-line"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ── STEP 2: Project Details ── -->
+            <div class="form-step" id="step2">
+              <div class="form-step-header">
+                <h3>2. Project Details</h3>
+                <p>Tell us what type of design work you need.</p>
+              </div>
+              <div class="design-type-grid">
+
+                <label class="type-option">
+                  <input type="radio" name="designType" value="logo" required />
+                  <span class="type-card">
+                    <img src="assets/img/logodesign.png" alt="Logo Design" />
+                    <span>Logo Design</span>
+                  </span>
+                </label>
+
+                <label class="type-option">
+                  <input type="radio" name="designType" value="branding" />
+                  <span class="type-card">
+                    <img src="assets/img/Printd.png" alt="Branding" />
+                    <span>Branding</span>
+                  </span>
+                </label>
+
+                <label class="type-option">
+                  <input type="radio" name="designType" value="print" />
+                  <span class="type-card">
+                    <img src="assets/img/Printdesign.png" alt="Print Design" />
+                    <span>Print Design</span>
+                  </span>
+                </label>
+
+                <label class="type-option">
+                  <input type="radio" name="designType" value="web" />
+                  <span class="type-card">
+                    <img src="assets/img/webdesign.png" alt="Web Design" />
+                    <span>Web Design</span>
+                  </span>
+                </label>
+
+                <label class="type-option">
+                  <input type="radio" name="designType" value="social" />
+                  <span class="type-card">
+                    <img src="assets/img/Socialmedia.png" alt="Social Media Design" />
+                    <span>Social Media Design</span>
+                  </span>
+                </label>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="budget">Budget Range <span class="req">*</span></label>
+                  <select id="budget" name="budget" required>
+                    <option value="" disabled selected>Select your budget</option>
+                    <option value="under-5000">Under KSh 5,000</option>
+                    <option value="5000-10000">KSh 5,000 – KSh 10,000</option>
+                    <option value="10000-30000">KSh 10,000 – KSh 30,000</option>
+                    <option value="30000-50000">KSh 30,000 – KSh 50,000</option>
+                    <option value="50000-100000">KSh 50,000 – KSh 100,000</option>
+                    <option value="100000+">KSh 100,000+</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="deadline">Ideal Deadline <span class="req">*</span></label>
+                  <input type="date" id="deadline" name="deadline" required />
+                </div>
+              </div>
+
+              <div class="form-nav">
+                <button type="button" class="btn-outline step-prev" data-prev="1" style="color: black;">
+                  <i class="ri-arrow-left-line"></i> Back
+                </button>
+                <button type="button" class="btn-primary step-next" data-next="3">
+                  Next: Project Brief <i class="ri-arrow-right-line"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ── STEP 3: Project Brief ── -->
+            <div class="form-step" id="step3">
+              <div class="form-step-header">
+                <h3>3. Project Brief</h3>
+                <p>Give us as much detail as you can — the more we know, the better we can help.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="references">Reference Links (Optional)</label>
+                <input type="url" id="references" name="references" placeholder="https://example.com/inspiration" />
+              </div>
+
+              <!-- File Upload -->
+              <div class="form-group">
+                <label>Upload Files <span class="form-hint">(PNG, JPG, PDF — up to 10MB)</span></label>
+                <div class="file-upload-zone" id="dropZone">
+                  <i class="ri-upload-cloud-2-line"></i>
+                  <p>Drag &amp; drop files here, or <label for="fileInput" class="file-trigger">click to browse</label>
+                  </p>
+                  <span>PNG, JPG, PDF up to 10MB</span>
+                  <input type="file" id="fileInput" name="files" multiple accept=".png,.jpg,.jpeg,.pdf" hidden />
+                </div>
+                <div class="file-list" id="fileList"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="projectDesc">Project Description <span class="req">*</span></label>
+                <textarea id="projectDesc" name="projectDesc" rows="5"
+                  placeholder="Tell us about your project, brand, and what you're looking for..." required></textarea>
+              </div>
+
+              <div class="form-nav">
+                <button type="button" class="btn-outline step-prev" data-prev="2" style="color: black;">
+                  <i class="ri-arrow-left-line"></i> Back
+                </button>
+                <button type="submit" class="btn-primary">
+                  Send Request <i class="ri-send-plane-line"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ── SUCCESS STATE ── -->
+            <div class="form-success" id="formSuccess">
+              <div class="success-icon"><i class="ri-checkbox-circle-fill"></i></div>
+              <h3>Quote Request Sent!</h3>
+              <p>Thank you! We've received your request and will get back to you within 24 hours.</p>
+              <a href="index.html" class="btn-primary">Back to Home <i class="ri-arrow-right-line"></i></a>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ── RIGHT: Sidebar Info ── -->
+        <aside class="quote-sidebar" data-animate="fade-up" data-delay="150">
+
+          <div class="qs-card">
+            <h4>Why Work With Us?</h4>
+            <ul class="qs-list">
+              <li><i class="ri-check-double-line"></i> 6+ Years of Experience</li>
+              <li><i class="ri-check-double-line"></i> 250+ Projects Delivered</li>
+              <li><i class="ri-check-double-line"></i> 150+ Happy Clients</li>
+              <li><i class="ri-check-double-line"></i> Fast Turnaround Times</li>
+              <li><i class="ri-check-double-line"></i> Unlimited Revisions (Premium)</li>
+              <li><i class="ri-check-double-line"></i> Money-back Guarantee</li>
+            </ul>
+          </div>
+
+          <div class="qs-card2">
+            <h4>How It Works</h4>
+            <ol class="qs-steps">
+              <li>
+                <div class="qs-num">01</div>
+                <div>
+                  <strong>Submit Request</strong>
+                  <span>Fill out this form with your project details</span>
+                </div>
+              </li>
+              <li>
+                <div class="qs-num">02</div>
+                <div>
+                  <strong>We Review</strong>
+                  <span>We'll analyse your brief and prepare a custom quote</span>
+                </div>
+              </li>
+              <li>
+                <div class="qs-num">03</div>
+                <div>
+                  <strong>We Connect</strong>
+                  <span>We'll reach out within 24 hrs to discuss your project</span>
+                </div>
+              </li>
+              <li>
+                <div class="qs-num">04</div>
+                <div>
+                  <strong>Design Begins</strong>
+                  <span>Once agreed, we get straight to work on your brand</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="qs-card qs-contact">
+            <h4>Prefer to Talk?</h4>
+            <a href="https://wa.me/254745222588" class="qs-wa-btn" target="_blank">
+              <i class="ri-whatsapp-line"></i> Chat on WhatsApp
+            </a>
+            <a href="mailto:jdevsdigital2@gmail.com" class="qs-email-link">
+              <i class="ri-mail-line"></i> jdevsdigital2@gmail.com
+            </a>
+          </div>
+
+        </aside>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ FOOTER ============================================================ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="assets/img/logomain.png" alt="JDEVS Logo">
+          </a>
+          <p>Designing brands that inspire, engage and leave lasting marks on every audience, every time.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Tiktok"><i class="ri-tiktok-line"></i></a>
+            <a href="#" class="social-btn" aria-label="whatsapp"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-btn" aria-label="facebook"><i class="ri-facebook-line"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Links -->
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="services.html#logo">Logo Design</a></li>
+            <li><a href="services.html#branding">Branding</a></li>
+            <li><a href="services.html#print">Print Design</a></li>
+            <li><a href="services.html#web">Web Design</a></li>
+            <li><a href="services.html#social">Social Media</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:jdevsdigital2@gmail.com">jdevsdigital2@gmail.com</a></li>
+            <li><a href="tel:+254745222588">+254745222588</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="quote.html">Get a Quote</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 JDEVS. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP -->
+  <div class="scroll-top" id="scrollTopBtn"><i class="ri-arrow-up-line"></i></div>
+
+  <!-- FAB -->
+  <div class="fab-container">
+    <div class="fab-main" id="fabToggle"><i class="ri-add-line"></i></div>
+    <div class="fab-options">
+      <a href="https://wa.me/254745222588" target="_blank" class="fab-item whatsapp"><i
+          class="ri-whatsapp-line"></i></a>
+      <a href="https://www.tiktok.com/@jdevs.digital" class="fab-item tiktok"><i class="ri-tiktok-fill"></i></a>
+      <a href="#" class="fab-item instagram"><i class="ri-instagram-line"></i></a>
+      <a href="#" class="fab-item facebook"><i class="ri-facebook-fill"></i></a>
+    </div>
+  </div>
+
+  <script src="assets/Script/script.js"></script>
+  <script>
+    /* ── Quote Form Multi-step Logic ── */
+    const steps = document.querySelectorAll('.form-step');
+    const stepIndicators = document.querySelectorAll('.q-step');
+
+    function showStep(n) {
+      steps.forEach(s => s.classList.remove('active'));
+      stepIndicators.forEach(s => s.classList.remove('active', 'done'));
+      const target = document.getElementById('step' + n);
+      if (target) target.classList.add('active');
+      stepIndicators.forEach((s, i) => {
+        if (i + 1 < n) s.classList.add('done');
+        if (i + 1 === n) s.classList.add('active');
+      });
+      // removed scrollTo so the form stays in place when switching steps
+    }
+
+    document.querySelectorAll('.step-next').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const next = parseInt(btn.dataset.next);
+        showStep(next);
+      });
+    });
+
+    document.querySelectorAll('.step-prev').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const prev = parseInt(btn.dataset.prev);
+        showStep(prev);
+      });
+    });
+
+    /* ── File Upload ── */
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileList = document.getElementById('fileList');
+
+    dropZone.addEventListener('click', (e) => {
+      if (e.target.classList.contains('file-trigger') || e.target === dropZone || e.target.closest('.file-upload-zone')) {
+        fileInput.click();
+      }
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      renderFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', () => renderFiles(fileInput.files));
+
+    function renderFiles(files) {
+      fileList.innerHTML = '';
+      Array.from(files).forEach(f => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        item.innerHTML = `<i class="ri-file-line"></i><span>${f.name}</span><small>${(f.size / 1024).toFixed(0)} KB</small>`;
+        fileList.appendChild(item);
+      });
+    }
+
+    /* ── Form Submit ── */
+    document.getElementById('quoteForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      steps.forEach(s => s.classList.remove('active'));
+      document.getElementById('formSuccess').style.display = 'flex';
+    });
+  </script>
+</body>
+
+</html>
