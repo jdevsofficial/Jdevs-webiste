@@ -30,7 +30,6 @@ function adminSwitchView(viewId) {
     'free-quotes': ['Free Quotes', 'Quote requests submitted via the public form.'],
     'user-quotes': ['User Quotes', 'Quote requests from registered logged-in users.'],
     'active-works': ['Active Works', 'Manage all ongoing and pending project works.'],
-    'track-progress': ['Progress Boards', 'Control what each client sees when they click "Track Progress".'],
     'portfolio': ['Portfolio Manager', 'Upload and organise portfolio images.'],
     'settings': ['Settings', 'Admin account and platform settings.'],
     'billing': ['Invoices & Billing', 'Create, track, and manage all client invoices.'],
@@ -805,6 +804,7 @@ document.addEventListener('click', function (e) {
         <div class="adm-work-footer">
           <span class="adm-work-due"><i class="ri-calendar-line"></i> ${dueLabel}</span>
           <div class="adm-work-actions">
+            <button class="adm-work-btn" data-action="manage" title="Manage"><i class="ri-settings-3-line"></i></button>
             <button class="adm-work-btn" data-action="complete" title="Mark Complete"><i class="ri-checkbox-circle-line"></i></button>
             <button class="adm-work-btn" title="Message Client"><i class="ri-chat-1-line"></i></button>
             <button class="adm-work-btn danger" data-action="delete" title="Remove"><i class="ri-delete-bin-line"></i></button>
@@ -890,6 +890,9 @@ window.toggleAdminTheme = function () {
   shell.classList.toggle('light-mode');
   const lightActive = shell.classList.contains('light-mode');
 
+  // Keep body in sync so fixed-position elements outside #dbShell (e.g. slide panel) pick up the theme
+  document.body.classList.toggle('light-mode', lightActive);
+
   // ── Settings toggle ──
   const settingsToggle = document.getElementById('admThemeToggle');
   const settingsLabel = document.getElementById('admThemeSettingLabel');
@@ -945,6 +948,7 @@ window.toggleAdminTheme = function () {
 
   if (useDark) {
     shell.classList.remove('light-mode');
+    document.body.classList.remove('light-mode');
 
     if (settingsToggle) settingsToggle.classList.add('active');
     if (settingsLabel) settingsLabel.textContent = 'Currently using Dark Mode';
@@ -957,6 +961,7 @@ window.toggleAdminTheme = function () {
     if (sidebarMoon) sidebarMoon.style.color = 'var(--clr-accent)';
   } else {
     shell.classList.add('light-mode');
+    document.body.classList.add('light-mode');
 
     if (settingsToggle) settingsToggle.classList.remove('active');
     if (settingsLabel) settingsLabel.textContent = 'Currently using Light Mode';
@@ -1478,1294 +1483,6 @@ document.addEventListener('click', function (e) {
 })();
 
 
-/* ════════════════════════════════════════════════════════════════
-   PROGRESS BOARDS — Admin editor for the user "Track Progress" panel
-   Mirrors the tpProjects data structure in dashboard.html exactly.
-   Data persisted to localStorage → read by user dashboard on load.
-════════════════════════════════════════════════════════════════ */
-
-/* ── Default data (mirrors dashboard.html tpProjects) ────────── */
-const TPB_DEFAULTS = {
-  coffee: {
-    title: 'Coffee Brand Identity',
-    meta: 'Branding · #QR-0089 · Started Apr 21, 2026',
-    startDate: '2026-04-21',
-    dueDate: '2026-05-08',
-    pct: 65,
-    milestones: [
-      { label: 'Brief & Discovery', date: 'Apr 21, 2026', state: 'done', icon: 'ri-file-text-line', note: 'Brand questionnaire completed. Tone: premium, warm, artisanal.' },
-      { label: 'Concept Research', date: 'Apr 23, 2026', state: 'done', icon: 'ri-search-eye-line', note: 'Mood board finalised — earthy tones, hand-drawn textures, serif typography.' },
-      { label: 'Initial Design Drafts', date: 'Apr 28, 2026', state: 'done', icon: 'ri-brush-3-line', note: '3 logo concepts drafted. Color system and typeface pairing selected.' },
-      { label: 'Client Review', date: 'In progress', state: 'active', icon: 'ri-eye-line', note: 'Drafts ready for your review — expect a link via email by May 2.' },
-      { label: 'Revisions & Refinement', date: 'Upcoming', state: 'pending', icon: 'ri-edit-line', note: '' },
-      { label: 'Brand Guidelines Doc', date: 'Upcoming', state: 'pending', icon: 'ri-book-2-line', note: '' },
-      { label: 'Final Delivery', date: 'May 8, 2026', state: 'pending', icon: 'ri-rocket-line', note: '' },
-    ],
-    updates: [
-      { icon: 'green', ri: 'ri-brush-3-line', text: '<strong>3 logo concepts completed</strong> — ready for your review. Check your email for the preview link.', time: 'Apr 28 · 3:12 PM' },
-      { icon: 'blue', ri: 'ri-palette-line', text: 'Color system defined: <strong>Espresso Brown, Cream White, Forest Green</strong>. Looks stunning.', time: 'Apr 26 · 11:45 AM' },
-      { icon: 'green', ri: 'ri-image-line', text: 'Mood board approved and <strong>visual direction locked in</strong>. Moving to design phase.', time: 'Apr 23 · 9:00 AM' },
-    ],
-    nextTitle: 'Up Next: Your Review',
-    nextSub: "We'll share design drafts for feedback. Your input at this stage shapes the final brand direction.",
-  },
-  landing: {
-    title: 'Landing Page UI',
-    meta: 'Web Design · #QR-0092 · Started Apr 28, 2026',
-    startDate: '2026-04-28',
-    dueDate: '2026-05-20',
-    pct: 15,
-    milestones: [
-      { label: 'Brief & Scope', date: 'Apr 28, 2026', state: 'done', icon: 'ri-file-text-line', note: 'Requirements captured: SaaS landing page, 5 sections, mobile-first.' },
-      { label: 'Wireframe Layout', date: 'In progress', state: 'active', icon: 'ri-layout-3-line', note: 'Low-fidelity wireframes being drafted — hero, features, pricing, CTA, footer.' },
-      { label: 'Visual Design', date: 'Upcoming', state: 'pending', icon: 'ri-palette-line', note: '' },
-      { label: 'Prototype & Review', date: 'Upcoming', state: 'pending', icon: 'ri-device-line', note: '' },
-      { label: 'Responsive QA', date: 'Upcoming', state: 'pending', icon: 'ri-smartphone-line', note: '' },
-      { label: 'Final Handoff', date: 'May 20, 2026', state: 'pending', icon: 'ri-rocket-line', note: '' },
-    ],
-    updates: [
-      { icon: 'blue', ri: 'ri-layout-3-line', text: '<strong>Wireframing started</strong> — mapping the hero and features sections first.', time: 'May 1 · 9:30 AM' },
-      { icon: 'green', ri: 'ri-file-text-line', text: 'Project brief confirmed. <strong>Scope & sitemap agreed</strong>. Work begins today.', time: 'Apr 28 · 2:00 PM' },
-    ],
-    nextTitle: 'Up Next: Wireframe Review',
-    nextSub: "You'll receive a low-fidelity wireframe to approve before we move into full visual design.",
-  },
-};
-
-/* ── State ─────────────────────────────────────────────────── */
-let _tpbKey = 'coffee';            // active project key
-let _tpbData = {};                 // deep clone of current working data
-
-/* ── Load: merge localStorage over defaults ──────────────────── */
-function tpbLoad(key) {
-  const saved = (() => {
-    try { return JSON.parse(localStorage.getItem('jdevs_track_' + key) || 'null'); }
-    catch { return null; }
-  })();
-  return saved ? Object.assign({}, TPB_DEFAULTS[key], saved) : JSON.parse(JSON.stringify(TPB_DEFAULTS[key]));
-}
-
-/* ── Save to localStorage ────────────────────────────────────── */
-function tpbSave() {
-  _tpbReadFormIntoData();
-  try {
-    localStorage.setItem('jdevs_track_' + _tpbKey, JSON.stringify(_tpbData));
-    showAdminToast('Progress Board Saved', '"' + _tpbData.title + '" track panel updated — client will see changes on next load.', 'green');
-  } catch (e) {
-    showAdminToast('Save Failed', 'localStorage error: ' + e.message, 'red');
-  }
-}
-
-/* ── Reset to default ────────────────────────────────────────── */
-function tpbReset() {
-  _tpbData = JSON.parse(JSON.stringify(TPB_DEFAULTS[_tpbKey]));
-  localStorage.removeItem('jdevs_track_' + _tpbKey);
-  tpbRenderAll();
-  showAdminToast('Reset to Default', 'Progress board restored to original defaults.', '');
-}
-
-/* ── Select project tab ──────────────────────────────────────── */
-function tpbSelectProject(btn) {
-  document.querySelectorAll('.tpb-proj-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  _tpbKey = btn.dataset.proj;
-  _tpbData = tpbLoad(_tpbKey);
-  tpbRenderAll();
-}
-
-/* ── Render everything from _tpbData ─────────────────────────── */
-function tpbRenderAll() {
-  const d = _tpbData;
-
-  // Stats fields
-  _setVal('tpbStartDate', d.startDate || '');
-  _setVal('tpbDueDate', d.dueDate || '');
-  _setVal('tpbPctSlider', d.pct);
-  tpbSyncPct(d.pct);
-  tpbAutoCalc();
-
-  // Milestones
-  tpbRenderMilestones();
-
-  // Updates
-  tpbRenderUpdates();
-
-  // Up Next
-  _setVal('tpbNextTitle', d.nextTitle || '');
-  _setVal('tpbNextSub', d.nextSub || '');
-
-  // Live preview
-  tpbLivePreview();
-}
-
-/* ── Sync pct slider display ─────────────────────────────────── */
-function tpbSyncPct(val) {
-  val = Math.min(100, Math.max(0, parseInt(val) || 0));
-  document.getElementById('tpbPctDisplay').textContent = val + '%';
-  document.getElementById('tpbPctSlider').value = val;
-  _tpbData.pct = val;
-  // Update preview
-  const el = document.getElementById('prevPct');
-  if (el) el.textContent = val + '%';
-}
-
-/* ── Auto-calculate days from dates ──────────────────────────── */
-function tpbAutoCalc() {
-  const startVal = document.getElementById('tpbStartDate')?.value;
-  const dueVal = document.getElementById('tpbDueDate')?.value;
-  const today = new Date();
-
-  if (startVal) {
-    const start = new Date(startVal);
-    const diff = Math.max(0, Math.round((today - start) / 86400000));
-    _setVal('tpbDaysActive', diff);
-    _tpbData.startDate = startVal;
-  }
-  if (dueVal) {
-    const due = new Date(dueVal);
-    const left = Math.max(0, Math.round((due - today) / 86400000));
-    _setVal('tpbDaysLeft', left);
-    const fmt = due.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-    _setVal('tpbDueFmt', fmt);
-    _tpbData.dueDate = dueVal;
-    // Update preview
-    const pDays = document.getElementById('prevDays');
-    const pLeft = document.getElementById('prevLeft');
-    const pDue = document.getElementById('prevDue');
-    if (pDays && startVal) pDays.textContent = Math.max(0, Math.round((today - new Date(startVal)) / 86400000));
-    if (pLeft) pLeft.textContent = left;
-    if (pDue) pDue.textContent = fmt;
-  }
-}
-
-/* ── Render milestone editor list ────────────────────────────── */
-function tpbRenderMilestones() {
-  const list = document.getElementById('tpbMsList');
-  if (!list) return;
-  list.innerHTML = '';
-  (_tpbData.milestones || []).forEach((ms, idx) => {
-    const row = document.createElement('div');
-    row.className = 'tpb-ms-row';
-    row.dataset.idx = idx;
-    row.innerHTML = `
-      <div class="tpb-ms-order-btns">
-        <button class="tpb-ms-order-btn" onclick="tpbMsMove(${idx},-1)" title="Move up">▲</button>
-        <button class="tpb-ms-order-btn" onclick="tpbMsMove(${idx}, 1)" title="Move down">▼</button>
-      </div>
-      <input class="tpb-input" style="font-size:0.8rem; padding:0.4rem 0.6rem;" value="${_esc(ms.label)}" placeholder="Milestone label"
-        oninput="_tpbData.milestones[${idx}].label=this.value; tpbLivePreview();" />
-      <input class="tpb-input" style="font-size:0.8rem; padding:0.4rem 0.6rem;" value="${_esc(ms.date)}" placeholder="Date / status"
-        oninput="_tpbData.milestones[${idx}].date=this.value; tpbLivePreview();" />
-      <select class="tpb-ms-state-sel state-${ms.state}" onchange="tpbMsStateChange(this,${idx})">
-        <option value="done"    ${ms.state === 'done' ? 'selected' : ''}>✅ Done</option>
-        <option value="active"  ${ms.state === 'active' ? 'selected' : ''}>⏳ Active</option>
-        <option value="pending" ${ms.state === 'pending' ? 'selected' : ''}>○ Pending</option>
-      </select>
-      <button class="tpb-ms-del-btn" onclick="tpbMsDelete(${idx})" title="Remove"><i class="ri-delete-bin-line"></i></button>
-      <input class="tpb-ms-note-field" value="${_esc(ms.note || '')}" placeholder="Optional note shown to client…"
-        oninput="_tpbData.milestones[${idx}].note=this.value; tpbLivePreview();" />
-    `;
-    list.appendChild(row);
-  });
-  tpbLivePreview();
-}
-
-function tpbMsStateChange(sel, idx) {
-  _tpbData.milestones[idx].state = sel.value;
-  sel.className = 'tpb-ms-state-sel state-' + sel.value;
-  tpbLivePreview();
-}
-
-function tpbMsMove(idx, dir) {
-  const ms = _tpbData.milestones;
-  const target = idx + dir;
-  if (target < 0 || target >= ms.length) return;
-  [ms[idx], ms[target]] = [ms[target], ms[idx]];
-  tpbRenderMilestones();
-}
-
-function tpbMsDelete(idx) {
-  _tpbData.milestones.splice(idx, 1);
-  tpbRenderMilestones();
-}
-
-function tpbAddMilestone() {
-  _tpbData.milestones.push({ label: 'New Milestone', date: 'Upcoming', state: 'pending', icon: 'ri-checkbox-blank-circle-line', note: '' });
-  tpbRenderMilestones();
-  // Scroll list to bottom
-  const list = document.getElementById('tpbMsList');
-  if (list) list.lastElementChild?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-/* ── Render update list ───────────────────────────────────────── */
-function tpbRenderUpdates() {
-  const list = document.getElementById('tpbUpdList');
-  if (!list) return;
-  list.innerHTML = '';
-  (_tpbData.updates || []).forEach((u, idx) => {
-    const row = document.createElement('div');
-    row.className = 'tpb-upd-row';
-    row.innerHTML = `
-      <div class="tpb-upd-dot ${u.icon}"><i class="${u.ri}"></i></div>
-      <div class="tpb-upd-body">
-        <div class="tpb-upd-text">${u.text}</div>
-        <div class="tpb-upd-time">${u.time}</div>
-      </div>
-      <button class="tpb-ms-del-btn" onclick="tpbDelUpdate(${idx})" title="Remove"><i class="ri-delete-bin-line"></i></button>
-    `;
-    list.appendChild(row);
-  });
-  tpbLivePreview();
-}
-
-function tpbDelUpdate(idx) {
-  _tpbData.updates.splice(idx, 1);
-  tpbRenderUpdates();
-}
-
-function tpbAddUpdate() {
-  const form = document.getElementById('tpbUpdateForm');
-  form.style.display = form.style.display === 'none' ? '' : 'none';
-  if (form.style.display !== 'none') {
-    // Set default timestamp
-    const now = new Date();
-    const fmt = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' · ' +
-      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    const timeEl = document.getElementById('tpbUpdTime');
-    if (timeEl && !timeEl.value) timeEl.value = fmt;
-  }
-}
-
-function tpbCommitUpdate() {
-  const icon = document.getElementById('tpbUpdIcon')?.value || 'green';
-  const ri = document.getElementById('tpbUpdRi')?.value || 'ri-brush-3-line';
-  const text = document.getElementById('tpbUpdText')?.value.trim() || '';
-  const time = document.getElementById('tpbUpdTime')?.value.trim() || '';
-  if (!text) { showAdminToast('Missing Text', 'Please write the update message.', 'red'); return; }
-  _tpbData.updates.unshift({ icon, ri, text, time });
-  // Clear form
-  ['tpbUpdText', 'tpbUpdTime'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  document.getElementById('tpbUpdateForm').style.display = 'none';
-  tpbRenderUpdates();
-}
-
-/* ── Live preview render ─────────────────────────────────────── */
-function tpbLivePreview() {
-  const d = _tpbData;
-  if (!d) return;
-
-  // Title / meta
-  _setText('prevTitle', d.title || '');
-  _setText('prevMeta', d.meta || '');
-
-  // Stats
-  _setText('prevPct', (d.pct || 0) + '%');
-
-  // Milestones
-  const tl = document.getElementById('prevTimeline');
-  if (tl) {
-    tl.innerHTML = (d.milestones || []).map(m => `
-      <div class="tpb-prev-ms">
-        <div class="tpb-prev-ms-dot ${m.state}">
-          <i class="${m.state === 'done' ? 'ri-check-line' : m.state === 'active' ? 'ri-loader-4-line' : m.icon || 'ri-circle-line'}"></i>
-        </div>
-        <div>
-          <div class="tpb-prev-ms-label">${_esc(m.label)}</div>
-          <div class="tpb-prev-ms-date">${_esc(m.date)}</div>
-          ${m.note ? `<div class="tpb-prev-ms-note">${_esc(m.note)}</div>` : ''}
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // Updates
-  const ul = document.getElementById('prevUpdates');
-  if (ul) {
-    ul.innerHTML = (d.updates || []).map(u => `
-      <div class="tpb-prev-upd">
-        <div class="tpb-prev-upd-dot ${u.icon}"><i class="${u.ri}"></i></div>
-        <div>
-          <div class="tpb-prev-upd-text">${u.text}</div>
-          <div class="tpb-prev-upd-time">${_esc(u.time)}</div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  // Up Next
-  _setText('prevNextTitle', document.getElementById('tpbNextTitle')?.value || d.nextTitle || '');
-  _setText('prevNextSub', document.getElementById('tpbNextSub')?.value || d.nextSub || '');
-}
-
-/* ── Toggle preview col on mobile ────────────────────────────── */
-function tpbTogglePreview() {
-  // Sync form data into _tpbData before opening the modal
-  _tpbReadFormIntoData();
-  tpbModalOpen();
-}
-
-/* ── Read form fields back into _tpbData before saving ───────── */
-function _tpbReadFormIntoData() {
-  _tpbData.nextTitle = document.getElementById('tpbNextTitle')?.value.trim() || '';
-  _tpbData.nextSub = document.getElementById('tpbNextSub')?.value.trim() || '';
-  _tpbData.pct = parseInt(document.getElementById('tpbPctSlider')?.value) || 0;
-  _tpbData.startDate = document.getElementById('tpbStartDate')?.value || '';
-  _tpbData.dueDate = document.getElementById('tpbDueDate')?.value || '';
-  // milestones and updates are already live-synced via oninput handlers
-}
-
-/* ── Helpers ─────────────────────────────────────────────────── */
-function _setVal(id, val) { const el = document.getElementById(id); if (el) el.value = val; }
-function _setText(id, txt) { const el = document.getElementById(id); if (el) el.textContent = txt; }
-function _esc(str) { return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-
-/* ── Init on view load ───────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', function () {
-  // Load coffee data as default
-  _tpbData = tpbLoad('coffee');
-  tpbRenderAll();
-
-  // Up Next fields: live preview on type
-  ['tpbNextTitle', 'tpbNextSub'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', tpbLivePreview);
-  });
-});
-
-
-
-/* ================================================================
-   JDEVS. — Admin Dashboard JS Additions
-   APPEND THIS ENTIRE FILE to the end of admin-dashboard.js
-   ================================================================
-
-   Covers:
-     E1.  adminSwitchView title map additions (revisions + finished-projects)
-          — ALSO manually add these two lines inside the `titles` object
-            in the existing adminSwitchView() function:
-            'revisions'         : ['Revisions', 'Client revision requests and admin responses.'],
-            'finished-projects' : ['Finished Projects', 'Completed and delivered work gallery.'],
-
-     E2.  Revisions — accordion (reuses existing A2 adm-quote-head handler)
-     E3.  Revisions — filter bar (reuses A3 pattern via data-group="rev-filter")
-     E4.  Revisions — inline search (reuses A4 pattern)
-     E5.  Revisions — Post Revision Update handler
-     E6.  Finished Projects — file upload + drag-drop + thumbs
-     E7.  Finished Projects — Add to grid
-     E8.  Finished Projects — category filter + delete + lightbox
-     E9.  Progress Board — fullscreen preview modal
-================================================================ */
-
-
-/* ──────────────────────────────────────────────────────────────
-   E1. View title entries are now handled directly in adminSwitchView().
-────────────────────────────────────────────────────────────── */
-
-
-/* ──────────────────────────────────────────────────────────────
-   E5. REVISIONS — Post Revision Update handler
-   Reads the card's form fields, posts update into the
-   adm-rev-updates-posted container, saves to localStorage
-   so the user dashboard can display it.
-────────────────────────────────────────────────────────────── */
-document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.adm-rev-post-btn');
-  if (!btn) return;
-
-  const card = btn.closest('.adm-rev-card');
-  if (!card) return;
-
-  const revId = btn.dataset.revid || card.dataset.revid || 'REV-???';
-  const iconSel = card.querySelector('.adm-rev-icon-sel');
-  const riSel = card.querySelector('.adm-rev-ri-sel');
-  const textEl = card.querySelector('.adm-rev-update-text');
-  const statusSel = card.querySelector('.adm-rev-status-sel');
-
-  const icon = iconSel ? iconSel.value : 'blue';
-  const ri = riSel ? riSel.value : 'ri-refresh-line';
-  const text = textEl ? textEl.value.trim() : '';
-  const newStatus = statusSel ? statusSel.value : null;
-
-  if (!text) {
-    showAdminToast('Empty Update', 'Please write an update message before posting.', 'red');
-    return;
-  }
-
-  // Build timestamp
-  const now = new Date();
-  const time = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) +
-    ' · ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-  // Render the posted update into the DOM
-  const postedContainer = document.getElementById('revPosted-' + revId);
-  if (postedContainer) {
-    const item = document.createElement('div');
-    item.className = 'adm-rev-posted-item';
-    item.innerHTML = `
-      <div class="tpb-prev-upd-dot ${icon}"><i class="${ri}"></i></div>
-      <div class="adm-rev-posted-body">
-        <div class="adm-rev-posted-text">${_escRev(text)}</div>
-        <div class="adm-rev-posted-time">${time}</div>
-      </div>
-    `;
-    postedContainer.prepend(item);
-  }
-
-  // Update card status if changed
-  if (newStatus && card.dataset.status !== newStatus) {
-    card.dataset.status = newStatus;
-
-    const badge = card.querySelector('.adm-quote-head .db-status');
-    if (badge) {
-      const statusMap = {
-        'pending': ['pending', 'Pending'],
-        'in-progress': ['progress', 'In Progress'],
-        'resolved': ['completed', 'Resolved'],
-      };
-      const [cls, txt] = statusMap[newStatus] || ['pending', 'Pending'];
-      badge.className = 'db-status ' + cls;
-      badge.textContent = txt;
-    }
-
-    // Update stat counters
-    _revUpdateStats();
-  }
-
-  // Persist to localStorage so user dashboard picks it up
-  _revSaveUpdate(revId, { icon, ri, text, time, status: newStatus });
-
-  // Clear the textarea
-  if (textEl) textEl.value = '';
-
-  showAdminToast('Update Posted', `Revision update for ${revId} is now visible to the client.`, 'green');
-});
-
-/* save/load rev updates via localStorage */
-function _revSaveUpdate(revId, update) {
-  const key = 'jdevs_rev_' + revId.toLowerCase().replace('-', '_');
-  let updates = [];
-  try { updates = JSON.parse(localStorage.getItem(key) || '[]'); } catch { }
-  updates.unshift(update);
-  try { localStorage.setItem(key, JSON.stringify(updates)); } catch { }
-}
-
-function _revLoadUpdates(revId) {
-  const key = 'jdevs_rev_' + revId.toLowerCase().replace('-', '_');
-  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; }
-}
-
-function _escRev(str) {
-  return (str || '')
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-function _revUpdateStats() {
-  const cards = document.querySelectorAll('#revList .adm-rev-card');
-  let pending = 0, inProg = 0, resolved = 0, urgent = 0;
-  cards.forEach(c => {
-    const s = c.dataset.status;
-    if (s === 'pending') pending++;
-    if (s === 'in-progress') inProg++;
-    if (s === 'resolved') resolved++;
-    // count urgent
-    if (c.querySelector('.adm-rev-priority-tag.urgent')) {
-      if (s !== 'resolved') urgent++;
-    }
-  });
-  const _s = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  _s('revStatPending', pending);
-  _s('revStatInProgress', inProg);
-  _s('revStatResolved', resolved);
-  _s('revStatUrgent', urgent);
-  _s('revNavBadge', pending + inProg);
-  _s('revCountAll', cards.length);
-  _s('revCountPending', pending);
-}
-
-/* restore posted updates from localStorage on page load */
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('#revList .adm-rev-card').forEach(card => {
-    const revId = card.dataset.revid;
-    if (!revId) return;
-
-    const savedUpdates = _revLoadUpdates(revId);
-    if (!savedUpdates.length) return;
-
-    const container = document.getElementById('revPosted-' + revId);
-    if (!container) return;
-
-    savedUpdates.forEach(u => {
-      const item = document.createElement('div');
-      item.className = 'adm-rev-posted-item';
-      item.innerHTML = `
-        <div class="tpb-prev-upd-dot ${u.icon}"><i class="${u.ri}"></i></div>
-        <div class="adm-rev-posted-body">
-          <div class="adm-rev-posted-text">${_escRev(u.text)}</div>
-          <div class="adm-rev-posted-time">${_escRev(u.time)}</div>
-        </div>
-      `;
-      container.appendChild(item);
-    });
-  });
-});
-
-/* Revision search */
-(function initRevSearch() {
-  document.addEventListener('input', function (e) {
-    const input = e.target;
-    if (input.id !== 'revSearch') return;
-    const q = input.value.trim().toLowerCase();
-    document.querySelectorAll('#revList .adm-rev-card').forEach(card => {
-      card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
-    });
-  });
-})();
-
-
-/* ================================================================
-   FINISHED PROJECTS UPGRADE — JS
-   
-   HOW TO USE:
-   1. In admin-dashboard.js, DELETE the existing blocks:
-        E6. FINISHED PROJECTS — File upload + drag/drop + thumbnails
-        E7. FINISHED PROJECTS — Add to grid handler
-   
-   2. Paste this entire file in their place.
-   
-   E8, E9 (category filter, delete, lightbox) remain unchanged.
-================================================================ */
-
-
-/* ──────────────────────────────────────────────────────────────
-   DATA STORE — Active Projects & Linked Invoices
-   Update these arrays whenever you add/complete a work order.
-────────────────────────────────────────────────────────────── */
-const JDEVS_ACTIVE_PROJECTS = [
-  {
-    workId: '#WK-014',
-    title: 'Coffee Brand Identity',
-    client: 'John Doe',
-    email: 'john@example.com',
-    service: 'Branding',
-    category: 'branding',
-    status: 'in-progress',
-    invoiceRef: '#INV-0041',
-  },
-  {
-    workId: '#WK-015',
-    title: 'Landing Page UI',
-    client: 'John Doe',
-    email: 'john@example.com',
-    service: 'Web Design',
-    category: 'web',
-    status: 'in-progress',
-    invoiceRef: '#INV-0042',
-  },
-  {
-    workId: '#WK-013',
-    title: 'Menu Card Design',
-    client: 'Amina Hassan',
-    email: 'amina.h@yahoo.com',
-    service: 'Print Design',
-    category: 'print',
-    status: 'review',
-    invoiceRef: '#QUO-0018',
-  },
-  {
-    workId: '#WK-016',
-    title: 'Kids Brand Logo',
-    client: 'Grace Mutua',
-    email: 'g.mutua@gmail.com',
-    service: 'Logo Design',
-    category: 'logo',
-    status: 'pending',
-    invoiceRef: null,
-  },
-  {
-    workId: '#WK-012',
-    title: 'Event Flyer',
-    client: 'David Omondi',
-    email: 'david@example.com',
-    service: 'Print Design',
-    category: 'print',
-    status: 'in-progress',
-    invoiceRef: null,
-  },
-];
-
-/* Invoice lookup — keyed by invoice ref */
-const JDEVS_INVOICES = {
-  '#INV-0041': {
-    ref: '#INV-0041',
-    type: 'Invoice',
-    client: 'John Doe',
-    email: 'john@example.com',
-    desc: 'Brand Identity Pack',
-    amount: 'KES 399',
-    issued: 'Apr 20, 2026',
-    due: 'Apr 30, 2026',
-    status: 'overdue',
-  },
-  '#INV-0042': {
-    ref: '#INV-0042',
-    type: 'Invoice',
-    client: 'John Doe',
-    email: 'john@example.com',
-    desc: 'Landing Page UI',
-    amount: 'KES 1,200',
-    issued: 'May 1, 2026',
-    due: 'May 20, 2026',
-    status: 'unpaid',
-  },
-  '#QUO-0018': {
-    ref: '#QUO-0018',
-    type: 'Quotation',
-    client: 'Amina Hassan',
-    email: 'amina.h@yahoo.com',
-    desc: 'Branding Package',
-    amount: 'KES 8,000',
-    issued: 'Apr 30, 2026',
-    due: 'May 30, 2026',
-    status: 'unpaid',
-  },
-  '#INV-0039': {
-    ref: '#INV-0039',
-    type: 'Invoice',
-    client: 'John Doe',
-    email: 'john@example.com',
-    desc: 'Logo Design',
-    amount: 'KES 149',
-    issued: 'Apr 12, 2026',
-    due: 'Apr 20, 2026',
-    status: 'paid',
-  },
-  '#INV-0035': {
-    ref: '#INV-0035',
-    type: 'Invoice',
-    client: 'John Doe',
-    email: 'john@example.com',
-    desc: 'Social Media Templates',
-    amount: 'KES 95',
-    issued: 'Feb 28, 2026',
-    due: 'Mar 10, 2026',
-    status: 'paid',
-  },
-};
-
-
-/* ──────────────────────────────────────────────────────────────
-   HELPER — open the existing admin invoice preview modal
-   (reuses the modal already present in admin-dashboard.html)
-────────────────────────────────────────────────────────────── */
-function fpOpenInvoiceModal(invRef) {
-  const inv = JDEVS_INVOICES[invRef];
-  if (!inv) {
-    showAdminToast('No Invoice', 'Could not find invoice data for ' + invRef, 'red');
-    return;
-  }
-
-  // Populate the existing adm invoice modal fields
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-
-  set('admModalRef', inv.ref);
-  set('admModalType', inv.type);
-  set('admModalClient', inv.client);
-  set('admModalEmail', inv.email);
-  set('admModalDate', inv.issued);
-  set('admModalDue', inv.due);
-  set('admModalDesc', inv.desc);
-  set('admModalItemAmt', inv.amount);
-  set('admModalSubtotal', inv.amount);
-  set('admModalTotal', inv.amount);
-
-  // Due label — hide for Quotations
-  const dueLabel = document.getElementById('admModalDueLabel');
-  if (dueLabel) dueLabel.style.display = inv.type === 'Quotation' ? 'none' : '';
-
-  // Mark Paid button visibility
-  const markPaidBtn = document.getElementById('admInvMarkPaidBtn');
-  if (markPaidBtn) {
-    markPaidBtn.style.display = (inv.status === 'unpaid' || inv.status === 'overdue') ? '' : 'none';
-  }
-
-  // Open backdrop
-  const backdrop = document.getElementById('admInvModalBackdrop');
-  if (backdrop) backdrop.classList.add('open');
-}
-
-
-/* ──────────────────────────────────────────────────────────────
-   E6. FINISHED PROJECTS — Project selector + auto-fill
-────────────────────────────────────────────────────────────── */
-(function initFpProjectSelector() {
-  const select = document.getElementById('fpProjectSelect');
-  const banner = document.getElementById('fpLinkedBanner');
-  const unlinkBtn = document.getElementById('fpUnlinkBtn');
-  const invBadge = document.getElementById('fpInvBadge');
-  const noInv = document.getElementById('fpNoInv');
-  const invPeekBtn = document.getElementById('fpInvPeekBtn');
-  if (!select) return;
-
-  /* Populate select options from data store */
-  const STATUS_LABELS = {
-    'in-progress': 'In Progress',
-    'review': 'In Review',
-    'pending': 'Pending',
-  };
-
-  JDEVS_ACTIVE_PROJECTS.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p.workId;
-    opt.textContent = `${p.workId} · ${p.title} — ${p.client} (${STATUS_LABELS[p.status] || p.status})`;
-    select.appendChild(opt);
-  });
-
-  /* Active selected project reference */
-  let _selectedProject = null;
-
-  function showBanner(project) {
-    _selectedProject = project;
-
-    document.getElementById('fpLinkedWorkId').textContent = project.workId;
-    document.getElementById('fpLinkedProjectName').textContent = project.title;
-    document.getElementById('fpLinkedClientName').textContent = project.client;
-    document.getElementById('fpLinkedClientEmail').textContent = project.email;
-
-    // Auto-fill form fields
-    const titleEl = document.getElementById('fpTitle');
-    const clientEl = document.getElementById('fpClient');
-    const categoryEl = document.getElementById('fpCategory');
-    if (titleEl && !titleEl.value) titleEl.value = project.title;
-    if (clientEl && !clientEl.value) clientEl.value = project.client;
-    if (categoryEl && !categoryEl.value) categoryEl.value = project.category;
-
-    // Invoice badge
-    if (project.invoiceRef && JDEVS_INVOICES[project.invoiceRef]) {
-      const inv = JDEVS_INVOICES[project.invoiceRef];
-      document.getElementById('fpInvRef').textContent = inv.ref;
-
-      const statusEl = document.getElementById('fpInvStatus');
-      statusEl.textContent = inv.status.charAt(0).toUpperCase() + inv.status.slice(1);
-      statusEl.className = 'adm-fp-inv-status ' + inv.status;
-
-      invBadge.style.display = 'flex';
-      noInv.style.display = 'none';
-    } else {
-      invBadge.style.display = 'none';
-      noInv.style.display = 'flex';
-    }
-
-    banner.style.display = '';
-  }
-
-  function hideBanner() {
-    _selectedProject = null;
-    banner.style.display = 'none';
-    select.value = '';
-  }
-
-  /* On project select */
-  select.addEventListener('change', function () {
-    if (!this.value) { hideBanner(); return; }
-    const project = JDEVS_ACTIVE_PROJECTS.find(p => p.workId === this.value);
-    if (project) showBanner(project);
-  });
-
-  /* Unlink */
-  if (unlinkBtn) unlinkBtn.addEventListener('click', hideBanner);
-
-  /* Invoice peek */
-  if (invPeekBtn) {
-    invPeekBtn.addEventListener('click', function () {
-      if (_selectedProject && _selectedProject.invoiceRef) {
-        fpOpenInvoiceModal(_selectedProject.invoiceRef);
-      }
-    });
-  }
-
-  /* Expose selected project to the Add button handler */
-  window._fpGetSelectedProject = function () { return _selectedProject; };
-  window._fpClearSelectedProject = function () { hideBanner(); };
-})();
-
-
-/* ──────────────────────────────────────────────────────────────
-   E6b. FINISHED PROJECTS — File upload + drag/drop + thumbnails
-────────────────────────────────────────────────────────────── */
-(function initFpUpload() {
-  const dropZone = document.getElementById('fpDropZone');
-  const fileInput = document.getElementById('fpFileInput');
-  const thumbsEl = document.getElementById('fpThumbs');
-  if (!dropZone || !fileInput || !thumbsEl) return;
-
-  let _fpFiles = [];
-
-  function renderThumbs() {
-    thumbsEl.innerHTML = '';
-    if (!_fpFiles.length) { thumbsEl.style.display = 'none'; return; }
-    thumbsEl.style.display = 'flex';
-    _fpFiles.forEach((f, idx) => {
-      const thumb = document.createElement('div');
-      thumb.className = 'adm-fp-thumb';
-      thumb.innerHTML = `
-        <img src="${f.src}" alt="${f.name}" />
-        <button class="adm-fp-thumb-del" data-idx="${idx}" title="Remove">
-          <i class="ri-close-line"></i>
-        </button>`;
-      thumbsEl.appendChild(thumb);
-    });
-    thumbsEl.querySelectorAll('.adm-fp-thumb-del').forEach(btn => {
-      btn.addEventListener('click', function () {
-        _fpFiles.splice(parseInt(this.dataset.idx), 1);
-        renderThumbs();
-      });
-    });
-  }
-
-  function processFiles(files) {
-    Array.from(files).forEach(file => {
-      if (!file.type.startsWith('image/')) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        _fpFiles.push({ src: e.target.result, name: file.name });
-        renderThumbs();
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
-  fileInput.addEventListener('change', function () { processFiles(this.files); });
-
-  dropZone.addEventListener('dragover', function (e) { e.preventDefault(); this.classList.add('drag-over'); });
-  dropZone.addEventListener('dragleave', function () { this.classList.remove('drag-over'); });
-  dropZone.addEventListener('drop', function (e) {
-    e.preventDefault();
-    this.classList.remove('drag-over');
-    processFiles(e.dataTransfer.files);
-  });
-
-  window._fpGetFiles = function () { return _fpFiles; };
-  window._fpClearFiles = function () { _fpFiles = []; renderThumbs(); };
-})();
-
-
-/* ──────────────────────────────────────────────────────────────
-   E7. FINISHED PROJECTS — Add to grid handler
-────────────────────────────────────────────────────────────── */
-(function initFpAdd() {
-  const addBtn = document.getElementById('fpAddBtn');
-  const clearBtn = document.getElementById('fpClearBtn');
-  if (!addBtn) return;
-
-  const CAT_LABELS = {
-    logo: 'Logo', branding: 'Branding', print: 'Print',
-    web: 'Web', social: 'Social', other: 'Other',
-  };
-
-  function _fpClear() {
-    ['fpTitle', 'fpClient', 'fpNotes'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    const cat = document.getElementById('fpCategory');
-    const dateEl = document.getElementById('fpDate');
-    if (cat) cat.value = '';
-    if (dateEl) dateEl.value = '';
-    if (window._fpClearFiles) window._fpClearFiles();
-    if (window._fpClearSelectedProject) window._fpClearSelectedProject();
-  }
-
-  if (clearBtn) clearBtn.addEventListener('click', _fpClear);
-
-  addBtn.addEventListener('click', function () {
-    const title = document.getElementById('fpTitle')?.value.trim();
-    const client = document.getElementById('fpClient')?.value.trim();
-    const cat = document.getElementById('fpCategory')?.value;
-    const dateVal = document.getElementById('fpDate')?.value;
-    const notes = document.getElementById('fpNotes')?.value.trim();
-    const files = window._fpGetFiles ? window._fpGetFiles() : [];
-    const project = window._fpGetSelectedProject ? window._fpGetSelectedProject() : null;
-
-    if (!title) {
-      showAdminToast('Missing Title', 'Please enter a project title.', 'red');
-      return;
-    }
-
-    const grid = document.getElementById('fpGrid');
-    if (!grid) return;
-
-    /* Date string */
-    let dateStr = 'Recently';
-    if (dateVal) {
-      const d = new Date(dateVal);
-      dateStr = 'Delivered ' + d.toLocaleDateString('en-GB', {
-        day: 'numeric', month: 'short', year: 'numeric',
-      });
-    }
-
-    /* Category pill */
-    const catPillStr = cat
-      ? `<span class="adm-fp-cat-pill ${cat}">${CAT_LABELS[cat] || cat}</span>`
-      : '';
-    const clientStr = client || 'JDEVS Client';
-
-    /* Image content — multi-image carousel if >1 file */
-    let imgContent = '';
-    if (files.length === 0) {
-      imgContent = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--clr-accent);opacity:0.4;">
-           <i class="ri-gallery-2-line"></i>
-         </div>`;
-    } else if (files.length === 1) {
-      imgContent = `<img src="${files[0].src}" alt="${title}" style="width:100%;height:100%;object-fit:cover;display:block;" />`;
-    } else {
-      // Multiple images — carousel with dot indicators
-      const slides = files.map((f, i) =>
-        `<img src="${f.src}" alt="${title} ${i + 1}" class="adm-fp-slide" data-idx="${i}" style="width:100%;height:100%;object-fit:cover;display:${i === 0 ? 'block' : 'none'};position:absolute;inset:0;" />`
-      ).join('');
-      const dots = files.map((_, i) =>
-        `<span class="adm-fp-dot${i === 0 ? ' active' : ''}" data-idx="${i}"></span>`
-      ).join('');
-      imgContent = `
-        <div class="adm-fp-carousel" style="position:relative;width:100%;height:100%;">
-          ${slides}
-          <button class="adm-fp-prev" title="Prev"><i class="ri-arrow-left-s-line"></i></button>
-          <button class="adm-fp-next" title="Next"><i class="ri-arrow-right-s-line"></i></button>
-          <div class="adm-fp-dots">${dots}</div>
-          <span class="adm-fp-img-count"><i class="ri-image-line"></i> ${files.length}</span>
-        </div>`;
-    }
-
-    /* Store all image srcs on the card for lightbox cycling */
-    const allSrcs = JSON.stringify(files.map(f => f.src));
-
-    /* Invoice ref — from linked project or empty */
-    const invRef = project?.invoiceRef || null;
-    const invBtnHtml = invRef
-      ? `<button class="adm-fp-inv-overlay-btn adm-fp-card-inv-btn" data-inv="${invRef}" title="View Invoice">
-           <i class="ri-receipt-line"></i> ${invRef}
-         </button>`
-      : '';
-
-    /* Card */
-    const card = document.createElement('div');
-    card.className = 'adm-fp-card';
-    card.dataset.cat = cat || 'other';
-    card.dataset.notes = notes || '';
-    card.dataset.invoiceRef = invRef || '';
-    card.dataset.workId = project?.workId || '';
-    card.dataset.allSrcs = allSrcs;
-
-    card.innerHTML = `
-      <div class="adm-fp-card-img" style="${files.length === 0 ? 'background:linear-gradient(135deg,#141414,#1e1e1e);' : ''}">
-        ${imgContent}
-        <div class="adm-fp-img-overlay">
-          <button class="adm-port-btn adm-fp-view-btn" title="View full size">
-            <i class="ri-eye-line"></i>
-          </button>
-          <button class="adm-port-btn danger adm-fp-delete-btn" title="Delete">
-            <i class="ri-delete-bin-line"></i>
-          </button>
-        </div>
-      </div>
-      <div class="adm-fp-card-info">
-        <div class="adm-fp-card-title">${title}</div>
-        <div class="adm-fp-card-meta">
-          <i class="ri-user-3-line"></i> ${clientStr}
-          &nbsp;·&nbsp; ${catPillStr}
-          ${project?.workId ? `<span style="font-size:0.7rem;color:var(--clr-muted);margin-left:0.25rem;">${project.workId}</span>` : ''}
-        </div>
-        <div class="adm-fp-card-date"><i class="ri-calendar-check-line"></i> ${dateStr}</div>
-        ${invBtnHtml}
-        ${notes ? `<div style="font-size:0.72rem;color:var(--clr-muted);margin-top:0.3rem;">${notes}</div>` : ''}
-      </div>`;
-
-    grid.prepend(card);
-    _fpClear();
-    _fpUpdateCount();
-    showAdminToast('Project Added', `"${title}" added to Finished Projects.`, 'green');
-  });
-})();
-
-
-/* ──────────────────────────────────────────────────────────────
-   E7b. FINISHED PROJECTS — Invoice button on card
-   (delegated click handler — works for dynamically added cards)
-────────────────────────────────────────────────────────────── */
-document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.adm-fp-card-inv-btn');
-  if (!btn) return;
-  const invRef = btn.dataset.inv;
-  if (invRef) fpOpenInvoiceModal(invRef);
-});
-
-
-/* ──────────────────────────────────────────────────────────────
-   E8. FINISHED PROJECTS — category filter, delete, lightbox, carousel
-────────────────────────────────────────────────────────────── */
-
-/* Category tab filter */
-document.addEventListener('click', function (e) {
-  const tab = e.target.closest('.adm-cat-tab[data-group="fp-cat"]');
-  if (!tab) return;
-  document.querySelectorAll('.adm-cat-tab[data-group="fp-cat"]').forEach(t => t.classList.remove('active'));
-  tab.classList.add('active');
-  const cat = tab.dataset.cat;
-  document.querySelectorAll('#fpGrid .adm-fp-card').forEach(card => {
-    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
-  });
-});
-
-/* Delete button */
-document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.adm-fp-delete-btn');
-  if (!btn) return;
-  const card = btn.closest('.adm-fp-card');
-  if (!card) return;
-  const title = card.querySelector('.adm-fp-card-title')?.textContent || 'Project';
-  card.style.opacity = '0';
-  card.style.transition = 'opacity 0.25s ease';
-  setTimeout(() => { card.remove(); _fpUpdateCount(); }, 250);
-  showAdminToast('Project Removed', `"${title}" removed from Finished Projects.`, 'red');
-});
-
-/* Carousel prev/next buttons */
-document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.adm-fp-prev, .adm-fp-next');
-  if (!btn) return;
-  e.stopPropagation();
-  const carousel = btn.closest('.adm-fp-carousel');
-  if (!carousel) return;
-  const slides = carousel.querySelectorAll('.adm-fp-slide');
-  const dots = carousel.querySelectorAll('.adm-fp-dot');
-  let current = 0;
-  slides.forEach((s, i) => { if (s.style.display !== 'none') current = i; });
-  const dir = btn.classList.contains('adm-fp-next') ? 1 : -1;
-  const next = (current + dir + slides.length) % slides.length;
-  slides[current].style.display = 'none';
-  slides[next].style.display = 'block';
-  dots.forEach((d, i) => d.classList.toggle('active', i === next));
-});
-
-/* Carousel dot navigation */
-document.addEventListener('click', function (e) {
-  const dot = e.target.closest('.adm-fp-dot');
-  if (!dot) return;
-  e.stopPropagation();
-  const carousel = dot.closest('.adm-fp-carousel');
-  if (!carousel) return;
-  const idx = parseInt(dot.dataset.idx);
-  carousel.querySelectorAll('.adm-fp-slide').forEach((s, i) => {
-    s.style.display = i === idx ? 'block' : 'none';
-  });
-  carousel.querySelectorAll('.adm-fp-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === idx);
-  });
-});
-
-/* View/lightbox button — supports multiple images with arrow navigation */
-let _lbSrcs = [], _lbIdx = 0, _lbCaption = '';
-
-document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.adm-fp-view-btn');
-  if (!btn) return;
-  const card = btn.closest('.adm-fp-card');
-  if (!card) return;
-
-  const title = card.querySelector('.adm-fp-card-title')?.textContent || '';
-  const client = card.querySelector('.adm-fp-card-meta')?.textContent?.trim() || '';
-  _lbCaption = `${title} · ${client}`;
-
-  // Get all images from data attribute or from single img
-  try {
-    _lbSrcs = JSON.parse(card.dataset.allSrcs || '[]');
-  } catch (_) { _lbSrcs = []; }
-
-  if (!_lbSrcs.length) {
-    const img = card.querySelector('.adm-fp-card-img img');
-    if (img && img.src && !img.src.startsWith('data:') === false || img?.src) {
-      _lbSrcs = [img.src];
-    }
-  }
-
-  if (_lbSrcs.length === 0) {
-    showAdminToast('No Image', 'No image uploaded for this project yet.', 'red');
-    return;
-  }
-
-  _lbIdx = 0;
-  openFpLightbox(_lbSrcs[0], _lbCaption, _lbSrcs.length);
-});
-
-/* Lightbox functions */
-function openFpLightbox(src, caption, total) {
-  const backdrop = document.getElementById('fpLightboxBackdrop');
-  const imgEl = document.getElementById('fpLightboxImg');
-  const capEl = document.getElementById('fpLightboxCaption');
-  const prevBtn = document.getElementById('fpLbPrev');
-  const nextBtn = document.getElementById('fpLbNext');
-  const counterEl = document.getElementById('fpLbCounter');
-  if (!backdrop || !imgEl) return;
-  imgEl.src = src;
-  if (capEl) capEl.textContent = caption || '';
-  if (counterEl) counterEl.textContent = total > 1 ? `${_lbIdx + 1} / ${total}` : '';
-  if (prevBtn) prevBtn.style.display = total > 1 ? '' : 'none';
-  if (nextBtn) nextBtn.style.display = total > 1 ? '' : 'none';
-  backdrop.classList.add('open');
-}
-
-function closeFpLightbox() {
-  const backdrop = document.getElementById('fpLightboxBackdrop');
-  if (backdrop) backdrop.classList.remove('open');
-}
-
-/* Close lightbox on backdrop click (not on img/nav clicks) */
-document.addEventListener('DOMContentLoaded', function () {
-  const lb = document.getElementById('fpLightboxBackdrop');
-  if (lb) {
-    lb.addEventListener('click', function (e) {
-      if (e.target === this) closeFpLightbox();
-    });
-  }
-});
-
-/* Lightbox prev/next */
-document.addEventListener('click', function (e) {
-  if (e.target.closest('#fpLbPrev')) {
-    _lbIdx = (_lbIdx - 1 + _lbSrcs.length) % _lbSrcs.length;
-    openFpLightbox(_lbSrcs[_lbIdx], _lbCaption, _lbSrcs.length);
-  }
-  if (e.target.closest('#fpLbNext')) {
-    _lbIdx = (_lbIdx + 1) % _lbSrcs.length;
-    openFpLightbox(_lbSrcs[_lbIdx], _lbCaption, _lbSrcs.length);
-  }
-});
-
-/* Count label */
-function _fpUpdateCount() {
-  const count = document.querySelectorAll('#fpGrid .adm-fp-card').length;
-  const label = document.getElementById('fpCountLabel');
-  if (label) label.textContent = `${count} project${count !== 1 ? 's' : ''} delivered`;
-}
-
-
-/* ──────────────────────────────────────────────────────────────
-   E9. PROGRESS BOARD — fullscreen preview modal
-────────────────────────────────────────────────────────────── */
-function tpbModalOpen() {
-  const backdrop = document.getElementById('tpbModalBackdrop');
-  const body = document.getElementById('tpbModalBody');
-  if (!backdrop || !body) return;
-
-  // Build the same HTML that the client preview panel shows
-  const d = window._tpbData || {};
-
-  const pct = d.pct || 0;
-  const days = document.getElementById('tpbDaysActive')?.value || '—';
-  const left = document.getElementById('tpbDaysLeft')?.value || '—';
-  const due = document.getElementById('tpbDueFmt')?.value || '—';
-  const title = d.title || document.getElementById('prevTitle')?.textContent || 'Project';
-  const meta = d.meta || document.getElementById('prevMeta')?.textContent || '';
-
-  const nextTitle = document.getElementById('tpbNextTitle')?.value || d.nextTitle || '';
-  const nextSub = document.getElementById('tpbNextSub')?.value || d.nextSub || '';
-
-  // Milestones HTML
-  const milestonesHtml = (d.milestones || []).map(m => `
-    <div class="tpb-prev-ms">
-      <div class="tpb-prev-ms-dot ${m.state}">
-        <i class="${m.state === 'done' ? 'ri-check-line' : m.state === 'active' ? 'ri-loader-4-line' : (m.icon || 'ri-circle-line')}"></i>
-      </div>
-      <div>
-        <div class="tpb-prev-ms-label">${_esc(m.label)}</div>
-        <div class="tpb-prev-ms-date">${_esc(m.date)}</div>
-        ${m.note ? `<div class="tpb-prev-ms-note">${_esc(m.note)}</div>` : ''}
-      </div>
-    </div>
-  `).join('');
-
-  // Updates HTML
-  const updatesHtml = (d.updates || []).map(u => `
-    <div class="tpb-prev-upd">
-      <div class="tpb-prev-upd-dot ${u.icon}"><i class="${u.ri}"></i></div>
-      <div>
-        <div class="tpb-prev-upd-text">${u.text}</div>
-        <div class="tpb-prev-upd-time">${_esc(u.time)}</div>
-      </div>
-    </div>
-  `).join('');
-
-  body.innerHTML = `
-    <div class="tpb-preview-shell" style="border:none; border-radius:0;">
-      <!-- Header -->
-      <div class="tpb-prev-head">
-        <div>
-          <div class="tpb-prev-badge"><i class="ri-loader-4-line"></i> In Progress</div>
-          <div class="tpb-prev-title">${_esc(title)}</div>
-          <div class="tpb-prev-meta">${_esc(meta)}</div>
-        </div>
-      </div>
-      <!-- Stats -->
-      <div class="tpb-prev-stats">
-        <div class="tpb-prev-stat"><div class="tpb-prev-stat-val">${days}</div><div class="tpb-prev-stat-lbl">Days Active</div></div>
-        <div class="tpb-prev-stat-div"></div>
-        <div class="tpb-prev-stat"><div class="tpb-prev-stat-val accent">${pct}%</div><div class="tpb-prev-stat-lbl">Complete</div></div>
-        <div class="tpb-prev-stat-div"></div>
-        <div class="tpb-prev-stat"><div class="tpb-prev-stat-val">${left}</div><div class="tpb-prev-stat-lbl">Days Left</div></div>
-        <div class="tpb-prev-stat-div"></div>
-        <div class="tpb-prev-stat"><div class="tpb-prev-stat-val">${_esc(due)}</div><div class="tpb-prev-stat-lbl">Due Date</div></div>
-      </div>
-      <!-- Milestones -->
-      <div class="tpb-prev-section">
-        <div class="tpb-prev-section-head"><i class="ri-map-2-line"></i> Project Milestones</div>
-        <div class="tpb-prev-timeline">${milestonesHtml}</div>
-      </div>
-      <!-- Updates -->
-      <div class="tpb-prev-section">
-        <div class="tpb-prev-section-head"><i class="ri-pulse-line"></i> Latest Updates <span class="tpb-pill" style="margin-left:auto;">From JDEVS</span></div>
-        <div class="tpb-prev-updates">${updatesHtml}</div>
-      </div>
-      <!-- Up Next -->
-      ${nextTitle ? `
-      <div class="tpb-prev-next">
-        <div class="tpb-prev-next-icon"><i class="ri-arrow-right-up-line"></i></div>
-        <div>
-          <div class="tpb-prev-next-title">${_esc(nextTitle)}</div>
-          <div class="tpb-prev-next-sub">${_esc(nextSub)}</div>
-        </div>
-      </div>` : ''}
-    </div>
-  `;
-
-  backdrop.classList.add('open');
-}
-
-/* Close modal */
-document.addEventListener('DOMContentLoaded', function () {
-  const closeBtn = document.getElementById('tpbModalClose');
-  if (closeBtn) closeBtn.addEventListener('click', tpbModalClose);
-
-  const backdrop = document.getElementById('tpbModalBackdrop');
-  if (backdrop) {
-    backdrop.addEventListener('click', function (e) {
-      if (e.target === this) tpbModalClose();
-    });
-  }
-
-  // ESC key
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      tpbModalClose();
-      closeFpLightbox();
-    }
-  });
-});
-
-function tpbModalClose() {
-  const backdrop = document.getElementById('tpbModalBackdrop');
-  if (backdrop) backdrop.classList.remove('open');
-}
-
 /* ──────────────────────────────────────────────────────────────
    REVISION FILTER (reuses A3 pattern for adm-rev-card items)
    The existing A3 handler in admin-dashboard.js filters
@@ -2776,3 +1493,481 @@ function tpbModalClose() {
 // No extra code needed — the existing A3 handler covers it.
 // The rev-filter buttons use data-target="#revList" which is the
 // same container, and cards have data-status attributes set.
+
+
+/* ================================================================
+   MANAGE PANEL — CLIENT PREVIEW TAB
+   Replaces the standalone Track Progress Board section.
+   Tab switcher + live preview renderer inside the slide panel.
+================================================================ */
+
+/* ──────────────────────────────────────────────────────────────
+   TAB SWITCHER
+   Toggles between "Manage" (adm-cp-body) and "Client Preview"
+   (adm-cp-preview-pane) inside the same slide panel.
+────────────────────────────────────────────────────────────── */
+function admCpSwitchTab(tab) {
+  const managePane  = document.getElementById('admCpBodyManage');
+  const previewPane = document.getElementById('admCpPreviewPane');
+  const tabs = document.querySelectorAll('.adm-cp-tab');
+
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+
+  if (tab === 'preview') {
+    if (managePane)  managePane.style.display  = 'none';
+    if (previewPane) previewPane.style.display = '';
+    admCpRenderPreview();
+  } else {
+    if (managePane)  managePane.style.display  = '';
+    if (previewPane) previewPane.style.display = 'none';
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────────
+   PREVIEW RENDERER
+   Reads the current project data from localStorage (same key the
+   Manage panel's Save & Sync button writes to) and renders a
+   faithful replica of what the client sees on their dashboard.
+────────────────────────────────────────────────────────────── */
+function admCpRenderPreview() {
+  const container = document.getElementById('admCpPrevInner');
+  if (!container) return;
+
+  // Determine which project key is open in the panel
+  const workId = document.getElementById('admCpPanel')?.dataset.workKey || '';
+  const storageKey = workId ? 'jdevs_proj_' + workId.replace('#', '') : null;
+
+  let data = null;
+  if (storageKey) {
+    try { data = JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch {}
+  }
+
+  // Fallback: pull what's currently visible in the Manage panel itself
+  if (!data) {
+    data = _admCpReadPanelData();
+  }
+
+  if (!data) {
+    container.innerHTML = '<p style="color:var(--clr-muted);font-size:0.82rem;text-align:center;padding:2rem 0;">No data saved yet — use the Manage tab to set milestones and post updates, then save.</p>';
+    return;
+  }
+
+  const pct      = data.pct || 0;
+  const title    = _cpEsc(data.title    || document.getElementById('admCpTitle')?.textContent || 'Project');
+  const meta     = _cpEsc(data.meta     || document.getElementById('admCpMeta')?.textContent  || '');
+  const nextTitle = _cpEsc(data.nextTitle || '');
+  const nextSub   = _cpEsc(data.nextSub  || '');
+
+  // Date stats from stored dates
+  const today     = new Date();
+  let daysActive  = '—', daysLeft = '—', dueFmt = '—';
+  if (data.startDate) {
+    const s = new Date(data.startDate);
+    daysActive = Math.max(0, Math.round((today - s) / 86400000));
+  }
+  if (data.dueDate) {
+    const d = new Date(data.dueDate);
+    daysLeft = Math.max(0, Math.round((d - today) / 86400000));
+    dueFmt = d.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+  }
+
+  // Milestones
+  const milestonesHtml = (data.milestones || []).map(m => `
+    <div class="tpb-prev-ms">
+      <div class="tpb-prev-ms-dot ${m.state}">
+        <i class="${m.state === 'done' ? 'ri-check-line' : m.state === 'active' ? 'ri-loader-4-line' : (m.icon || 'ri-circle-line')}"></i>
+      </div>
+      <div>
+        <div class="tpb-prev-ms-label">${_cpEsc(m.label)}</div>
+        <div class="tpb-prev-ms-date">${_cpEsc(m.date)}</div>
+        ${m.note ? `<div class="tpb-prev-ms-note">${_cpEsc(m.note)}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  // Updates
+  const updatesHtml = (data.updates || []).map(u => `
+    <div class="tpb-prev-upd">
+      <div class="tpb-prev-upd-dot ${u.icon}"><i class="${u.ri}"></i></div>
+      <div>
+        <div class="tpb-prev-upd-text">${u.text}</div>
+        <div class="tpb-prev-upd-time">${_cpEsc(u.time)}</div>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="adm-cp-prev-label"><i class="ri-eye-line"></i> Live Client View — ${title}</div>
+
+    <!-- Project Header -->
+    <div class="tpb-prev-head">
+      <div class="tpb-prev-badge"><i class="ri-loader-4-line"></i> In Progress</div>
+      <div class="tpb-prev-title">${title}</div>
+      <div class="tpb-prev-meta">${meta}</div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="tpb-prev-stats">
+      <div class="tpb-prev-stat">
+        <div class="tpb-prev-stat-val">${daysActive}</div>
+        <div class="tpb-prev-stat-lbl">Days Active</div>
+      </div>
+      <div class="tpb-prev-stat-div"></div>
+      <div class="tpb-prev-stat">
+        <div class="tpb-prev-stat-val accent">${pct}%</div>
+        <div class="tpb-prev-stat-lbl">Complete</div>
+      </div>
+      <div class="tpb-prev-stat-div"></div>
+      <div class="tpb-prev-stat">
+        <div class="tpb-prev-stat-val">${daysLeft}</div>
+        <div class="tpb-prev-stat-lbl">Days Left</div>
+      </div>
+      <div class="tpb-prev-stat-div"></div>
+      <div class="tpb-prev-stat">
+        <div class="tpb-prev-stat-val">${dueFmt}</div>
+        <div class="tpb-prev-stat-lbl">Due Date</div>
+      </div>
+    </div>
+
+    <!-- Milestones -->
+    ${milestonesHtml ? `
+    <div class="tpb-prev-section">
+      <div class="tpb-prev-section-head"><i class="ri-map-2-line"></i> Project Milestones</div>
+      <div class="tpb-prev-timeline">${milestonesHtml}</div>
+    </div>` : ''}
+
+    <!-- Updates -->
+    ${updatesHtml ? `
+    <div class="tpb-prev-section">
+      <div class="tpb-prev-section-head"><i class="ri-pulse-line"></i> Latest Updates <span class="tpb-pill" style="margin-left:auto;">From JDEVS</span></div>
+      <div class="tpb-prev-updates">${updatesHtml}</div>
+    </div>` : ''}
+
+    <!-- Up Next -->
+    ${nextTitle ? `
+    <div class="tpb-prev-next">
+      <div class="tpb-prev-next-icon"><i class="ri-arrow-right-up-line"></i></div>
+      <div>
+        <div class="tpb-prev-next-title">${nextTitle}</div>
+        <div class="tpb-prev-next-sub">${nextSub}</div>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+/* Read what's currently set in the Manage panel as a fallback */
+function _admCpReadPanelData() {
+  const pct = parseInt(document.getElementById('admCpPct')?.textContent) || 0;
+  const title = document.getElementById('admCpTitle')?.textContent || '';
+  const meta  = document.getElementById('admCpMeta')?.textContent  || '';
+  const nextTitle = document.getElementById('admCpNextTitle')?.value?.trim() || '';
+  const nextSub   = document.getElementById('admCpNextSub')?.value?.trim()   || '';
+
+  // Milestones from the rendered panel list
+  const milestones = [];
+  document.querySelectorAll('#admCpMsList .adm-cp-ms-item').forEach(item => {
+    milestones.push({
+      label : item.querySelector('.adm-cp-ms-label')?.textContent?.trim() || '',
+      date  : item.querySelector('.adm-cp-ms-date')?.textContent?.trim()  || '',
+      state : item.dataset.state || 'pending',
+      icon  : 'ri-circle-line',
+      note  : item.querySelector('.adm-cp-ms-note-input')?.value?.trim() || '',
+    });
+  });
+
+  // Updates from the rendered feed
+  const updates = [];
+  document.querySelectorAll('#admCpUpdFeed .adm-cp-update-item').forEach(item => {
+    const iconEl = item.querySelector('.adm-cp-upd-icon');
+    const iconCls = iconEl ? (iconEl.classList.contains('green') ? 'green' : iconEl.classList.contains('blue') ? 'blue' : iconEl.classList.contains('orange') ? 'orange' : 'green') : 'green';
+    const riCls = iconEl?.querySelector('i')?.className || 'ri-pencil-line';
+    updates.push({
+      icon : iconCls,
+      ri   : riCls,
+      text : item.querySelector('.adm-cp-upd-text p')?.innerHTML?.trim() || '',
+      time : item.querySelector('.adm-cp-upd-time')?.textContent?.trim()  || '',
+    });
+  });
+
+  if (!title && !milestones.length && !updates.length) return null;
+  return { pct, title, meta, milestones, updates, nextTitle, nextSub };
+}
+
+function _cpEsc(str) {
+  return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+
+/* ================================================================
+   MANAGE PANEL — OPEN / CLOSE / POPULATE / SAVE
+   Handles the slide panel opened via the gear button on work cards.
+================================================================ */
+
+/* ──────────────────────────────────────────────────────────────
+   Open the panel — reads data from the clicked work card
+────────────────────────────────────────────────────────────── */
+function admCpOpen(card) {
+  const panel   = document.getElementById('admCpPanel');
+  const overlay = document.getElementById('admCpOverlay');
+  if (!panel || !overlay) return;
+
+  // Pull card metadata
+  const workId    = card.querySelector('.adm-work-id')?.textContent?.trim()    || '';
+  const workTitle = card.querySelector('.adm-work-title')?.textContent?.trim() || 'Project';
+  const clientEl  = card.querySelector('.adm-work-client');
+  const clientTxt = clientEl ? clientEl.textContent.replace(/\s+/g, ' ').trim() : '';
+  const pct       = parseInt(card.querySelector('.db-progress-fill')?.style.width) || 0;
+
+  // Store work key on panel for preview renderer
+  panel.dataset.workKey = workId;
+
+  // Populate header
+  document.getElementById('admCpTitle').textContent = workTitle;
+  document.getElementById('admCpMeta').textContent  = clientTxt;
+  document.getElementById('admCpPct').textContent   = pct;
+
+  // Try to load saved data from localStorage
+  const storageKey = workId ? 'jdevs_proj_' + workId.replace('#', '') : null;
+  let saved = null;
+  if (storageKey) {
+    try { saved = JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch {}
+  }
+
+  // Populate dates
+  document.getElementById('admCpStartDate').value = saved?.startDate || '';
+  document.getElementById('admCpDueDate').value   = saved?.dueDate   || '';
+
+  // Populate next banner
+  document.getElementById('admCpNextTitle').value = saved?.nextTitle || '';
+  document.getElementById('admCpNextSub').value   = saved?.nextSub   || '';
+
+  // Populate milestones
+  admCpRenderMilestones(saved?.milestones || []);
+
+  // Populate updates feed
+  admCpRenderUpdates(saved?.updates || []);
+
+  // Always start on Manage tab
+  admCpSwitchTab('manage');
+
+  // Open
+  panel.classList.add('open');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Close the panel
+────────────────────────────────────────────────────────────── */
+function admCpClose() {
+  document.getElementById('admCpPanel')?.classList.remove('open');
+  document.getElementById('admCpOverlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Render milestones list
+────────────────────────────────────────────────────────────── */
+function admCpRenderMilestones(milestones) {
+  const list = document.getElementById('admCpMsList');
+  if (!list) return;
+  list.innerHTML = milestones.map((m, i) => `
+    <div class="adm-cp-ms-item" data-idx="${i}" data-state="${m.state || 'pending'}">
+      <select class="adm-cp-ms-state-sel" title="State">
+        <option value="done"    ${m.state === 'done'    ? 'selected' : ''}>✅</option>
+        <option value="active"  ${m.state === 'active'  ? 'selected' : ''}>🔄</option>
+        <option value="pending" ${m.state === 'pending' ? 'selected' : ''}>⏳</option>
+      </select>
+      <input class="adm-cp-ms-label-input adm-cp-ms-label" value="${_cpEsc(m.label)}" placeholder="Milestone…" />
+      <input class="adm-cp-ms-date-input adm-cp-ms-date"  value="${_cpEsc(m.date)}"  placeholder="Date" />
+      <button class="adm-cp-ms-del" title="Remove"><i class="ri-delete-bin-line"></i></button>
+    </div>
+  `).join('');
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Render updates feed
+────────────────────────────────────────────────────────────── */
+function admCpRenderUpdates(updates) {
+  const feed = document.getElementById('admCpUpdFeed');
+  if (!feed) return;
+  if (!updates.length) { feed.innerHTML = ''; return; }
+  feed.innerHTML = updates.map((u, i) => `
+    <div class="adm-cp-update-item" data-idx="${i}">
+      <div class="adm-cp-upd-icon ${u.icon}"><i class="${u.ri}"></i></div>
+      <div style="flex:1;">
+        <div class="adm-cp-upd-text"><p>${u.text}</p></div>
+        <div class="adm-cp-upd-time">${_cpEsc(u.time)}</div>
+      </div>
+      <button class="adm-cp-ms-del" data-upd-del="${i}" title="Remove"><i class="ri-delete-bin-line"></i></button>
+    </div>
+  `).join('');
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Collect current panel state into a data object
+────────────────────────────────────────────────────────────── */
+function _admCpCollect() {
+  const pct = parseInt(document.getElementById('admCpPct')?.textContent) || 0;
+  const title = document.getElementById('admCpTitle')?.textContent?.trim() || '';
+  const meta  = document.getElementById('admCpMeta')?.textContent?.trim()  || '';
+  const startDate = document.getElementById('admCpStartDate')?.value || '';
+  const dueDate   = document.getElementById('admCpDueDate')?.value   || '';
+  const nextTitle = document.getElementById('admCpNextTitle')?.value?.trim() || '';
+  const nextSub   = document.getElementById('admCpNextSub')?.value?.trim()   || '';
+
+  const milestones = [];
+  document.querySelectorAll('#admCpMsList .adm-cp-ms-item').forEach(item => {
+    milestones.push({
+      label : item.querySelector('.adm-cp-ms-label')?.value?.trim() || '',
+      date  : item.querySelector('.adm-cp-ms-date')?.value?.trim()  || '',
+      state : item.querySelector('.adm-cp-ms-state-sel')?.value     || 'pending',
+      icon  : 'ri-circle-line',
+      note  : '',
+    });
+  });
+
+  const updates = [];
+  document.querySelectorAll('#admCpUpdFeed .adm-cp-update-item').forEach(item => {
+    const iconEl  = item.querySelector('.adm-cp-upd-icon');
+    const iconCls = iconEl
+      ? (iconEl.classList.contains('green') ? 'green' : iconEl.classList.contains('blue') ? 'blue' : 'orange')
+      : 'green';
+    const riCls = iconEl?.querySelector('i')?.className || 'ri-pencil-line';
+    updates.push({
+      icon : iconCls,
+      ri   : riCls,
+      text : item.querySelector('.adm-cp-upd-text p')?.innerHTML?.trim() || '',
+      time : item.querySelector('.adm-cp-upd-time')?.textContent?.trim()  || '',
+    });
+  });
+
+  return { pct, title, meta, startDate, dueDate, nextTitle, nextSub, milestones, updates };
+}
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Manage button on work cards
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.adm-work-btn[data-action="manage"]');
+  if (!btn) return;
+  const card = btn.closest('.adm-work-card');
+  if (card) admCpOpen(card);
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Close button + overlay click
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  if (e.target.closest('#admCpClose') || e.target.id === 'admCpOverlay') {
+    admCpClose();
+  }
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Add Milestone
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('#admCpAddMs')) return;
+  const list = document.getElementById('admCpMsList');
+  if (!list) return;
+  const idx = list.querySelectorAll('.adm-cp-ms-item').length;
+  const row = document.createElement('div');
+  row.className = 'adm-cp-ms-item';
+  row.dataset.idx   = idx;
+  row.dataset.state = 'pending';
+  row.innerHTML = `
+    <select class="adm-cp-ms-state-sel" title="State">
+      <option value="done">✅</option>
+      <option value="active">🔄</option>
+      <option value="pending" selected>⏳</option>
+    </select>
+    <input class="adm-cp-ms-label-input adm-cp-ms-label" placeholder="Milestone name…" />
+    <input class="adm-cp-ms-date-input adm-cp-ms-date"  placeholder="e.g. May 20" />
+    <button class="adm-cp-ms-del" title="Remove"><i class="ri-delete-bin-line"></i></button>
+  `;
+  list.appendChild(row);
+  row.querySelector('.adm-cp-ms-label')?.focus();
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Delete Milestone row
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  const del = e.target.closest('.adm-cp-ms-item .adm-cp-ms-del');
+  if (!del) return;
+  del.closest('.adm-cp-ms-item')?.remove();
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Delete Update from feed
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  const del = e.target.closest('[data-upd-del]');
+  if (!del) return;
+  del.closest('.adm-cp-update-item')?.remove();
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Post Update to feed
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('#admCpPostUpd')) return;
+  const textarea = document.getElementById('admCpUpdText');
+  const selEl    = document.getElementById('admCpUpdIcon');
+  const feed     = document.getElementById('admCpUpdFeed');
+  if (!textarea || !selEl || !feed) return;
+
+  const text = textarea.value.trim();
+  if (!text) { showAdminToast('Empty Update', 'Please type an update before posting.', 'red'); return; }
+
+  const [iconCls, riCls] = (selEl.value || 'green|ri-pencil-line').split('|');
+  const now = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+  const item = document.createElement('div');
+  item.className = 'adm-cp-update-item';
+  const idx = feed.querySelectorAll('.adm-cp-update-item').length;
+  item.dataset.idx = idx;
+  item.innerHTML = `
+    <div class="adm-cp-upd-icon ${_cpEsc(iconCls)}"><i class="${_cpEsc(riCls)}"></i></div>
+    <div style="flex:1;">
+      <div class="adm-cp-upd-text"><p>${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p></div>
+      <div class="adm-cp-upd-time">${now}</div>
+    </div>
+    <button class="adm-cp-ms-del" data-upd-del="${idx}" title="Remove"><i class="ri-delete-bin-line"></i></button>
+  `;
+  feed.prepend(item);
+  textarea.value = '';
+  showAdminToast('Update Posted', 'Client update added to the feed.', 'green');
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CLICK HANDLER — Save & Sync to localStorage
+────────────────────────────────────────────────────────────── */
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('#admCpSave')) return;
+  const panel = document.getElementById('admCpPanel');
+  const workId = panel?.dataset.workKey || '';
+  if (!workId) { showAdminToast('No Project', 'Could not determine work order ID.', 'red'); return; }
+
+  const storageKey = 'jdevs_proj_' + workId.replace('#', '');
+  const data = _admCpCollect();
+
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(data));
+    showAdminToast('Saved', `${workId} synced to client dashboard.`, 'green');
+  } catch (err) {
+    showAdminToast('Save Failed', 'localStorage error — storage may be full.', 'red');
+  }
+});
+
+/* ──────────────────────────────────────────────────────────────
+   CHANGE HANDLER — milestone state select updates data-state
+────────────────────────────────────────────────────────────── */
+document.addEventListener('change', function (e) {
+  const sel = e.target.closest('.adm-cp-ms-state-sel');
+  if (!sel) return;
+  const item = sel.closest('.adm-cp-ms-item');
+  if (item) item.dataset.state = sel.value;
+});
