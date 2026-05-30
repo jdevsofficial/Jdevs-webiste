@@ -15,8 +15,6 @@
     rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 </head>
 
@@ -296,7 +294,7 @@
             <div class="form-success" id="formSuccess">
               <div class="success-icon"><i class="ri-checkbox-circle-fill"></i></div>
               <h3>Quote Request Sent!</h3>
-              <p>Thank you! We've received your request and will get back to you within 4 hours.</p>
+              <p>Thank you! We've received your request and will get back to you within 24 hours.</p>
               <a href="index.html" class="btn-primary">Back to Home <i class="ri-arrow-right-line"></i></a>
             </div>
 
@@ -339,7 +337,7 @@
                 <div class="qs-num">03</div>
                 <div>
                   <strong>We Connect</strong>
-                  <span>We'll reach out within 4 hrs to discuss your project</span>
+                  <span>We'll reach out within 24 hrs to discuss your project</span>
                 </div>
               </li>
               <li>
@@ -521,68 +519,11 @@
       });
     }
 
-    // ─── EMAILJS SETUP ───────────────────────────────
-    const EMAILJS_SERVICE_ID  = 'service_l6m2hzq';
-    const EMAILJS_TEMPLATE_ID = 'template_yug4z4t';
-    const EMAILJS_PUBLIC_KEY  = 'sh7Ejos-Nyi6FRrB2';
-    const AMOS_EMAIL          = 'rimorearchie94@gmail.com';
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-
-    function sendToAmos(subject, message) {
-      return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        to_email: AMOS_EMAIL,
-        subject:  subject,
-        message:  message,
-      });
-    }
-
     /* ── Form Submit ── */
     document.getElementById('quoteForm').addEventListener('submit', (e) => {
       e.preventDefault();
-
-      const submitBtn = document.querySelector('#quoteForm button[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending… <i class="ri-loader-4-line"></i>';
-
-      // Gather all fields
-      const firstName  = document.getElementById('firstName').value.trim();
-      const lastName   = document.getElementById('lastName').value.trim();
-      const email      = document.getElementById('email').value.trim();
-      const phone      = document.getElementById('phone').value.trim();
-      const business   = document.getElementById('businessName').value.trim();
-      const designType = (document.querySelector('input[name="designType"]:checked') || {}).value || 'Not selected';
-      const budget     = document.getElementById('budget').value;
-      const deadline   = document.getElementById('deadline').value;
-      const references = document.getElementById('references').value.trim();
-      const projectDesc= document.getElementById('projectDesc').value.trim();
-
-      const contactInfo = email ? `Email: ${email}` : '';
-      const phoneInfo   = phone ? `Phone: ${phone}` : '';
-      const reachBack   = [contactInfo, phoneInfo].filter(Boolean).join(' | ');
-
-      const subject = `New Quote Request from ${firstName} ${lastName}`;
-      const message =
-        `Name:         ${firstName} ${lastName}\n` +
-        `Contact:      ${reachBack || 'Not provided'}\n` +
-        `Business:     ${business || 'N/A'}\n\n` +
-        `Design Type:  ${designType}\n` +
-        `Budget:       ${budget}\n` +
-        `Deadline:     ${deadline}\n` +
-        `References:   ${references || 'None'}\n\n` +
-        `Project Description:\n${projectDesc}\n\n` +
-        `---\nWe will call back within 4 hours of this submission.`;
-
-      sendToAmos(subject, message)
-        .then(() => {
-          steps.forEach(s => s.classList.remove('active'));
-          document.getElementById('formSuccess').style.display = 'flex';
-        })
-        .catch((err) => {
-          console.error('EmailJS error:', err);
-          alert('Oops! Something went wrong sending your request. Please try again or reach us on WhatsApp.');
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = 'Send Request <i class="ri-send-plane-line"></i>';
-        });
+      steps.forEach(s => s.classList.remove('active'));
+      document.getElementById('formSuccess').style.display = 'flex';
     });
   </script>
 </body>
